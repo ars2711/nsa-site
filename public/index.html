@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NUST Society of Artificial Intelligence</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <!-- Google Fonts: Titillium Web -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        min-height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        font-family: "Titillium Web", Arial, sans-serif !important;
+      }
+      body {
+        min-height: 100vh;
+        min-width: 100vw;
+        width: 100vw;
+        height: 100vh;
+        font-family: "Titillium Web", Arial, sans-serif !important;
+        transition: background 0.3s, color 0.3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+      }
+      .container {
+        flex: 1 0 auto;
+        min-height: 100vh;
+        width: 100vw;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 !important;
+      }
+      .nsa-title,
+      .nsa-subtitle,
+      .desc-text,
+      .ai-bits,
+      .btn-nsa,
+      .footer,
+      .footer * {
+        font-family: "Titillium Web", Arial, sans-serif !important;
+      }
+      .ai-bits {
+        margin: 2rem auto 1.5rem auto;
+        max-width: 340px;
+        min-height: 80px;
+        border-radius: 1.5rem;
+        background: rgba(30, 41, 59, 0.18);
+        box-shadow: 0 2px 16px 0 rgba(33, 203, 243, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        color: #8ecae6;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        padding: 1.2rem 1.5rem;
+        text-align: center;
+        min-width: 220px;
+        transition: background 0.4s, color 0.4s, box-shadow 0.4s;
+        position: relative;
+        overflow: hidden;
+        animation: fadeIn 0.7s;
+      }
+      .ai-bits-animate {
+        animation: fadeOutIn 0.7s;
+      }
+      @keyframes fadeOutIn {
+        0% {
+          opacity: 1;
+        }
+        40% {
+          opacity: 0;
+          transform: scale(0.97);
+        }
+        60% {
+          opacity: 0;
+          transform: scale(1.03);
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .light-mode .ai-bits {
+        background: rgba(200, 220, 255, 0.18);
+        color: #1a1a2e;
+        box-shadow: 0 2px 16px 0 rgba(33, 203, 243, 0.1);
+      }
+      .light-mode .nsa-subtitle {
+        color: #1976d2;
+      }
+      .light-mode .desc-text {
+        color: #444;
+      }
+      .light-mode .footer {
+        color: #444;
+      }
+      .light-mode .footer a {
+        color: #1976d2;
+      }
+      .light-mode .footer a:hover,
+      .light-mode .footer a:focus {
+        color: #ff9800;
+      }
+      .light-mode .btn-nsa.btn-tech {
+        color: #fff !important;
+      }
+      .light-mode .btn-nsa.btn-nontech {
+        color: #222 !important;
+      }
+      .light-mode .btn-nsa.btn-exec {
+        color: #222 !important;
+      }
+      .light-mode .btn-nsa.btn-dir {
+        color: #fff !important;
+      }
+      .light-mode .theme-toggle {
+        color: #1976d2;
+      }
+      .theme-toggle {
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        font-size: 1.6rem;
+        cursor: pointer;
+        color: #8ecae6;
+        background: none;
+        border: none;
+        outline: none;
+        transition: color 0.2s;
+        z-index: 10;
+      }
+      .theme-toggle:focus {
+        outline: 2px solid #2196f3;
+      }
+      .btn-nsa,
+      .btn-nsa:focus,
+      .btn-nsa:active {
+        transition: background 0.3s, color 0.3s, box-shadow 0.2s, transform 0.2s;
+      }
+      .btn-nsa {
+        font-size: 1.15rem;
+        font-weight: 600;
+        padding: 0.85rem 2.5rem;
+        border-radius: 2rem;
+        margin: 0.5rem 1rem;
+        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.08);
+        transition: transform 0.15s, box-shadow 0.15s;
+        will-change: transform, box-shadow;
+      }
+      .btn-nsa:hover,
+      .btn-nsa:focus {
+        transform: translateY(-2px) scale(1.04);
+        box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.12);
+      }
+      .btn-nsa:active {
+        transform: scale(0.98);
+      }
+      .footer {
+        margin-top: 2rem;
+        padding: 1.5rem 0 0.5rem 0;
+        font-size: 1.1rem;
+        color: #adb5bd;
+        background: transparent;
+        flex-shrink: 0;
+        width: 100vw;
+        transition: color 0.3s;
+      }
+      .footer a {
+        color: #8ecae6;
+        margin: 0 0.5rem;
+        font-size: 1.5rem;
+        transition: color 0.2s;
+      }
+      .footer a:hover,
+      .footer a:focus {
+        color: #2196f3;
+      }
+      @media (max-width: 600px) {
+        .nsa-title {
+          font-size: 2.1rem;
+        }
+        .nsa-subtitle {
+          font-size: 1rem;
+        }
+        .btn-nsa {
+          font-size: 1rem;
+          padding: 0.7rem 1.2rem;
+        }
+        .ai-bits {
+          font-size: 0.98rem;
+          padding: 1rem 0.7rem;
+        }
+        .theme-toggle {
+          right: 1rem;
+          top: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="dark-mode">
+    <button
+      class="theme-toggle"
+      id="themeToggle"
+      aria-label="Toggle dark/light mode"
+    >
+      <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+    </button>
+    <main
+      class="container d-flex flex-column align-items-center justify-content-center"
+    >
+      <div class="nsa-title mt-4 mb-1">
+        <i class="bi bi-cpu-fill" style="color: #8ecae6"></i> NSA
+      </div>
+      <div class="nsa-subtitle mb-3">
+        Nust Society of Artificial Intelligence
+      </div>
+      <div class="desc-text mb-4">
+        <i class="bi bi-info-circle-fill"></i>
+        <span>
+          Tech portfolios are for students of <b>SEECS</b>, <b>SMME</b>, and
+          <b>SINES</b>. Non-Tech portfolios are open to all NUST students.
+        </span>
+      </div>
+      <div class="ai-bits" id="aiBits" aria-live="polite">
+        <i class="bi bi-robot"></i> &nbsp;Welcome! Ready to join the AI
+        revolution?
+      </div>
+      <div
+        id="portfolioSelection"
+        class="mb-4"
+        aria-label="Portfolio Selection"
+      >
+        <button
+          type="button"
+          class="btn btn-nsa btn-tech"
+          id="techPortfolioBtn"
+          aria-describedby="techDesc"
+        >
+          <i class="bi bi-cpu"></i> Tech Portfolios
+        </button>
+        <button
+          type="button"
+          class="btn btn-nsa btn-nontech"
+          id="nonTechPortfolioBtn"
+          aria-describedby="nonTechDesc"
+        >
+          <i class="bi bi-people"></i> Non-Tech Portfolios
+        </button>
+      </div>
+      <div
+        id="recruitmentOptions"
+        class="mb-4"
+        style="display: none"
+        aria-label="Recruitment Selection"
+      >
+        <div class="mb-3" id="recruitmentTitle"></div>
+        <a
+          href="#"
+          class="btn btn-nsa btn-exec"
+          id="executiveRecruitmentBtn"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="bi bi-person-badge-fill"></i> Executive Recruitment
+        </a>
+        <a
+          href="#"
+          class="btn btn-nsa btn-dir"
+          id="directorateRecruitmentBtn"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="bi bi-diagram-3-fill"></i> Directorate Recruitment
+        </a>
+        <div class="mt-3">
+          <button
+            type="button"
+            class="btn btn-link text-info"
+            id="backBtn"
+            aria-label="Back to portfolio selection"
+          >
+            <i class="bi bi-arrow-left"></i> Back
+          </button>
+        </div>
+      </div>
+    </main>
+    <footer class="footer text-center">
+      <div class="mb-2">
+        <span>©NSA2025</span>
+        <span class="mx-2">|</span>
+        <a
+          href="https://instagram.com/nust.nsa"
+          target="_blank"
+          rel="noopener"
+          aria-label="Instagram"
+          ><i class="bi bi-instagram"></i
+        ></a>
+        <a
+          href="https://facebook.com/nust.nsa"
+          target="_blank"
+          rel="noopener"
+          aria-label="Facebook"
+          ><i class="bi bi-facebook"></i
+        ></a>
+        <a
+          href="https://twitter.com/nust_nsa"
+          target="_blank"
+          rel="noopener"
+          aria-label="Twitter"
+          ><i class="bi bi-twitter-x"></i
+        ></a>
+        <a
+          href="https://linkedin.com/company/nust-nsa"
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn"
+          ><i class="bi bi-linkedin"></i
+        ></a>
+      </div>
+      <div>
+        <span><i class="bi bi-envelope"></i> nust.nsa@gmail.com</span>
+      </div>
+    </footer>
+    <!-- Bootstrap JS, Popper.js, jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+      // Theme toggle
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      const body = document.body;
+      function setTheme(mode) {
+        if (mode === "light") {
+          body.classList.remove("dark-mode");
+          body.classList.add("light-mode");
+          themeIcon.classList.remove("bi-moon-stars-fill");
+          themeIcon.classList.add("bi-sun-fill");
+        } else {
+          body.classList.remove("light-mode");
+          body.classList.add("dark-mode");
+          themeIcon.classList.remove("bi-sun-fill");
+          themeIcon.classList.add("bi-moon-stars-fill");
+        }
+      }
+      // Persist theme
+      if (localStorage.getItem("theme")) {
+        setTheme(localStorage.getItem("theme"));
+      }
+      themeToggle.addEventListener("click", () => {
+        const isDark = body.classList.contains("dark-mode");
+        setTheme(isDark ? "light" : "dark");
+        localStorage.setItem("theme", isDark ? "light" : "dark");
+      });
+
+      // Portfolio selection logic
+      const techBtn = document.getElementById("techPortfolioBtn");
+      const nonTechBtn = document.getElementById("nonTechPortfolioBtn");
+      const recruitmentOptions = document.getElementById("recruitmentOptions");
+      const portfolioSelection = document.getElementById("portfolioSelection");
+      const recruitmentTitle = document.getElementById("recruitmentTitle");
+      const backBtn = document.getElementById("backBtn");
+
+      function fadeIn(el) {
+        el.style.display = "block";
+        el.style.opacity = 0;
+        el.style.transform = "scale(0.98)";
+        setTimeout(() => {
+          el.style.transition = "opacity 0.5s, transform 0.5s";
+          el.style.opacity = 1;
+          el.style.transform = "scale(1)";
+        }, 10);
+      }
+      function fadeOut(el, cb) {
+        el.style.transition = "opacity 0.4s, transform 0.4s";
+        el.style.opacity = 0;
+        el.style.transform = "scale(1.02)";
+        setTimeout(() => {
+          el.style.display = "none";
+          if (cb) cb();
+        }, 400);
+      }
+
+      techBtn.addEventListener("click", () => {
+        recruitmentTitle.innerHTML = '<i class="bi bi-cpu"></i> Tech Portfolio';
+        fadeOut(portfolioSelection, () => fadeIn(recruitmentOptions));
+        aiBitsText("Tech portfolios are for SEECS, SMME, SINES students.");
+      });
+      nonTechBtn.addEventListener("click", () => {
+        recruitmentTitle.innerHTML =
+          '<i class="bi bi-people"></i> Non-Tech Portfolio';
+        fadeOut(portfolioSelection, () => fadeIn(recruitmentOptions));
+        aiBitsText("Non-Tech portfolios are open to all NUST students.");
+      });
+      backBtn.addEventListener("click", () => {
+        fadeOut(recruitmentOptions, () => fadeIn(portfolioSelection));
+        aiBitsText("Ready to join the AI revolution?");
+      });
+
+      // AI bits interactive text
+      const aiBits = document.getElementById("aiBits");
+      function aiBitsText(msg) {
+        aiBits.classList.add("ai-bits-animate");
+        setTimeout(() => {
+          aiBits.innerHTML = '<i class="bi bi-robot"></i> &nbsp;' + msg;
+          aiBits.classList.remove("ai-bits-animate");
+        }, 350);
+      }
+      // Fun AI bits cycling
+      const aiMessages = [
+        "Welcome! Ready to join the AI revolution?",
+        "AI is the future. Be a part of it!",
+        "NSA: Where innovation meets intelligence.",
+        "Your journey in AI starts here.",
+        "Let's build the future together!",
+      ];
+      let aiIndex = 0;
+      setInterval(() => {
+        if (portfolioSelection.style.display !== "none") {
+          aiIndex = (aiIndex + 1) % aiMessages.length;
+          aiBitsText(aiMessages[aiIndex]);
+        }
+      }, 5000);
+
+      // Ensure font everywhere
+      document.querySelectorAll("*").forEach((el) => {
+        el.style.fontFamily = "'Titillium Web', Arial, sans-serif";
+      });
+
+      // Recruitment form links
+      const execTech =
+        "https://docs.google.com/forms/d/e/1FAIpQLSe_TDy73MudR9S7McqeEIAnNOy6yHviw69ULXw716ycf5xBuQ/viewform?usp=header";
+      const dirTech =
+        "https://docs.google.com/forms/d/e/1FAIpQLSdS80zXUTvFFbCCA-CXKiNzbwQ6tXZpXz0hoRYhGqQhwj1J-A/viewform?usp=header";
+      const execNonTech = "https://forms.gle/NhM9redNSpWAkYyP7";
+      const dirNonTech =
+        "https://docs.google.com/forms/d/e/1FAIpQLSdocxgC0eVSoI33rgcT2brkHV1mlRPlNcO0vSXuHTkXW6QG0A/viewform?usp=header";
+
+      const execBtn = document.getElementById("executiveRecruitmentBtn");
+      const dirBtn = document.getElementById("directorateRecruitmentBtn");
+
+      let currentPortfolio = null;
+
+      techBtn.addEventListener("click", () => {
+        recruitmentTitle.innerHTML = '<i class="bi bi-cpu"></i> Tech Portfolio';
+        fadeOut(portfolioSelection, () => fadeIn(recruitmentOptions));
+        aiBitsText("Tech portfolios are for SEECS, SMME, SINES students.");
+        execBtn.href = execTech;
+        dirBtn.href = dirTech;
+        currentPortfolio = "tech";
+      });
+      nonTechBtn.addEventListener("click", () => {
+        recruitmentTitle.innerHTML =
+          '<i class="bi bi-people"></i> Non-Tech Portfolio';
+        fadeOut(portfolioSelection, () => fadeIn(recruitmentOptions));
+        aiBitsText("Non-Tech portfolios are open to all NUST students.");
+        execBtn.href = execNonTech;
+        dirBtn.href = dirNonTech;
+        currentPortfolio = "nontech";
+      });
+    </script>
+  </body>
+</html>
