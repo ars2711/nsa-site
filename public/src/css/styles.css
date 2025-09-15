@@ -110,18 +110,100 @@ body {
 .footer a:focus {
   color: #2196f3;
 }
+
+/* --- Responsive Tweaks --- */
 @media (max-width: 600px) {
+  body,
+  html {
+    min-width: 100vw;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+  .container {
+    min-height: 100vh;
+    width: 100vw;
+    padding: 0 0.5rem !important;
+    box-sizing: border-box;
+    justify-content: flex-start !important;
+  }
   .nsa-title {
     font-size: 2.1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.3rem;
+    text-align: center;
   }
   .nsa-subtitle {
-    font-size: 1rem;
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+    text-align: center;
   }
-  .btn-nsa {
-    font-size: 1rem;
-    padding: 0.7rem 1.2rem;
+  .desc-text {
+    font-size: 0.98rem;
+    margin-bottom: 1.2rem;
+    text-align: center;
+    padding: 0 0.2rem;
   }
   .ai-bits {
+    font-size: 0.97rem;
+    padding: 0.9rem 0.5rem;
+    min-width: 0;
+    max-width: 98vw;
+    margin: 1.2rem auto 1rem auto;
+    border-radius: 1.1rem;
+  }
+  #portfolioSelection,
+  #recruitmentOptions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .btn-nsa {
     font-size: 0.98rem;
+    padding: 0.7rem 1.1rem;
+    margin: 0.4rem 0;
+    width: 90vw;
+    max-width: 340px;
+    min-width: 0;
+    text-align: center;
+    display: block;
+  }
+  .footer {
+    margin-top: 2.5rem;
+    padding: 1.2rem 0 0.5rem 0;
+    font-size: 0.98rem;
+    width: 100vw;
+    text-align: center;
+    line-height: 1.6;
+  }
+  .footer .mb-2 {
+    flex-direction: column;
+    gap: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer a {
+    font-size: 1.3rem;
+    margin: 0 0.3rem;
+  }
+  .theme-toggle {
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.3rem;
+  }
+}
+
+/* --- Slightly larger mobile screens --- */
+@media (max-width: 400px) {
+  .btn-nsa {
+    font-size: 0.92rem;
+    padding: 0.6rem 0.7rem;
+    max-width: 95vw;
+  }
+  .ai-bits {
+    font-size: 0.92rem;
+    padding: 0.7rem 0.3rem;
   }
 }

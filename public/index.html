@@ -491,5 +491,28 @@
         currentPortfolio = "nontech";
       });
     </script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyDvdGrZlpqQ3ZxmGc1SW9s5s6LUCaItOvU",
+        authDomain: "nust-nsa.firebaseapp.com",
+        projectId: "nust-nsa",
+        storageBucket: "nust-nsa.firebasestorage.app",
+        messagingSenderId: "729207024507",
+        appId: "1:729207024507:web:0586170e8dac71fc992bde",
+        measurementId: "G-ZG4HNM6CC1",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
   </body>
 </html>
