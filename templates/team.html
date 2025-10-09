@@ -1,0 +1,72 @@
+{% extends "layout.html" %} {% block title %}Team - NSA{% endblock %} {% block
+content %}
+<section class="page-hero">
+  <div class="page-hero__inner" data-animate>
+    <span class="badge">TEAM</span>
+    <h1>Leads, Builders, Operators</h1>
+    <p>
+      Meet the humans behind the missions. Edit <code>data/team.json</code> to
+      update this roster.
+    </p>
+  </div>
+</section>
+
+<section class="projects-section">
+  <div class="projects-toolbar" data-animate>
+    <button class="filter-chip is-active" data-filter="all">All</button>
+    {% for t in tracks %}
+    <button class="filter-chip" data-filter="{{ t }}">{{ t }}</button>
+    {% endfor %}
+  </div>
+
+  <div class="project-grid">
+    {% for m in members %}
+    <article
+      class="project-card"
+      data-tags="{{ m.focus | join(',') }}"
+      data-animate
+    >
+      <header class="project-card__header">
+        <h2>{{ m.name }}</h2>
+        <span class="project-status">{{ m.role }}</span>
+      </header>
+      <p class="project-summary">{{ m.bio }}</p>
+      <dl class="project-meta">
+        <div>
+          <dt>Department</dt>
+          <dd>{{ m.dept }}</dd>
+        </div>
+        <div>
+          <dt>Focus</dt>
+          <dd>
+            {% for tag in m.focus %}
+            <span class="tag-pill">{{ tag }}</span>
+            {% endfor %}
+          </dd>
+        </div>
+      </dl>
+      <div>
+        {% if m.links.github %}
+        <a
+          class="project-link"
+          href="{{ m.links.github }}"
+          target="_blank"
+          rel="noopener"
+          >GitHub</a
+        >
+        {% endif %} {% if m.links.linkedin %}
+        <a
+          class="project-link"
+          href="{{ m.links.linkedin }}"
+          target="_blank"
+          rel="noopener"
+          >LinkedIn</a
+        >
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  <p class="projects-empty" hidden>No profiles match this filter.</p>
+</section>
+{% endblock %}

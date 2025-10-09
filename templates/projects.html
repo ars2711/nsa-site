@@ -1,0 +1,69 @@
+{% extends "layout.html" %} {% block title %}Projects - NSA{% endblock %} {%
+block content %}
+<section class="page-hero">
+  <div class="page-hero__inner" data-animate>
+    <span class="badge">PROJECTS</span>
+    <h1>Mission Files & Build Tracks</h1>
+    <p>
+      Every initiative below is a live thread in the NSA network. Edit
+      <code>data/projects.json</code> to add new missions, update status, or
+      archive finished operations. Filters help recruits find the track that
+      fits their skill set.
+    </p>
+  </div>
+</section>
+
+<section class="projects-section">
+  <div class="projects-toolbar" data-animate>
+    <button class="filter-chip is-active" data-filter="all">All</button>
+    {% for tag in tags %}
+    <button class="filter-chip" data-filter="{{ tag }}">{{ tag }}</button>
+    {% endfor %}
+  </div>
+
+  <div class="project-grid">
+    {% for project in projects %}
+    <article
+      class="project-card"
+      data-tags="{{ project.tags | join(',') }}"
+      data-animate
+    >
+      <header class="project-card__header">
+        <h2>{{ project.title }}</h2>
+        <span class="project-status">{{ project.status }}</span>
+      </header>
+      <p class="project-summary">{{ project.summary }}</p>
+      <dl class="project-meta">
+        <div>
+          <dt>Mission Lead</dt>
+          <dd>{{ project.lead }}</dd>
+        </div>
+        <div>
+          <dt>Focus</dt>
+          <dd>
+            {% for tag in project.tags %}
+            <span class="tag-pill">{{ tag }}</span>
+            {% endfor %}
+          </dd>
+        </div>
+      </dl>
+      {% if project.link and project.link != '#' %}
+      <a
+        class="project-link"
+        href="{{ project.link }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        >View Brief</a
+      >
+      {% else %}
+      <span class="project-link disabled">Brief uploading soon</span>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  <p class="projects-empty" hidden>
+    No missions match that focus yet. Try another filter or drop a new brief in
+    <code>data/projects.json</code>.
+  </p>
+</section>
+{% endblock %}

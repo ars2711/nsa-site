@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Apollo Ops Bot",
+    "summary": "Discord-native assistant that triages support pings and surfaces relevant NSA docs in under 5 seconds.",
+    "tags": ["Automation", "Bots", "DX"],
+    "status": "In review",
+    "lead": "Zain R. (DevOps)",
+    "link": "https://example.com/briefs/apollo"
+  },
+  {
+    "title": "Sentinel Labs",
+    "summary": "Cyber range with weekly blue-team/red-team drills and recorded debriefs for newcomers.",
+    "tags": ["Security", "Infrastructure"],
+    "status": "Recruiting contributors",
+    "lead": "Hiba A. (Security)",
+    "link": ""
+  },
+  {
+    "title": "PulseView Dashboard",
+    "summary": "Realtime health dashboard pulling metrics from member projects, GitHub orgs, and campus sensors.",
+    "tags": ["Data", "Visualization", "Product"],
+    "status": "Scoping",
+    "lead": "Arsal S. (Core)",
+    "link": "https://example.com/briefs/pulseview"
+  }
+]
