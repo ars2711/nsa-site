@@ -37,7 +37,7 @@ data/
 Recruitment now happens directly through Google Forms. The two primary entry points are surfaced in the navbar and hero section:
 
 - Recruitment Intake: <https://forms.gle/d8rLMELNKLbSxPNc7>
-- PhD Applicants Portal: <https://forms.gle/fsUwK4bLwuXGMHmM9>
+- Researchers Recruitment Portal: <https://forms.gle/fsUwK4bLwuXGMHmM9>
 
 No server-side proxy is required—the site links out to Google Forms immediately when a visitor clicks a CTA.
 
@@ -55,7 +55,7 @@ python app.py
 
 - **Hero Command Console**: Holographic intro, gradient copy, mission CTA pair.
 - **9 Intel Cards**: Animated grid covering identity, culture, and strategic direction.
-- **Recruitment & PhD CTAs**: Navbar buttons linking to the [Recruitment Intake](https://forms.gle/d8rLMELNKLbSxPNc7) and [PhD Applicants](https://forms.gle/fsUwK4bLwuXGMHmM9) Google Forms.
+- **Recruitment & Researchers CTAs**: Navbar buttons linking to the [Recruitment Intake](https://forms.gle/d8rLMELNKLbSxPNc7) and [Researchers Recruitment](https://forms.gle/fsUwK4bLwuXGMHmM9) Google Forms.
 - **Google Form Intake**: Default flow uses Google Forms. A native on-site form can also forward responses directly to Google Forms (details below).
 - **Dark / Light Modes**: Persistent theme toggle with particle system recoloring.
 - **Projects Portfolio**: JSON-driven projects page with focus filters (e.g., CV, NLP, GenAI). Update `data/projects.json` to change content.
