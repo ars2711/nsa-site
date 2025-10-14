@@ -152,4 +152,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		updateEmptyState();
 	}
+
+	// Initialize countdown timer
+	initCountdown();
 });
+
+// === Countdown Timer ===
+function initCountdown() {
+	const daysEl = document.getElementById("days");
+	const hoursEl = document.getElementById("hours");
+	const minutesEl = document.getElementById("minutes");
+	const secondsEl = document.getElementById("seconds");
+	const countdownBanner = document.querySelector(".countdown-banner");
+
+	if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+	// Target: October 15, 2025 at 11:00 PM PKT (UTC+5)
+	// Convert to UTC: 11:00 PM PKT = 6:00 PM UTC (18:00 UTC)
+	const targetDate = new Date("2025-10-15T18:00:00Z");
+
+	function updateCountdown() {
+		const now = new Date();
+		const diff = targetDate - now;
+
+		if (diff <= 0) {
+			// Countdown expired
+			if (countdownBanner) {
+				countdownBanner.style.display = "none";
+			}
+			return;
+		}
+
+		const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+		const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+		const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+		daysEl.textContent = String(days).padStart(2, "0");
+		hoursEl.textContent = String(hours).padStart(2, "0");
+		minutesEl.textContent = String(minutes).padStart(2, "0");
+		secondsEl.textContent = String(seconds).padStart(2, "0");
+	}
+
+	// Update immediately and then every second
+	updateCountdown();
+	setInterval(updateCountdown, 1000);
+}
+
+// === FAQ Toggle ===
+function toggleFaq(button) {
+	const answer = button.nextElementSibling;
+	const isOpen = answer.classList.contains("open");
+
+	// Toggle active state on button
+	button.classList.toggle("active");
+
+	// Toggle answer visibility
+	if (isOpen) {
+		answer.classList.remove("open");
+	} else {
+		answer.classList.add("open");
+	}
+}
