@@ -138,7 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		filterChips.forEach((chip) => {
 			chip.addEventListener("click", () => {
 				const targetFilter = chip.dataset.filter || "all";
-				filterChips.forEach((c) => c.classList.toggle("is-active", c === chip));
+				filterChips.forEach((c) => {
+					const isActive = c === chip;
+					c.classList.toggle("is-active", isActive);
+					c.setAttribute("aria-pressed", isActive ? "true" : "false");
+				});
 				projectCards.forEach((card) => {
 					const tags = normalize(card.dataset.tags);
 					const matches =

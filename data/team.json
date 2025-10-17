@@ -1,18 +1,710 @@
 [
   {
-    "name": "Arsal S.",
-    "role": "President",
-    "dept": "SEECS",
-    "focus": ["Leadership", "Strategy"],
-    "bio": "Leading NSA's mission and partnerships.",
-    "links": { "linkedin": "#" }
+    "name": "Abdullah Jamil",
+    "role": "Deputy Director",
+    "dept": "SMME 23",
+    "focus": [
+      "GS Wing",
+      "Marketing",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "atung.ug23smme@student.nust.edu.pk",
+    "links": {}
   },
   {
-    "name": "Tech Ops",
-    "role": "Director, Engineering",
-    "dept": "SMME",
-    "focus": ["Systems", "AI"],
-    "bio": "Shipping products and infra.",
-    "links": { "github": "#" }
+    "name": "Curly hair",
+    "role": "Deputy Director",
+    "dept": "",
+    "focus": [
+      "GS Wing",
+      "Marketing",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "",
+    "links": {}
+  },
+  {
+    "name": "Faiza Hurab",
+    "role": "Deputy Director",
+    "dept": "NBS 25",
+    "focus": [
+      "GS Wing",
+      "Event Management",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "faizahurab27@gmail.com",
+    "links": {}
+  },
+  {
+    "name": "Safi Ullah Azeem",
+    "role": "Deputy Director",
+    "dept": "SMME 24",
+    "focus": [
+      "GS Wing",
+      "Event Management",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "sazeem.ug24smme@student.nust.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Fatiha Sheikh",
+    "role": "Director",
+    "dept": "SEECS 24",
+    "focus": [
+      "GS Wing",
+      "Event Management",
+      "Director"
+    ],
+    "bio": "",
+    "email": "fatihasheikh235@gmail.com",
+    "links": {}
+  },
+  {
+    "name": "Muhammad Bilal",
+    "role": "Director",
+    "dept": "ASAB 23",
+    "focus": [
+      "GS Wing",
+      "Admin Events",
+      "Director"
+    ],
+    "bio": "",
+    "email": "mbilal.bsbt16asab@student.nust.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Shaheer Murtaza Shehri",
+    "role": "Director",
+    "dept": "SEECS 24",
+    "focus": [
+      "GS Wing",
+      "Security",
+      "Director"
+    ],
+    "bio": "",
+    "email": "sshehri.bsai24seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Hadia Abid",
+    "role": "Executive",
+    "dept": "ASAB 25",
+    "focus": [
+      "GS Wing",
+      "Event Management",
+      "Executive",
+      "Treasure Wing",
+      "Logistics"
+    ],
+    "bio": "",
+    "email": "hadiaabid.2006@gmail.com",
+    "links": {}
+  },
+  {
+    "name": "Malik Samar Abbas",
+    "role": "Executive",
+    "dept": "SEECS 24",
+    "focus": [
+      "GS Wing",
+      "Liaison",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "mabbas.bscs24seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Miraas Mohsin",
+    "role": "Executive",
+    "dept": "ASAB 25",
+    "focus": [
+      "GS Wing",
+      "Event Management",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "miraasms07@gmail.com",
+    "links": {}
+  },
+  {
+    "name": "Muhammad Hamza",
+    "role": "Executive",
+    "dept": "",
+    "focus": [
+      "GS Wing",
+      "Marketing",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "",
+    "links": {}
+  },
+  {
+    "name": "Saad Faran Malik",
+    "role": "Executive",
+    "dept": "SEECS 21",
+    "focus": [
+      "GS Wing",
+      "Admin Events",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "mmalik.bee21seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Syed Mukarrum Ali",
+    "role": "Executive",
+    "dept": "SEECS 24",
+    "focus": [
+      "GS Wing",
+      "Marketing",
+      "Executive",
+      "Treasure Wing",
+      "ER and sponsorship"
+    ],
+    "bio": "",
+    "email": "sali.bee24seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Uzair Ahmed",
+    "role": "Executive",
+    "dept": "SEECS 25",
+    "focus": [
+      "GS Wing",
+      "Event Management",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "uahmed.bscs25seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Zul Arsh Rashid",
+    "role": "Executive",
+    "dept": "SCME 25",
+    "focus": [
+      "GS Wing",
+      "Liaison",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "arshr0458@gmail.com",
+    "links": {}
+  },
+  {
+    "name": "Aiman Rehman",
+    "role": "Deputy Director",
+    "dept": "ASAB 23",
+    "focus": [
+      "PS Wing",
+      "SMM",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "aiman.rehman1498@gmail.com",
+    "links": {}
+  },
+  {
+    "name": "Muhammad Zain Ikhlaq",
+    "role": "Deputy Director",
+    "dept": "SEECS 23",
+    "focus": [
+      "PS Wing",
+      "Web and App Development",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "mikhlaq.bscs23seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Raja Haris Ahmed",
+    "role": "Deputy Director",
+    "dept": "SMME 24",
+    "focus": [
+      "PS Wing",
+      "Graphics",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "rahmed.ug24smme@student.nust.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Ahsan Javed",
+    "role": "Deputy Director (Tentative)",
+    "dept": "SEECS 23",
+    "focus": [
+      "PS Wing",
+      "Graphics",
+      "Deputy Director (Tentative)",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "ajaved.bee23seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Basfa Hanif",
+    "role": "Deputy Director (Tentative)",
+    "dept": "SADA 23",
+    "focus": [
+      "PS Wing",
+      "Graphics",
+      "Deputy Director (Tentative)",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "bhanif.id23sada@student.nust.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Noor Fatima",
+    "role": "Director",
+    "dept": "SEECS 24",
+    "focus": [
+      "PS Wing",
+      "Graphics",
+      "Director"
+    ],
+    "bio": "",
+    "email": "",
+    "links": {}
+  },
+  {
+    "name": "Abdul Kareem",
+    "role": "Executive",
+    "dept": "SMME 24",
+    "focus": [
+      "PS Wing",
+      "SMM",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "akareem.ug24smme@student.nust.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Muhammad Ahmed",
+    "role": "Executive",
+    "dept": "SMME 24",
+    "focus": [
+      "PS Wing",
+      "Graphics",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "muahmad.ug24smme@nust.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Uzair Abdullah",
+    "role": "Executive",
+    "dept": "SMME 24",
+    "focus": [
+      "PS Wing",
+      "Graphics",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "uabdullah.ug24smme@student.nust.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Muhammad Hashim Mughal",
+    "role": "Executive / Deputy Director",
+    "dept": "SEECS 24",
+    "focus": [
+      "PS Wing",
+      "Graphics",
+      "Executive",
+      "Web and App Development",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "mmughal.bese24seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Ali Zain",
+    "role": "Deputy Director",
+    "dept": "SEECS 23",
+    "focus": [
+      "Presidential Wing",
+      "HR",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "sabideen.bscs23seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Areeba Shakeel",
+    "role": "Deputy Director",
+    "dept": "ASAB 24",
+    "focus": [
+      "Presidential Wing",
+      "HR",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "areebashakeel557@gmail.com",
+    "links": {}
+  },
+  {
+    "name": "Reem Saleha",
+    "role": "Deputy Director",
+    "dept": "SEECS 24",
+    "focus": [
+      "Presidential Wing",
+      "HR",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "rsaleha.bsai24seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Hafsa Faizan",
+    "role": "Director",
+    "dept": "SCEE 24",
+    "focus": [
+      "Presidential Wing",
+      "HR",
+      "Director"
+    ],
+    "bio": "",
+    "email": "hafsa.faizan00@gmail.com",
+    "links": {}
+  },
+  {
+    "name": "Hifza Ilyas",
+    "role": "Executive",
+    "dept": "IESE 24",
+    "focus": [
+      "Presidential Wing",
+      "HR",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "hifza.bes24iese@student.nust.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Mohad Aamir",
+    "role": "Executive",
+    "dept": "SEECS 25",
+    "focus": [
+      "Presidential Wing",
+      "HR",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "mohad.bsai25seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Nouman",
+    "role": "GS",
+    "dept": "",
+    "focus": [
+      "Presidential Wing",
+      "OBs",
+      "GS"
+    ],
+    "bio": "",
+    "email": "",
+    "links": {}
+  },
+  {
+    "name": "Ammar",
+    "role": "President",
+    "dept": "SEECS 21",
+    "focus": [
+      "Presidential Wing",
+      "President"
+    ],
+    "bio": "",
+    "email": "",
+    "links": {}
+  },
+  {
+    "name": "Babar / Ashar",
+    "role": "Tech",
+    "dept": "",
+    "focus": [
+      "Presidential Wing",
+      "OBs",
+      "Tech"
+    ],
+    "bio": "",
+    "email": "",
+    "links": {}
+  },
+  {
+    "name": "Hammad",
+    "role": "Treasurer",
+    "dept": "",
+    "focus": [
+      "Presidential Wing",
+      "OBs",
+      "Treasurer"
+    ],
+    "bio": "",
+    "email": "",
+    "links": {}
+  },
+  {
+    "name": "Tamkeen Sara",
+    "role": "Director ML/DL",
+    "dept": "SEECS 23",
+    "focus": [
+      "Tech Wing",
+      "Director ML/DL",
+      "Director"
+    ],
+    "bio": "",
+    "email": "tsara.bsds23seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Muhammad Abdullah",
+    "role": "Executive AI",
+    "dept": "",
+    "focus": [
+      "Tech Wing",
+      "Executive AI",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "",
+    "links": {}
+  },
+  {
+    "name": "Mufassir Amjad",
+    "role": "Executive DL/CV",
+    "dept": "SMME 23",
+    "focus": [
+      "Tech Wing",
+      "Executive DL/CV",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "hamjad.ug23smme@student.nust.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Shaheer Hassan",
+    "role": "Executive DL/CV",
+    "dept": "SEECS 25",
+    "focus": [
+      "Tech Wing",
+      "Executive DL/CV",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "hassan.bscs25seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Shunzab Asad",
+    "role": "Executive DL/CV",
+    "dept": "SEECS 25",
+    "focus": [
+      "Tech Wing",
+      "Executive DL/CV",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "sasad.bscs25seecs@student.nust.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Mohammad Asjal",
+    "role": "Executive GenAI",
+    "dept": "SEECS 24",
+    "focus": [
+      "Tech Wing",
+      "Executive GenAI",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "masjal.bee24seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Moaz Khan",
+    "role": "Member",
+    "dept": "SEECS 25",
+    "focus": [
+      "Tech Wing",
+      "Tech Enthusiasts",
+      "Member"
+    ],
+    "bio": "",
+    "email": "moazkkhan10@gmail.com",
+    "links": {}
+  },
+  {
+    "name": "Muhammad Ali",
+    "role": "Member",
+    "dept": "SEECS 25",
+    "focus": [
+      "Tech Wing",
+      "Tech Enthusiasts",
+      "Member"
+    ],
+    "bio": "",
+    "email": "muhali.bscs25seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Hamza Cheema",
+    "role": "Deputy Director",
+    "dept": "SCEE 24",
+    "focus": [
+      "Treasure Wing",
+      "ER and sponsorship",
+      "Deputy Director",
+      "Deputy"
+    ],
+    "bio": "",
+    "email": "hhammad.bes24iese@student.nust.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Ali Ahmad Khan",
+    "role": "Director",
+    "dept": "SEECS 24",
+    "focus": [
+      "Treasure Wing",
+      "Decor",
+      "Director"
+    ],
+    "bio": "",
+    "email": "aak.aliahmadk@gmail.com",
+    "links": {}
+  },
+  {
+    "name": "Arsalan Afzal",
+    "role": "Director",
+    "dept": "SEECS 24",
+    "focus": [
+      "Treasure Wing",
+      "ER and sponsorship",
+      "Director"
+    ],
+    "bio": "",
+    "email": "mafzal.bscs24seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Asifa Noreen",
+    "role": "Director",
+    "dept": "SNS 25",
+    "focus": [
+      "Treasure Wing",
+      "Finance",
+      "Director"
+    ],
+    "bio": "",
+    "email": "asifanoreen@sns.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Ahmad Khan",
+    "role": "Executive",
+    "dept": "SEECS 25",
+    "focus": [
+      "Treasure Wing",
+      "Logistics",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "ahhmadk812@gmail.com",
+    "links": {}
+  },
+  {
+    "name": "Haider Javed",
+    "role": "Executive",
+    "dept": "SEECS 25",
+    "focus": [
+      "Treasure Wing",
+      "Logistics",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "hjaved.bscs25seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Muhammad Abdullah Rana",
+    "role": "Executive",
+    "dept": "SEECS 24",
+    "focus": [
+      "Treasure Wing",
+      "ER and sponsorship",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "mrana.bese24seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Muhammad Azeem ud din Babar",
+    "role": "Executive",
+    "dept": "SEECS 25",
+    "focus": [
+      "Treasure Wing",
+      "Logistics",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "mbabar.bscs25seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Mustafa",
+    "role": "Executive",
+    "dept": "SEECS 25",
+    "focus": [
+      "Treasure Wing",
+      "Logistics",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "muali.bscs25seecs@seecs.edu.pk",
+    "links": {}
+  },
+  {
+    "name": "Saad Asghar",
+    "role": "Executive",
+    "dept": "SMME 24",
+    "focus": [
+      "Treasure Wing",
+      "Logistics",
+      "Executive"
+    ],
+    "bio": "",
+    "email": "masghar.ug24smme@srudent.nust.edu.pk",
+    "links": {}
   }
 ]

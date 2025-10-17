@@ -94,6 +94,7 @@ def team():
             "dept": "SEECS",
             "focus": ["Leadership", "Partnerships"],
             "bio": "Driving NSA's vision and execution.",
+            "email": "",
             "links": {"linkedin": "#"},
         },
         {
@@ -102,6 +103,7 @@ def team():
             "dept": "SMME",
             "focus": ["Systems", "AI"],
             "bio": "Shipping pipelines and infra.",
+            "email": "",
             "links": {"github": "#"},
         },
     ]
@@ -111,20 +113,82 @@ def team():
     for m in members:
         if not isinstance(m, dict):
             continue
-        focus = m.get("focus") or []
-        if isinstance(focus, str):
-            focus = [t.strip() for t in focus.split(',') if t.strip()]
+        focus_raw = m.get("focus") or []
+        if isinstance(focus_raw, str):
+            focus_raw = [t.strip() for t in focus_raw.split(',') if t.strip()]
+        focus = []
+        for item in focus_raw:
+            value = (item or "").strip()
+            if value and value not in focus:
+                focus.append(value)
+        focus_tokens = [token.lower() for token in focus]
+        links = m.get("links") or {}
+        if not isinstance(links, dict):
+            links = {}
         normalized.append({
-            "name": m.get("name", "Member"),
-            "role": m.get("role", ""),
-            "dept": m.get("dept", ""),
+            "name": (m.get("name") or "Member").strip(),
+            "role": (m.get("role") or "").strip(),
+            "dept": (m.get("dept") or "").strip(),
             "focus": focus,
-            "bio": m.get("bio", ""),
-            "links": m.get("links", {}),
+            "focus_tokens": focus_tokens,
+            "bio": (m.get("bio") or "").strip(),
+            "email": (m.get("email") or "").strip(),
+            "links": links,
         })
 
-    tracks = sorted({t for m in normalized for t in (m.get("focus") or [])})
-    return render_template('team.html', members=normalized, tracks=tracks)
+    track_candidates = {tag for member in normalized for tag in member.get("focus", [])}
+    wing_order = [
+        "Presidential Wing",
+        "GS Wing",
+        "PS Wing",
+        "Treasure Wing",
+        "Tech Wing",
+    ]
+    wing_priority = {name: index for index, name in enumerate(wing_order)}
+    role_order = [
+        "President",
+        "Vice President",
+        "Director",
+        "Deputy Director",
+        "Deputy Director (Tentative)",
+        "Deputy",
+        "Treasurer",
+        "GS",
+        "Tech",
+        "Executive / Deputy Director",
+        "Executive",
+        "Member",
+    ]
+    role_priority = {name: index for index, name in enumerate(role_order)}
+
+    def track_sort_key(tag: str) -> tuple:
+        if tag in wing_priority:
+            return (0, wing_priority[tag], tag.lower())
+        if tag in role_priority:
+            return (1, role_priority[tag], tag.lower())
+        return (2, tag.lower())
+
+    tracks = sorted(track_candidates, key=track_sort_key)
+
+    structured_people = []
+    for member in normalized:
+        person: Dict[str, Any] = {
+            "@type": "Person",
+            "name": member["name"],
+            "affiliation": "NUST Society of Artificial Intelligence",
+            "url": f"{PUBLIC_BASE_URL}/team",
+        }
+        if member.get("role"):
+            person["jobTitle"] = member["role"]
+        if member.get("focus"):
+            person["knowsAbout"] = member["focus"]
+        if member.get("bio"):
+            person["description"] = member["bio"]
+        if member.get("email"):
+            person["email"] = member["email"]
+        structured_people.append(person)
+
+    return render_template('team.html', members=normalized, tracks=tracks, structured_people=structured_people)
 
 
 @app.route('/robots.txt')

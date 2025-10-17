@@ -1,43 +1,19 @@
-{% extends "layout.html" %}
-{% block title %}Team - NSA{% endblock %}
-{% block page_metadata %}
-  {% set page_description = "Meet the NUST Society of Artificial Intelligence leadership, directors, and executive teams powering Pakistan's most ambitious student AI community." %}
-  {% set page_keywords = default_keywords + [
-    "NSA team",
-    "NUST AI leadership",
-    "student directors",
-    "AI society team",
-    "Pakistan AI leaders"
-  ] %}
-{% endblock %}
-{% block head_extra %}
-  {{ super() }}
-  {% if members %}
-    {% set people = [] %}
-    {% for member in members %}
-      {% set people = people + [
-        {
-          "@type": "Person",
-          "name": member.name,
-          "jobTitle": member.role,
-          "affiliation": "NUST Society of Artificial Intelligence",
-          "knowsAbout": member.focus,
-          "description": member.bio,
-          "url": canonical_url
-        }
-      ] %}
-    {% endfor %}
-    <script type="application/ld+json">
-      {{ {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "name": "NSA Leadership and Directorates",
-        "itemListElement": people
-      } | tojson | safe }}
-    </script>
-  {% endif %}
-{% endblock %}
-{% block content %}
+{% extends "layout.html" %} {% block title %}Team - NSA{% endblock %} {% block
+page_metadata %} {% set page_description = "Meet the NUST Society of Artificial
+Intelligence leadership, directors, and executive teams powering Pakistan's most
+ambitious student AI community." %} {% set page_keywords = default_keywords + [
+"NSA team", "NUST AI leadership", "student directors", "AI society team",
+"Pakistan AI leaders" ] %} {% endblock %} {% block head_extra %} {{ super() }}
+{% if structured_people %}
+<script type="application/ld+json">
+  {{ {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "NSA Leadership and Directorates",
+    "itemListElement": structured_people
+  } | tojson | safe }}
+</script>
+{% endif %} {% endblock %} {% block content %}
 <section class="page-hero">
   <div class="page-hero__inner" data-animate>
     <span class="badge">TEAM</span>
@@ -49,7 +25,9 @@
     <p>
       Looking for your next challenge? Browse our
       <a href="{{ url_for('projects') }}">AI project pipeline</a> or read the
-      <a href="{{ url_for('index') }}#recruitment-timeline">recruitment timeline</a>
+      <a href="{{ url_for('index') }}#recruitment-timeline"
+        >recruitment timeline</a
+      >
       to see where you fit best.
     </p>
   </div>
@@ -57,9 +35,17 @@
 
 <section class="projects-section">
   <div class="projects-toolbar" data-animate>
-    <button class="filter-chip is-active" data-filter="all">All</button>
+    <button class="filter-chip is-active" data-filter="all" aria-pressed="true">
+      All
+    </button>
     {% for t in tracks %}
-    <button class="filter-chip" data-filter="{{ t }}">{{ t }}</button>
+    <button
+      class="filter-chip"
+      data-filter="{{ t | lower }}"
+      aria-pressed="false"
+    >
+      {{ t }}
+    </button>
     {% endfor %}
   </div>
 
@@ -67,19 +53,28 @@
     {% for m in members %}
     <article
       class="project-card"
-      data-tags="{{ m.focus | join(',') }}"
+      data-tags="{{ (m.focus_tokens | default([], true)) | join(',') }}"
       data-animate
     >
       <header class="project-card__header">
         <h2>{{ m.name }}</h2>
         <span class="project-status">{{ m.role }}</span>
       </header>
+      {% if m.bio %}
       <p class="project-summary">{{ m.bio }}</p>
+      {% endif %} {% if m.dept or m.email or m.focus %}
       <dl class="project-meta">
+        {% if m.dept %}
         <div>
           <dt>Department</dt>
           <dd>{{ m.dept }}</dd>
         </div>
+        {% endif %} {% if m.email %}
+        <div>
+          <dt>Email</dt>
+          <dd><a href="mailto:{{ m.email }}">{{ m.email }}</a></dd>
+        </div>
+        {% endif %} {% if m.focus %}
         <div>
           <dt>Focus</dt>
           <dd>
@@ -88,8 +83,10 @@
             {% endfor %}
           </dd>
         </div>
+        {% endif %}
       </dl>
-      <div>
+      {% endif %} {% if m.links.github or m.links.linkedin %}
+      <div class="project-links">
         {% if m.links.github %}
         <a
           class="project-link"
@@ -108,6 +105,7 @@
         >
         {% endif %}
       </div>
+      {% endif %}
     </article>
     {% endfor %}
   </div>
