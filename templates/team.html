@@ -1,5 +1,43 @@
-{% extends "layout.html" %} {% block title %}Team - NSA{% endblock %} {% block
-content %}
+{% extends "layout.html" %}
+{% block title %}Team - NSA{% endblock %}
+{% block page_metadata %}
+  {% set page_description = "Meet the NUST Society of Artificial Intelligence leadership, directors, and executive teams powering Pakistan's most ambitious student AI community." %}
+  {% set page_keywords = default_keywords + [
+    "NSA team",
+    "NUST AI leadership",
+    "student directors",
+    "AI society team",
+    "Pakistan AI leaders"
+  ] %}
+{% endblock %}
+{% block head_extra %}
+  {{ super() }}
+  {% if members %}
+    {% set people = [] %}
+    {% for member in members %}
+      {% set people = people + [
+        {
+          "@type": "Person",
+          "name": member.name,
+          "jobTitle": member.role,
+          "affiliation": "NUST Society of Artificial Intelligence",
+          "knowsAbout": member.focus,
+          "description": member.bio,
+          "url": canonical_url
+        }
+      ] %}
+    {% endfor %}
+    <script type="application/ld+json">
+      {{ {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "NSA Leadership and Directorates",
+        "itemListElement": people
+      } | tojson | safe }}
+    </script>
+  {% endif %}
+{% endblock %}
+{% block content %}
 <section class="page-hero">
   <div class="page-hero__inner" data-animate>
     <span class="badge">TEAM</span>
@@ -7,6 +45,12 @@ content %}
     <p>
       Meet the humans behind the missions. Edit <code>data/team.json</code> to
       update this roster.
+    </p>
+    <p>
+      Looking for your next challenge? Browse our
+      <a href="{{ url_for('projects') }}">AI project pipeline</a> or read the
+      <a href="{{ url_for('index') }}#recruitment-timeline">recruitment timeline</a>
+      to see where you fit best.
     </p>
   </div>
 </section>

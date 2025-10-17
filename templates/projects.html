@@ -1,5 +1,45 @@
-{% extends "layout.html" %} {% block title %}Projects - NSA{% endblock %} {%
-block content %}
+{% extends "layout.html" %}
+{% block title %}Projects - NSA{% endblock %}
+{% block page_metadata %}
+  {% set page_description = "Explore NSA's active AI initiatives at NUST, including machine learning, computer vision, and product builds led by Pakistan's next generation of innovators." %}
+  {% set page_keywords = default_keywords + [
+    "AI projects Pakistan",
+    "NUST AI initiatives",
+    "student AI research",
+    "NSA projects",
+    "machine learning builds"
+  ] %}
+{% endblock %}
+{% block head_extra %}
+  {{ super() }}
+  {% if projects %}
+    {% set project_items = [] %}
+    {% for project in projects %}
+      {% set project_items = project_items + [
+        {
+          "@type": "CreativeWork",
+          "name": project.title,
+          "about": project.summary,
+          "keywords": project.tags,
+          "author": {
+            "@type": "Person",
+            "name": project.lead
+          },
+          "url": project.link if project.link and project.link != '#' else canonical_url
+        }
+      ] %}
+    {% endfor %}
+    <script type="application/ld+json">
+      {{ {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "NSA Active Projects",
+        "itemListElement": project_items
+      } | tojson | safe }}
+    </script>
+  {% endif %}
+{% endblock %}
+{% block content %}
 <section class="page-hero">
   <div class="page-hero__inner" data-animate>
     <span class="badge">PROJECTS</span>
@@ -9,6 +49,12 @@ block content %}
       <code>data/projects.json</code> to add new missions, update status, or
       archive finished operations. Filters help recruits find the track that
       fits their skill set.
+    </p>
+    <p>
+      Want to join a build squad? Meet the
+      <a href="{{ url_for('team') }}">NSA leadership &amp; directorates</a> or
+      review our <a href="{{ url_for('index') }}#recruitment-timeline">recruitment timeline</a>
+      to plug into the next cohort.
     </p>
   </div>
 </section>

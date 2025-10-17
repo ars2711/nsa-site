@@ -1,6 +1,53 @@
 {% extends "layout.html" %} {% block title %}Home - NSA{% endblock %} {% block
-content %}
-<section class="terminal-hero">
+page_metadata %} {% set page_description = "Join the NUST Society of Artificial
+Intelligence (NSA) in Pakistan to build AI products, research breakthroughs, and
+unforgettable events with the country's leading student AI community." %} {% set
+page_keywords = default_keywords + [ "NSA Pakistan", "NUST AI society", "AI
+recruitment", "student AI projects", "NUST events", "AI leadership" ] %} {%
+endblock %} {% block head_extra %} {{ super() }} {% set faq_entities = [ {
+"@type": "Question", "name": "When does recruitment close?", "acceptedAnswer": {
+"@type": "Answer", "text": "Applications close on October 15, 2025 at 11:00 PM
+Pakistan Time. Interviews follow within the next week and final selections
+publish by October 18, 2025." } }, { "@type": "Question", "name": "What's the
+selection process?", "acceptedAnswer": { "@type": "Answer", "text": "Submit the
+Google Form, pass a skills and motivation screening, complete a 15-20 minute
+interview, and receive results within 48 hours of the conversation." } }, {
+"@type": "Question", "name": "Do I need to be a CS student to join NSA?",
+"acceptedAnswer": { "@type": "Answer", "text": "NSA welcomes students from every
+NUST school. Diverse disciplines strengthen our AI work, so engineering,
+business, design, and biosciences students are encouraged to apply." } }, {
+"@type": "Question", "name": "What do NSA members work on?", "acceptedAnswer": {
+"@type": "Answer", "text": "Members ship AI products, run research experiments,
+craft design systems, and lead operations for large-scale events and
+partnerships across NUST." } }, { "@type": "Question", "name": "Can first-year
+students participate?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We
+actively recruit freshmen and sophomores so they can learn, contribute, and grow
+into leadership roles throughout their time at NUST." } } ] %} {% set
+recruitment_event = { "@context": "https://schema.org", "@type":
+"EducationEvent", "name": "NSA Recruitment Fall 2025", "eventAttendanceMode":
+"https://schema.org/MixedEventAttendanceMode", "eventStatus":
+"https://schema.org/EventScheduled", "startDate": "2025-09-25T09:00:00+05:00",
+"endDate": "2025-10-15T23:00:00+05:00", "url": base_url ~
+'/#recruitment-timeline', "location": { "@type": "Place", "name": "NUST
+Islamabad", "address": { "@type": "PostalAddress", "addressCountry": "PK",
+"addressLocality": "Islamabad", "streetAddress": "National University of
+Sciences and Technology" } }, "organizer": { "@type": "Organization", "name":
+"NUST Society of Artificial Intelligence", "url": base_url ~ '/', "sameAs":
+["https://www.instagram.com/nsa.nust/"] }, "description": "NSA's Fall 2025
+recruitment drives interviews, workshops, and onboarding for Pakistan's most
+ambitious AI talent at NUST." } %}
+<script type="application/ld+json">
+  {{ [
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faq_entities
+    },
+    recruitment_event
+  ] | tojson | safe }}
+</script>
+{% endblock %} {% block content %}
+<section class="terminal-hero" id="home">
   <div class="hero-grid">
     <div class="hero-copy" data-animate>
       <span class="hero-kicker"
@@ -10,6 +57,18 @@ content %}
       <p class="hero-subtitle">
         Pakistan's next generation of builders, researchers, and visionaries
         transforming AI from theory into reality.
+      </p>
+      <p class="hero-link-strip">
+        Explore our
+        <a href="{{ url_for('projects') }}" class="hero-link"
+          >live AI projects</a
+        >, meet the
+        <a href="{{ url_for('team') }}" class="hero-link"
+          >team behind the mission</a
+        >, or study the
+        <a href="#recruitment-timeline" class="hero-link"
+          >recruitment timeline</a
+        >.
       </p>
 
       <!-- Countdown Timer -->
@@ -64,7 +123,7 @@ content %}
 </section>
 
 <!-- Stats Counter Section -->
-<section class="stats-showcase" data-animate>
+<section class="stats-showcase" id="impact-stats" data-animate>
   <div class="stats-grid">
     <div class="stat-card" data-animate>
       <div class="stat-icon">
@@ -139,7 +198,7 @@ content %}
 </section>
 
 <!-- Visual Timeline Section -->
-<section class="timeline-section" id="timeline">
+<section class="timeline-section" id="recruitment-timeline">
   <div class="category-header" data-animate>
     <span class="badge">RECRUITMENT TIMELINE</span>
     <h2>Your Journey // From Apply to Onboard</h2>
@@ -269,7 +328,7 @@ content %}
 </section>
 
 <!-- Impact & Achievements Section -->
-<section class="impact-section" data-animate>
+<section class="impact-section" id="impact" data-animate>
   <div class="category-header" data-animate>
     <span class="badge">OUR IMPACT</span>
     <h2>Building // Real Results</h2>
@@ -378,7 +437,7 @@ content %}
 </section>
 
 <!-- Team Structure Section -->
-<section class="team-structure-section" data-animate>
+<section class="team-structure-section" id="team-structure" data-animate>
   <div class="category-header" data-animate>
     <span class="badge">TEAM STRUCTURE</span>
     <h2>How We Operate // Complete Portfolio Breakdown</h2>

@@ -526,6 +526,42 @@ body.light-mode .theme-toggle {
   max-width: 34ch;
 }
 
+.hero-link-strip {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: -0.5rem 0 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.hero-link-strip .hero-link {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  position: relative;
+  font-weight: 600;
+}
+
+.hero-link-strip .hero-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(120deg, var(--accent-cyan), var(--accent-blue));
+  opacity: 0.5;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hero-link-strip .hero-link:hover::after,
+.hero-link-strip .hero-link:focus-visible::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -955,8 +991,8 @@ body.light-mode .theme-toggle {
   );
   border: 2px solid rgba(255, 50, 100, 0.4);
   border-radius: 16px;
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   box-shadow: 0 0 30px rgba(255, 0, 80, 0.2),
     inset 0 0 20px rgba(255, 100, 0, 0.1);
   animation: pulse-border 3s ease-in-out infinite;
@@ -1064,8 +1100,8 @@ body.light-mode .theme-toggle {
   border: 1px solid rgba(0, 217, 245, 0.15);
   border-radius: 18px;
   padding: 2rem;
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1198,8 +1234,8 @@ body.light-mode .countdown-banner {
   padding: 2.5rem 2rem;
   text-align: center;
   box-shadow: var(--shadow-glow);
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -1259,8 +1295,8 @@ body.light-mode .countdown-banner {
   border-radius: 20px;
   padding: 2rem;
   box-shadow: var(--shadow-glow);
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -1423,6 +1459,7 @@ body.light-mode .impact-card {
   border-radius: 16px;
   padding: 1.5rem 2rem;
   box-shadow: var(--shadow-glow);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }

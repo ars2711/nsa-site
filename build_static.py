@@ -2,16 +2,18 @@
 from __future__ import annotations
 
 import shutil
+from datetime import datetime
 from pathlib import Path
-from typing import Callable, Union
+from typing import Callable, Dict, List, Tuple, Union
 
 from flask import render_template
 
-from app import app, projects as projects_view, team as team_view
+from app import PUBLIC_BASE_URL, app, projects as projects_view, team as team_view
 
 ROOT = Path(__file__).parent.resolve()
 OUTPUT_DIR = ROOT / "public"
 STATIC_DIR = ROOT / "static"
+BASE_URL = PUBLIC_BASE_URL
 
 
 def ensure_empty_directory(path: Path) -> None:
@@ -46,7 +48,7 @@ def main() -> None:
 
     # Render dynamic templates into static HTML pages.
     with app.app_context():
-        pages = {
+        pages: Dict[str, Tuple[str, Callable[[], Union[str, bytes]]]] = {
             "index.html": ("/", lambda: render_template("index.html")),
             "projects/index.html": ("/projects", projects_view),
             "team/index.html": ("/team", team_view),
@@ -55,6 +57,41 @@ def main() -> None:
             with app.test_request_context(request_path):
                 html = render_route(handler)
             write_page(relative_path, html)
+
+    # Generate sitemap.xml
+    lastmod = datetime.utcnow().date().isoformat()
+    sitemap_entries: List[str] = []
+    sitemap_targets = [
+        ("index.html", "/", "1.0"),
+        ("projects/index.html", "/projects", "0.9"),
+        ("team/index.html", "/team", "0.9"),
+    ]
+    for _, path, priority in sitemap_targets:
+        loc = f"{BASE_URL}{'' if path == '/' else path}"
+        sitemap_entries.append(
+            "    <url>\n"
+            f"      <loc>{loc}</loc>\n"
+            f"      <lastmod>{lastmod}</lastmod>\n"
+            "      <changefreq>weekly</changefreq>\n"
+            f"      <priority>{priority}</priority>\n"
+            "    </url>"
+        )
+
+    sitemap_content = (
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n"
+        + "\n".join(sitemap_entries)
+        + "\n</urlset>\n"
+    )
+    write_page("sitemap.xml", sitemap_content)
+
+    # Generate robots.txt
+    robots_content = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        f"Sitemap: {BASE_URL}/sitemap.xml\n"
+    )
+    write_page("robots.txt", robots_content)
 
     # Copy root-level favicon for convenience.
     favicon_source = STATIC_DIR / "favicon.svg"

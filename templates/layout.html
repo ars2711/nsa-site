@@ -2,12 +2,85 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-site-verification" content="2jp4cTFc0TpjMCLHOVFC0DkmgQTQfV8HdOtkBaDmqq0" />
-    <title>{% block title %}NSA - NUST Society of AI{% endblock %}</title>
+    <meta
+      name="google-site-verification"
+      content="2jp4cTFc0TpjMCLHOVFC0DkmgQTQfV8HdOtkBaDmqq0"
+    />
+    {% set base_url = "https://nust-nsa.web.app" %}
+    {% if request is defined %}
+      {% set canonical_path = request.path if request.path else '/' %}
+    {% else %}
+      {% set canonical_path = '/' %}
+    {% endif %}
+    {% if not canonical_path %}{% set canonical_path = '/' %}{% endif %}
+    {% set canonical_url = base_url ~ ('/' if canonical_path == '/' else canonical_path) %}
+    {% set default_description = "NUST Society of Artificial Intelligence (NSA) is Pakistan's leading student AI community at NUST, launching research, products, and events for future innovators." %}
+    {% set default_keywords = [
+      "NSA",
+      "NUST Society of Artificial Intelligence",
+      "NUST",
+      "Artificial Intelligence Pakistan",
+      "Machine Learning",
+      "Student Society",
+      "AI Research",
+      "AI Projects",
+      "AI Events",
+      "Tech Community",
+      "Islamabad",
+      "STEM Pakistan"
+    ] %}
+    {% set page_title = self.title() | striptags | trim %}
+    {% set page_title = page_title if page_title else 'NSA - NUST Society of AI' %}
+    {% set page_description = default_description %}
+    {% set page_keywords = default_keywords %}
+    {% block page_metadata %}{% endblock %}
+    {% if page_keywords is iterable and page_keywords is not string %}
+      {% set page_keywords = page_keywords | join(', ') %}
+    {% endif %}
+    {% set og_image = base_url ~ url_for('static', filename='img/og-default.svg') %}
+    <title>{{ page_title }}</title>
+    <meta name="description" content="{{ page_description }}" />
+    <meta name="keywords" content="{{ page_keywords }}" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="author" content="NUST Society of Artificial Intelligence" />
+    <meta name="language" content="English" />
+    <meta name="geo.region" content="PK-IS" />
+    <meta name="distribution" content="global" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#020617" />
+    <link rel="canonical" href="{{ canonical_url }}" />
+    <link rel="alternate" hreflang="en-PK" href="{{ canonical_url }}" />
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}" />
+    <meta property="og:locale" content="en_PK" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NUST Society of Artificial Intelligence (NSA)" />
+    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:description" content="{{ page_description }}" />
+    <meta property="og:url" content="{{ canonical_url }}" />
+    <meta property="og:image" content="{{ og_image }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="NUST Society of Artificial Intelligence" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ page_title }}" />
+    <meta name="twitter:description" content="{{ page_description }}" />
+    <meta name="twitter:image" content="{{ og_image }}" />
+    <meta name="twitter:url" content="{{ canonical_url }}" />
+    <meta name="twitter:site" content="@nsa_nust" />
+    <meta name="twitter:creator" content="@nsa_nust" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     />
     <link
       rel="stylesheet"
@@ -26,6 +99,58 @@
       href="{{ url_for('static', filename='favicon.svg') }}"
       type="image/svg+xml"
     />
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon.svg') }}" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-368359187"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-368359187');
+    </script>
+    {% set structured_data = [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "NUST Society of Artificial Intelligence",
+        "url": base_url ~ '/',
+        "logo": og_image,
+        "sameAs": [
+          "https://www.instagram.com/nsa.nust/"
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "General Inquiries",
+            "email": "mafzal.bscs24seecs@seecs.edu.pk",
+            "areaServed": "PK"
+          }
+        ],
+        "parentOrganization": {
+          "@type": "CollegeOrUniversity",
+          "name": "National University of Sciences and Technology (NUST)",
+          "url": "https://nust.edu.pk"
+        },
+        "foundingDate": "2018"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "NUST Society of Artificial Intelligence (NSA)",
+        "url": base_url ~ '/',
+        "inLanguage": "en-PK",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": base_url ~ '/?q={search_term_string}',
+          "query-input": 'required name=search_term_string'
+        }
+      }
+    ] %}
+    <script type="application/ld+json">
+      {{ structured_data | tojson | safe }}
+    </script>
+    {% block head_extra %}{% endblock %}
   </head>
   <body class="dark-mode">
     <div id="particles-js"></div>
@@ -51,8 +176,18 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('index') }}">Home</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}#recruitment-timeline">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('projects') }}">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('team') }}">Team</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}#faq">FAQs</a>
+            </li>
             <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
               <a
                 class="hero-btn ghost mini"
@@ -114,8 +249,8 @@
       </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
   </body>
 </html>

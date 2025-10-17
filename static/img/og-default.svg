@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">NUST Society of Artificial Intelligence</title>
+  <desc id="desc">Gradient background featuring NSA acronym with tagline Learn. Build. Evolve.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00192e" />
+      <stop offset="50%" stop-color="#032f4e" />
+      <stop offset="100%" stop-color="#140733" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f5a0" />
+      <stop offset="50%" stop-color="#00c7e0" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(0,245,160,0.4)" />
+      <stop offset="100%" stop-color="rgba(124,58,237,0.45)" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="20" result="blur" />
+      <feOffset in="blur" dx="0" dy="0" result="offsetBlur" />
+      <feFlood flood-color="rgba(0, 199, 224, 0.45)" result="color" />
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow" />
+      <feMerge>
+        <feMergeNode in="shadow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="300" cy="180" r="260" fill="rgba(0,199,224,0.08)" />
+  <circle cx="980" cy="440" r="220" fill="rgba(124,58,237,0.08)" />
+  <text x="100" y="320" font-family="'Titillium Web', 'Segoe UI', sans-serif" font-size="180" font-weight="700" fill="url(#accent)" filter="url(#shadow)">NSA</text>
+  <text x="100" y="420" font-family="'Titillium Web', 'Segoe UI', sans-serif" font-size="46" fill="#e2e8f0" letter-spacing="0.2em">
+    NUST SOCIETY OF ARTIFICIAL INTELLIGENCE
+  </text>
+  <text x="100" y="485" font-family="'Titillium Web', 'Segoe UI', sans-serif" font-size="36" fill="#94a3b8">
+    Learn - Build - Evolve - Lead Pakistan's AI Future
+  </text>
+  <rect x="900" y="140" width="220" height="220" rx="28" ry="28" fill="rgba(255,255,255,0.04)" stroke="rgba(0,245,160,0.3)" />
+  <text x="1010" y="240" font-family="'Titillium Web', 'Segoe UI', sans-serif" font-size="72" fill="url(#accent)" text-anchor="middle">AI</text>
+  <text x="1010" y="290" font-family="'Titillium Web', 'Segoe UI', sans-serif" font-size="24" fill="#aac7ff" text-anchor="middle">NUST</text>
+</svg>

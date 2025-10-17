@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from datetime import datetime
+from flask import Flask, Response, render_template
 import os
 import json
 from pathlib import Path
@@ -6,6 +7,8 @@ from typing import Dict, Any
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
+
+PUBLIC_BASE_URL = "https://nust-nsa.web.app"
 
 app = Flask(__name__)
 
@@ -122,6 +125,47 @@ def team():
 
     tracks = sorted({t for m in normalized for t in (m.get("focus") or [])})
     return render_template('team.html', members=normalized, tracks=tracks)
+
+
+@app.route('/robots.txt')
+def robots_txt() -> Response:
+    content = "\n".join(
+        [
+            "User-agent: *",
+            "Allow: /",
+            f"Sitemap: {PUBLIC_BASE_URL}/sitemap.xml",
+        ]
+    )
+    return Response(content, mimetype="text/plain")
+
+
+@app.route('/sitemap.xml')
+def sitemap_xml() -> Response:
+    lastmod = datetime.utcnow().date().isoformat()
+    routes = [
+        ("/", "1.0"),
+        ("/projects", "0.9"),
+        ("/team", "0.9"),
+    ]
+    url_entries = []
+    for path, priority in routes:
+        loc = f"{PUBLIC_BASE_URL}{'' if path == '/' else path}"
+        url_entries.append(
+            "    <url>\n"
+            f"      <loc>{loc}</loc>\n"
+            f"      <lastmod>{lastmod}</lastmod>\n"
+            "      <changefreq>weekly</changefreq>\n"
+            f"      <priority>{priority}</priority>\n"
+            "    </url>"
+        )
+    xml = (
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n"
+        + "\n".join(url_entries)
+        + "\n</urlset>\n"
+    )
+    return Response(xml, mimetype="application/xml")
+
 
 if __name__ == '__main__':
     app.run(debug=True)
