@@ -1,0 +1,70 @@
+{
+  "battles": [
+    {
+      "name": "Build vs Break",
+      "brief": "Two squads race. Builders ship a working demo in 90 minutes while breakers stress-test and score stability.",
+      "focus": "Product engineering"
+    },
+    {
+      "name": "Vision Gauntlet",
+      "brief": "Computer vision teams classify obscure datasets under latency limits. Highest accuracy with real-time feedback wins.",
+      "focus": "Computer vision"
+    },
+    {
+      "name": "Prompt Arena",
+      "brief": "Gen AI crews craft prompts to solve real campus problems. Judges score creativity, safety, and outputs.",
+      "focus": "Generative AI"
+    }
+  ],
+  "challenges": [
+    {
+      "title": "Agent in a Day",
+      "duration": "6 hours",
+      "description": "Spin up an assistant that books venues, notifies squads, and posts updates to Discord using existing APIs.",
+      "tags": ["Automation", "Integrations", "LLMs"]
+    },
+    {
+      "title": "Research Sprint",
+      "duration": "48 hours",
+      "description": "Reproduce a recent conference paper with NSA data and present the deltas to the research guild.",
+      "tags": ["Research", "Reproducibility", "Evaluation"]
+    },
+    {
+      "title": "Responsible Release",
+      "duration": "24 hours",
+      "description": "Audit an AI feature for bias and privacy, then publish a mitigation playbook for ship-ready teams.",
+      "tags": ["Policy", "Safety", "DX"]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How do AI battles work?",
+      "answer": "Each battle spans a single evening. Teams form on the spot, receive the mission brief, and deliver a demo or report before midnight."
+    },
+    {
+      "question": "Can newcomers join AI challenges?",
+      "answer": "Yes. We pair first-timers with mentors, publish starter kits, and score progress as much as final output."
+    },
+    {
+      "question": "Where can I find datasets?",
+      "answer": "The NSA data guild curates anonymized datasets in our GitHub organization along with documentation and baselines."
+    }
+  ],
+  "resources": [
+    {
+      "title": "NSA Model Playground",
+      "url": "https://github.com/nsa-nust/playground",
+      "description": "Shared notebooks for quick experiments, deployed demos, and inference recipes."
+    },
+    {
+      "title": "AI Safety Checklist",
+      "url": "https://github.com/nsa-nust/ai-safety",
+      "description": "Step-by-step release checklist covering privacy, fairness, and monitoring."
+    },
+    {
+      "title": "Battle Archive",
+      "url": "https://github.com/nsa-nust/ai-battles",
+      "description": "Past challenges, winning strategies, and scoring sheets."
+    }
+  ]
+}

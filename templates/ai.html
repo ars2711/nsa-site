@@ -1,0 +1,100 @@
+{% extends "layout.html" %} {% block title %}AI Programs - NSA{% endblock %} {%
+block page_metadata %} {% set page_description = "Discover AI battles,
+challenges, and resources from the NUST Society of Artificial Intelligence." %}
+{% set page_keywords = default_keywords + [ "NSA AI battles", "AI challenges
+NUST", "NSA AI resources", "student AI competitions" ] %} {% endblock %} {%
+block content %}
+<section class="page-hero">
+  <div class="page-hero__inner" data-animate>
+    <span class="badge">AI PROGRAMS</span>
+    <h1>Launchpads for Builders</h1>
+    <p>
+      This page highlights NSA's upcoming AI battles, challenge sprints, and
+      core resources. Update
+      <code>data/ai.json</code> to keep the lineup fresh.
+    </p>
+  </div>
+</section>
+
+<section class="projects-section">
+  <div class="category-header" data-animate>
+    <span class="badge">BATTLES</span>
+    <h2>Rapid-fire Competitions</h2>
+  </div>
+  <div class="project-grid">
+    {% for battle in ai.battles %}
+    <article class="project-card" data-animate>
+      <header class="project-card__header">
+        <h2>{{ battle.name }}</h2>
+        <span class="project-status">{{ battle.focus }}</span>
+      </header>
+      <p class="project-summary">{{ battle.brief }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="projects-section">
+  <div class="category-header" data-animate>
+    <span class="badge">CHALLENGES</span>
+    <h2>Deep-dive Sprints</h2>
+  </div>
+  <div class="project-grid">
+    {% for challenge in ai.challenges %}
+    <article class="project-card" data-animate>
+      <header class="project-card__header">
+        <h2>{{ challenge.title }}</h2>
+        <span class="project-status">{{ challenge.duration }}</span>
+      </header>
+      <p class="project-summary">{{ challenge.description }}</p>
+      {% if challenge.tags %}
+      <div class="project-meta">
+        {% for tag in challenge.tags %}
+        <span class="tag-pill">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="projects-section">
+  <div class="category-header" data-animate>
+    <span class="badge">RESOURCES</span>
+    <h2>Toolkits &amp; Archives</h2>
+  </div>
+  <div class="project-grid">
+    {% for resource in ai.resources %}
+    <article class="project-card" data-animate>
+      <header class="project-card__header">
+        <h2>{{ resource.title }}</h2>
+      </header>
+      <p class="project-summary">{{ resource.description }}</p>
+      <a
+        class="project-link"
+        href="{{ resource.url }}"
+        target="_blank"
+        rel="noopener"
+        >Open Resource</a
+      >
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="projects-section">
+  <div class="category-header" data-animate>
+    <span class="badge">FAQ</span>
+    <h2>Mission Control Answers</h2>
+  </div>
+  <div class="faq-grid">
+    {% for faq in ai.faqs %}
+    <article class="faq-card" data-animate>
+      <h3>{{ faq.question }}</h3>
+      <p>{{ faq.answer }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,268 @@
+{
+  "timeline": [
+    {
+      "title": "Rolling Recruitment Windows",
+      "period": "All year",
+      "description": "Submit your profile and we will route it to the right wing in under 72 hours.",
+      "icon": "bi-rocket-takeoff",
+      "cta": {
+        "label": "Start Application",
+        "url": "https://forms.gle/d8rLMELNKLbSxPNc7"
+      }
+    },
+    {
+      "title": "Squad Conversations",
+      "period": "Weekly cohorts",
+      "description": "Meet wing leads for focused chats about your skills, goals, and preferred teams.",
+      "icon": "bi-people",
+      "cta": null
+    },
+    {
+      "title": "Shadow Sprints",
+      "period": "First month",
+      "description": "Join active missions with mentors so you can learn the operating rhythm on the job.",
+      "icon": "bi-lightning-charge",
+      "cta": null
+    },
+    {
+      "title": "Launch Reviews",
+      "period": "Quarterly",
+      "description": "Showcase progress, ship demos, and plan the next wave of projects with the core council.",
+      "icon": "bi-bar-chart"
+    }
+  ],
+  "impact": [
+    {
+      "value": 78,
+      "title": "Members publish research",
+      "description": "More than three quarters of active researchers submit work to journals, conferences, or tech blogs every season."
+    },
+    {
+      "value": 62,
+      "title": "Ship production code",
+      "description": "Engineers push code that reaches real users inside and outside the campus within their first two quarters."
+    },
+    {
+      "value": 48,
+      "title": "Lead major events",
+      "description": "Event specialists own flagship conferences, hackathons, and workshops with cross-campus partners."
+    }
+  ],
+  "faq": [
+    {
+      "title": "Recruitment & Eligibility",
+      "icon": "bi-person-check",
+      "questions": [
+        {
+          "question": "When does recruitment close?",
+          "answer": "NSA operates on rolling cohorts now. Submit whenever you're ready and expect an update from the council within 72 hours."
+        },
+        {
+          "question": "Do I need to be a CS student to join NSA?",
+          "answer": "NSA welcomes students from every NUST school. Diverse disciplines strengthen our AI work, so engineering, business, design, and biosciences students are encouraged to apply."
+        },
+        {
+          "question": "Can first-year students participate?",
+          "answer": "Yes. We actively recruit freshmen and sophomores so they can learn, contribute, and grow into leadership roles throughout their time at NUST."
+        }
+      ]
+    },
+    {
+      "title": "Life Inside NSA",
+      "icon": "bi-lightning-charge",
+      "questions": [
+        {
+          "question": "What's the selection process?",
+          "answer": "Submit the Google Form, pass a skills and motivation screening, complete a 15-20 minute interview, and receive results within 48 hours of the conversation."
+        },
+        {
+          "question": "What do NSA members work on?",
+          "answer": "Members ship AI products, run research experiments, craft design systems, and lead operations for large-scale events and partnerships across NUST."
+        }
+      ]
+    }
+  ],
+  "directorates": [
+    {
+      "name": "Engineering Directorate",
+      "icon": "bi-cpu",
+      "description": "Transforms ambitious briefs into resilient products, services, and tools.",
+      "roles": [
+        "Web and App Development",
+        "ML Engineering",
+        "DevOps and Infrastructure"
+      ]
+    },
+    {
+      "name": "Research Directorate",
+      "icon": "bi-flask",
+      "description": "Runs experimentation pipelines, model evaluations, and technical write-ups.",
+      "roles": ["NLP and LLMs", "ML Research", "Academic Publications"]
+    },
+    {
+      "name": "Design Directorate",
+      "icon": "bi-palette2",
+      "description": "Crafts the visual language for every product, deck, and experience.",
+      "roles": ["Product Design", "Brand Identity", "Creative Direction"]
+    },
+    {
+      "name": "Marketing Directorate",
+      "icon": "bi-megaphone",
+      "description": "Amplifies missions, leads campaigns, and nurtures community stories.",
+      "roles": ["Growth Strategy", "Content Planning", "Community Programs"]
+    },
+    {
+      "name": "Operations Directorate",
+      "icon": "bi-diagram-3",
+      "description": "Keeps logistics, security, and event execution aligned with the mission clock.",
+      "roles": ["Security", "Logistics", "Admin Operations"]
+    },
+    {
+      "name": "Strategy Directorate",
+      "icon": "bi-compass",
+      "description": "Aligns resources, partnerships, and long-term roadmaps for every wing.",
+      "roles": ["Strategic Planning", "Sponsorships", "Leadership Coordination"]
+    }
+  ],
+  "portfolios": [
+    {
+      "name": "Team Human Resources",
+      "icon": "bi-person-hearts",
+      "description": "Builds culture, onboarding, and member growth journeys."
+    },
+    {
+      "name": "Team Security and Logistics",
+      "icon": "bi-shield-lock",
+      "description": "Protects venues, manages access, and aligns on-ground execution."
+    },
+    {
+      "name": "Team Event Management",
+      "icon": "bi-calendar3",
+      "description": "Designs unforgettable experiences from brief to breakdown."
+    },
+    {
+      "name": "Team Admin Events",
+      "icon": "bi-clipboard-data",
+      "description": "Owns permissions, space bookings, and partner coordination."
+    },
+    {
+      "name": "Team Liaison",
+      "icon": "bi-diagram-2",
+      "description": "Connects NSA squads with external mentors, startups, and partners."
+    },
+    {
+      "name": "Team Publications",
+      "icon": "bi-journal-text",
+      "description": "Documents wins, research, and member spotlights for the network."
+    },
+    {
+      "name": "Team Graphics",
+      "icon": "bi-brush",
+      "description": "Turns complex ideas into expressive visuals and motion."
+    },
+    {
+      "name": "Team Media",
+      "icon": "bi-camera-reels",
+      "description": "Captures moments, produces recaps, and runs post-event storytelling."
+    },
+    {
+      "name": "Team SMM",
+      "icon": "bi-hash",
+      "description": "Curates social conversations and sparks interest across channels."
+    },
+    {
+      "name": "Team ER and Sponsorship",
+      "icon": "bi-handshake",
+      "description": "Unlocks resources and long-term alliances for missions."
+    },
+    {
+      "name": "Team Finance",
+      "icon": "bi-cash-stack",
+      "description": "Balances budgets, reimbursements, and transparent reporting."
+    },
+    {
+      "name": "Team Decor",
+      "icon": "bi-stars",
+      "description": "Shapes immersive atmospheres that match the energy of each launch."
+    },
+    {
+      "name": "Team Marketing",
+      "icon": "bi-broadcast",
+      "description": "Keeps the NSA story consistent across every touchpoint."
+    },
+    {
+      "name": "Unit Software Development",
+      "icon": "bi-code-slash",
+      "description": "Ships full-stack products, internal tools, and integrations."
+    },
+    {
+      "name": "Unit Computer Vision",
+      "icon": "bi-eye",
+      "description": "Builds perception systems, pipelines, and applied CV demos."
+    },
+    {
+      "name": "Unit Deep Learning",
+      "icon": "bi-cpu-fill",
+      "description": "Runs model training, optimization, and evaluators."
+    },
+    {
+      "name": "Unit Enthusiasts",
+      "icon": "bi-lightbulb",
+      "description": "Hosts discovery circles, reading groups, and labs for new members."
+    },
+    {
+      "name": "Unit Gen AI",
+      "icon": "bi-robot",
+      "description": "Prototype agents, assistants, and content intelligence systems."
+    },
+    {
+      "name": "Unit R and D",
+      "icon": "bi-graph-up",
+      "description": "Maps long-term AI investments, grants, and research collaborations."
+    }
+  ],
+  "social": [
+    {
+      "name": "Instagram",
+      "handle": "@nsa.nust",
+      "url": "https://www.instagram.com/nsa.nust/",
+      "icon": "bi-instagram"
+    },
+    {
+      "name": "WhatsApp Community",
+      "handle": "Join the HQ channel",
+      "url": "https://chat.whatsapp.com/BOCZkgf8vYb5fhpXW8o7Vh",
+      "icon": "bi-whatsapp"
+    },
+    {
+      "name": "Email",
+      "handle": "hello@nsa.pk",
+      "url": "mailto:mafzal.bscs24seecs@seecs.edu.pk",
+      "icon": "bi-envelope"
+    },
+    {
+      "name": "GitHub Org",
+      "handle": "github.com/nsa-nust",
+      "url": "https://github.com/nsa-nust",
+      "icon": "bi-github"
+    },
+    {
+      "name": "Twitter",
+      "handle": "@nsa_nust",
+      "url": "https://twitter.com/nsa_nust",
+      "icon": "bi-twitter-x"
+    }
+  ],
+  "social_widgets": {
+    "instagram_embed": "https://www.instagram.com/p/Cx0mSbmJ0_k/embed/",
+    "instagram_profile": "https://www.instagram.com/nsa.nust/",
+    "whatsapp_link": "https://chat.whatsapp.com/BOCZkgf8vYb5fhpXW8o7Vh",
+    "whatsapp_qr": "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://chat.whatsapp.com/BOCZkgf8vYb5fhpXW8o7Vh",
+    "email_address": "mafzal.bscs24seecs@seecs.edu.pk",
+    "email_note": "Your note arrives directly in the NSA inbox. Expect a reply within 24 hours.",
+    "github_org": "https://github.com/nsa-nust",
+    "github_note": "Open-source drops are staged. Watch this space for launch repos.",
+    "twitter_profile": "https://twitter.com/nsa_nust",
+    "twitter_note": "Follow for live event coverage, callouts, and member spotlights."
+  }
+}

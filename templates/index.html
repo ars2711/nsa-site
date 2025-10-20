@@ -1,99 +1,64 @@
-{% extends "layout.html" %} {% block title %}Home - NSA{% endblock %} {% block
-page_metadata %} {% set page_description = "Join the NUST Society of Artificial
-Intelligence (NSA) in Pakistan to build AI products, research breakthroughs, and
-unforgettable events with the country's leading student AI community." %} {% set
-page_keywords = default_keywords + [ "NSA Pakistan", "NUST AI society", "AI
-recruitment", "student AI projects", "NUST events", "AI leadership" ] %} {%
-endblock %} {% block head_extra %} {{ super() }} {% set faq_entities = [ {
-"@type": "Question", "name": "When does recruitment close?", "acceptedAnswer": {
-"@type": "Answer", "text": "Applications close on October 15, 2025 at 11:00 PM
-Pakistan Time. Interviews follow within the next week and final selections
-publish by October 18, 2025." } }, { "@type": "Question", "name": "What's the
-selection process?", "acceptedAnswer": { "@type": "Answer", "text": "Submit the
-Google Form, pass a skills and motivation screening, complete a 15-20 minute
-interview, and receive results within 48 hours of the conversation." } }, {
-"@type": "Question", "name": "Do I need to be a CS student to join NSA?",
-"acceptedAnswer": { "@type": "Answer", "text": "NSA welcomes students from every
-NUST school. Diverse disciplines strengthen our AI work, so engineering,
-business, design, and biosciences students are encouraged to apply." } }, {
-"@type": "Question", "name": "What do NSA members work on?", "acceptedAnswer": {
-"@type": "Answer", "text": "Members ship AI products, run research experiments,
-craft design systems, and lead operations for large-scale events and
-partnerships across NUST." } }, { "@type": "Question", "name": "Can first-year
-students participate?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We
-actively recruit freshmen and sophomores so they can learn, contribute, and grow
-into leadership roles throughout their time at NUST." } } ] %} {% set
-recruitment_event = { "@context": "https://schema.org", "@type":
-"EducationEvent", "name": "NSA Recruitment Fall 2025", "eventAttendanceMode":
-"https://schema.org/MixedEventAttendanceMode", "eventStatus":
-"https://schema.org/EventScheduled", "startDate": "2025-09-25T09:00:00+05:00",
-"endDate": "2025-10-15T23:00:00+05:00", "url": base_url ~
-'/#recruitment-timeline', "location": { "@type": "Place", "name": "NUST
-Islamabad", "address": { "@type": "PostalAddress", "addressCountry": "PK",
-"addressLocality": "Islamabad", "streetAddress": "National University of
-Sciences and Technology" } }, "organizer": { "@type": "Organization", "name":
-"NUST Society of Artificial Intelligence", "url": base_url ~ '/', "sameAs":
-["https://www.instagram.com/nsa.nust/"] }, "description": "NSA's Fall 2025
-recruitment drives interviews, workshops, and onboarding for Pakistan's most
-ambitious AI talent at NUST." } %}
-<script type="application/ld+json">
-  {{ [
-    {
+{% extends "layout.html" %}
+{% block title %}Home - NSA{% endblock %}
+{% block page_metadata %}
+{% set page_description = "Join the NUST Society of Artificial Intelligence to ship AI products, publish research, and deliver flagship tech events across Pakistan." %}
+{% set page_keywords = default_keywords + [
+  "NSA Pakistan",
+  "NUST AI society",
+  "AI recruitment",
+  "student AI projects",
+  "NUST events",
+  "AI leadership"
+] %}
+{% endblock %}
+{% block head_extra %}
+  {{ super() }}
+  {% set faq_ns = namespace(entities=[]) %}
+  {% if home.faq %}
+    {% for category in home.faq %}
+      {% for item in category.questions %}
+        {% set faq_ns.entities = faq_ns.entities + [{
+          "@type": "Question",
+          "name": item.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item.answer
+          }
+        }] %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+  {% if faq_ns.entities %}
+  <script type="application/ld+json">
+    {{ {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": faq_entities
-    },
-    recruitment_event
-  ] | tojson | safe }}
-</script>
-{% endblock %} {% block content %}
+      "mainEntity": faq_ns.entities
+    } | tojson | safe }}
+  </script>
+  {% endif %}
+{% endblock %}
+{% block content %}
+
 <section class="terminal-hero" id="home">
   <div class="hero-grid">
     <div class="hero-copy" data-animate>
-      <span class="hero-kicker"
-        >// NUST Society of Artificial Intelligence</span
-      >
+      <span class="hero-kicker">// NUST Society of Artificial Intelligence</span>
       <h1 class="hero-title">Command Center: NSA</h1>
       <p class="hero-subtitle">
-        Pakistan's next generation of builders, researchers, and visionaries
-        transforming AI from theory into reality.
+        Pakistan's next generation of builders, researchers, and visionaries transforming AI from theory into reality.
       </p>
       <p class="hero-link-strip">
         Explore our
-        <a href="{{ url_for('projects') }}" class="hero-link"
-          >live AI projects</a
-        >, meet the
-        <a href="{{ url_for('team') }}" class="hero-link"
-          >team behind the mission</a
-        >, or study the
-        <a href="#recruitment-timeline" class="hero-link"
-          >recruitment timeline</a
-        >.
+        <a href="{{ url_for('projects') }}" class="hero-link">live AI projects</a>, meet the
+        <a href="{{ url_for('team') }}" class="hero-link">team behind the mission</a>, or follow the
+        <a href="#recruitment-timeline" class="hero-link">recruitment timeline</a>.
       </p>
 
-      <!-- Countdown Timer -->
       <div class="countdown-banner" id="countdownBanner">
-        <div class="countdown-label">⚡ Recruitment Deadline</div>
-        <div class="countdown-timer" id="countdown">
-          <div class="time-unit">
-            <span class="time-value" id="days">00</span>
-            <span class="time-label">Days</span>
-          </div>
-          <div class="time-unit">
-            <span class="time-value" id="hours">00</span>
-            <span class="time-label">Hours</span>
-          </div>
-          <div class="time-unit">
-            <span class="time-value" id="minutes">00</span>
-            <span class="time-label">Mins</span>
-          </div>
-          <div class="time-unit">
-            <span class="time-value" id="seconds">00</span>
-            <span class="time-label">Secs</span>
-          </div>
-        </div>
+        <div class="countdown-label">Recruitment Status</div>
         <div class="countdown-message">
-          Applications close October 15, 2025 at 11:00 PM PKT
+          Rolling applications all year. Submit anytime and expect a council response within 72 hours.
         </div>
       </div>
 
@@ -122,82 +87,31 @@ ambitious AI talent at NUST." } %}
   </div>
 </section>
 
-<!-- Stats Counter Section -->
+{% if stats_cards %}
 <section class="stats-showcase" id="impact-stats" data-animate>
   <div class="stats-grid">
-    <div class="stat-card" data-animate>
-      <div class="stat-icon">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </svg>
+    {% for card in stats_cards %}
+    <a
+      class="stat-card"
+      href="{{ card.href or '#' }}"
+      {% if not card.href %}aria-disabled="true"{% endif %}
+      data-animate
+    >
+      <div class="stat-icon" aria-hidden="true">
+        <i class="bi {{ card.icon }}"></i>
       </div>
-      <div class="stat-number" data-count="150">0</div>
-      <div class="stat-label">Active Members</div>
-    </div>
-
-    <div class="stat-card" data-animate>
-      <div class="stat-icon">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-        </svg>
-      </div>
-      <div class="stat-number" data-count="25">0</div>
-      <div class="stat-label">Active Projects</div>
-    </div>
-
-    <div class="stat-card" data-animate>
-      <div class="stat-icon">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-          ></path>
-          <polyline points="14 2 14 8 20 8"></polyline>
-          <line x1="16" y1="13" x2="8" y2="13"></line>
-          <line x1="16" y1="17" x2="8" y2="17"></line>
-          <polyline points="10 9 9 9 8 9"></polyline>
-        </svg>
-      </div>
-      <div class="stat-number" data-count="12">0</div>
-      <div class="stat-label">Research Papers</div>
-    </div>
-
-    <div class="stat-card" data-animate>
-      <div class="stat-icon">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-        </svg>
-      </div>
-      <div class="stat-number" data-count="50">0</div>
-      <div class="stat-label">Events Hosted</div>
-    </div>
+      <div class="stat-number" data-count="{{ card.value }}">{{ card.value }}</div>
+      <div class="stat-label">{{ card.label }}</div>
+      {% if card.description %}
+      <p class="stat-description">{{ card.description }}</p>
+      {% endif %}
+    </a>
+    {% endfor %}
   </div>
 </section>
+{% endif %}
 
-<!-- Visual Timeline Section -->
+{% if home.timeline %}
 <section class="timeline-section" id="recruitment-timeline">
   <div class="category-header" data-animate>
     <span class="badge">RECRUITMENT TIMELINE</span>
@@ -205,79 +119,42 @@ ambitious AI talent at NUST." } %}
   </div>
 
   <div class="timeline-container">
+    {% for step in home.timeline %}
     <div class="timeline-item" data-animate>
       <div class="timeline-marker">
-        <div class="timeline-dot"></div>
+        <div class="timeline-dot">
+          {% if step.icon %}<i class="bi {{ step.icon }}" aria-hidden="true"></i>{% endif %}
+        </div>
+        {% if not loop.last %}
         <div class="timeline-line"></div>
+        {% endif %}
       </div>
       <div class="timeline-content">
-        <div class="timeline-date">Oct 14-15, 2025</div>
-        <h3>📝 Application Phase</h3>
-        <p>
-          Submit your application via Google Forms. Tell us about your skills,
-          interests, and what excites you about AI. Takes 10-15 minutes.
-        </p>
+        {% if step.period %}<div class="timeline-date">{{ step.period }}</div>{% endif %}
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.description }}</p>
+        {% if step.cta %}
         <div class="timeline-cta">
           <a
-            href="https://forms.gle/d8rLMELNKLbSxPNc7"
+            href="{{ step.cta.url }}"
             target="_blank"
+            rel="noopener"
             class="timeline-btn"
-            >Apply Now →</a
+            >{{ step.cta.label }}</a
           >
         </div>
+        {% endif %}
       </div>
     </div>
-
-    <div class="timeline-item" data-animate>
-      <div class="timeline-marker">
-        <div class="timeline-dot"></div>
-        <div class="timeline-line"></div>
-      </div>
-      <div class="timeline-content">
-        <div class="timeline-date">Oct 16-18, 2025</div>
-        <h3>🔍 Screening & Review</h3>
-        <p>
-          Our team reviews applications. We look for passion, potential, and fit
-          with NSA's culture. Shortlisted candidates receive interview invites.
-        </p>
-      </div>
-    </div>
-
-    <div class="timeline-item" data-animate>
-      <div class="timeline-marker">
-        <div class="timeline-dot"></div>
-        <div class="timeline-line"></div>
-      </div>
-      <div class="timeline-content">
-        <div class="timeline-date">Oct 19-22, 2025</div>
-        <h3>💬 Interviews</h3>
-        <p>
-          15-20 minute casual conversations. We'll discuss your background,
-          interests, and how you see yourself contributing to NSA.
-        </p>
-      </div>
-    </div>
-
-    <div class="timeline-item" data-animate>
-      <div class="timeline-marker">
-        <div class="timeline-dot"></div>
-      </div>
-      <div class="timeline-content">
-        <div class="timeline-date">Oct 25, 2025</div>
-        <h3>🎉 Results & Onboarding</h3>
-        <p>
-          Final selections announced! Accepted members join our Slack, attend
-          orientation, and get matched with their first project or team.
-        </p>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </section>
+{% endif %}
 
 <section class="intel-deck" id="who-we-are">
   <div class="category-header" data-animate>
     <span class="badge">WHO WE ARE</span>
-    <h2>Identity // Core DNA</h2>
+    <h2>Identity &mdash; Core DNA</h2>
   </div>
   <div class="card-grid">
     <article class="nsa-card" data-animate>
@@ -286,55 +163,53 @@ ambitious AI talent at NUST." } %}
         <h3>Welcome to NSA</h3>
       </div>
       <p class="card-info">
-        NUST’s official AI Society — the home of Pakistan’s next generation of
-        innovators.<br />
+        NUST's official AI Society is the home of Pakistan's next generation of innovators.<br />
         We merge research, creativity, and real-world application.<br />
-        Every algorithm we build, every project we launch — brings AI closer to
-        life.
+        Every initiative we launch brings AI closer to daily life.
       </p>
       <p class="card-caption">
-        “The system is initializing. Welcome to the nerve center of AI at NUST.”
+        "The system is initializing. Welcome to the nerve center of AI at NUST."
       </p>
     </article>
     <article class="nsa-card" data-animate>
       <div class="card-header">
         <span class="card-index">02</span>
-        <h3>Transforming Pakistan’s AI Landscape</h3>
+        <h3>Transforming Pakistan's AI Landscape</h3>
       </div>
       <p class="card-info">
-        We’re on a mission to create an AI-first culture.<br />
         We mentor students, launch projects, and prepare future leaders.<br />
         Our work bridges classrooms and industries, theory and application.
       </p>
       <p class="card-caption">
-        “AI is the future — and we’re coding it, here and now.”
+        "AI is the future, and we're building it right here."
       </p>
     </article>
     <article class="nsa-card" data-animate>
       <div class="card-header">
         <span class="card-index">03</span>
-        <h3>Research → Real-World Impact</h3>
+        <h3>Research to Real-World Impact</h3>
       </div>
       <p class="card-info">
-        Our vision: turn innovation into influence.<br />
-        From research papers to startups, from classrooms to industries —<br />
-        NSA leads the movement to make NUST the launchpad for AI in Pakistan.
+        Our mission is to turn innovation into influence.<br />
+        From research papers to startups, NSA accelerates AI adoption across Pakistan.
       </p>
       <p class="card-caption">
-        “Don’t just imagine the future. Build it with us.”
+        "Don't just imagine the future. Ship it with us."
       </p>
     </article>
   </div>
 </section>
 
-<!-- Impact & Achievements Section -->
+{% if home.impact %}
 <section class="impact-section" id="impact" data-animate>
   <div class="category-header" data-animate>
     <span class="badge">OUR IMPACT</span>
-    <h2>Building // Real Results</h2>
+    <h2>Building &mdash; Real Results</h2>
   </div>
-
   <div class="impact-grid">
+    {% for metric in home.impact %}
+    {% set dash_total = 251.2 %}
+    {% set dash_offset = dash_total - (dash_total * (metric.value | float / 100)) %}
     <div class="impact-card" data-animate>
       <div class="impact-visual">
         <svg viewBox="0 0 100 100" class="impact-chart">
@@ -353,345 +228,88 @@ ambitious AI talent at NUST." } %}
             fill="none"
             stroke="var(--accent-cyan)"
             stroke-width="8"
-            stroke-dasharray="251.2"
-            stroke-dashoffset="62.8"
+            stroke-dasharray="{{ dash_total }}"
+            stroke-dashoffset="{{ dash_offset }}"
             transform="rotate(-90 50 50)"
             class="progress-ring"
           />
         </svg>
-        <div class="impact-percent">75%</div>
+        <div class="impact-percent">{{ metric.value }}%</div>
       </div>
-      <h3>Members Publish Research</h3>
-      <p>
-        3 out of 4 active researchers publish papers at conferences or journals
-        during their NSA tenure.
-      </p>
+      <h3>{{ metric.title }}</h3>
+      <p>{{ metric.description }}</p>
     </div>
-
-    <div class="impact-card" data-animate>
-      <div class="impact-visual">
-        <svg viewBox="0 0 100 100" class="impact-chart">
-          <circle
-            cx="50"
-            cy="50"
-            r="40"
-            fill="none"
-            stroke="rgba(0,245,160,0.2)"
-            stroke-width="8"
-          />
-          <circle
-            cx="50"
-            cy="50"
-            r="40"
-            fill="none"
-            stroke="var(--accent-blue)"
-            stroke-width="8"
-            stroke-dasharray="251.2"
-            stroke-dashoffset="100.48"
-            transform="rotate(-90 50 50)"
-            class="progress-ring"
-          />
-        </svg>
-        <div class="impact-percent">60%</div>
-      </div>
-      <h3>Ship Production Code</h3>
-      <p>
-        Over half our engineers contribute to deployed projects used by real
-        users within 6 months.
-      </p>
-    </div>
-
-    <div class="impact-card" data-animate>
-      <div class="impact-visual">
-        <svg viewBox="0 0 100 100" class="impact-chart">
-          <circle
-            cx="50"
-            cy="50"
-            r="40"
-            fill="none"
-            stroke="rgba(0,245,160,0.2)"
-            stroke-width="8"
-          />
-          <circle
-            cx="50"
-            cy="50"
-            r="40"
-            fill="none"
-            stroke="var(--accent-purple)"
-            stroke-width="8"
-            stroke-dasharray="251.2"
-            stroke-dashoffset="125.6"
-            transform="rotate(-90 50 50)"
-            class="progress-ring"
-          />
-        </svg>
-        <div class="impact-percent">50%</div>
-      </div>
-      <h3>Land Top Internships</h3>
-      <p>
-        NSA members secure internships at leading tech companies and AI startups
-        2x more than average.
-      </p>
-    </div>
+    {% endfor %}
   </div>
 </section>
+{% endif %}
 
-<!-- Team Structure Section -->
+{% if home.directorates or home.portfolios %}
 <section class="team-structure-section" id="team-structure" data-animate>
   <div class="category-header" data-animate>
     <span class="badge">TEAM STRUCTURE</span>
     <h2>How We Operate // Complete Portfolio Breakdown</h2>
-    <p
-      class="section-subtitle"
-      style="
-        max-width: 800px;
-        margin: 1rem auto 0;
-        color: var(--text-secondary);
-        font-size: 1.1rem;
-      "
-    >
-      NSA operates through
-      <strong style="color: var(--accent-cyan)">Core Directorates</strong>
-      (strategic leadership pillars) and
-      <strong style="color: var(--accent-blue)">Executive Portfolios</strong>
-      (specialized operational teams).
+    <p class="section-subtitle">
+      NSA operates through core directorates that steer long-term strategy and executive portfolios that execute every mission on the ground.
     </p>
   </div>
 
-  <!-- Core Directorates -->
+  {% if home.directorates %}
   <div class="portfolio-category" data-animate>
     <h3 class="portfolio-category-title">
       <span class="portfolio-badge">CORE DIRECTORATES</span>
       Strategic Leadership Pillars
     </h3>
     <div class="directorates-grid">
-      <div class="directorate-card" data-animate>
-        <div class="directorate-icon">💻</div>
-        <h3>Engineering Directorate</h3>
-        <p>
-          The builders of NSA's digital universe; turning ideas into
-          interactive, functional, and stunning experiences.
-        </p>
+      {% for directorate in home.directorates %}
+      <article class="directorate-card" data-animate>
+        <div class="directorate-icon">
+          {% if directorate.icon %}
+          <i class="bi {{ directorate.icon }}" aria-hidden="true"></i>
+          {% else %}
+          <span aria-hidden="true">&bull;</span>
+          {% endif %}
+        </div>
+        <h3>{{ directorate.name }}</h3>
+        <p>{{ directorate.description }}</p>
+        {% if directorate.roles %}
         <ul class="directorate-roles">
-          <li>Web & App Development</li>
-          <li>ML Engineering</li>
-          <li>DevOps & Infrastructure</li>
+          {% for role in directorate.roles %}
+          <li>{{ role }}</li>
+          {% endfor %}
         </ul>
-      </div>
-
-      <div class="directorate-card" data-animate>
-        <div class="directorate-icon">🔬</div>
-        <h3>Research Directorate</h3>
-        <p>
-          The linguists of code enabling machines to read, speak, and understand
-          human language through cutting-edge AI.
-        </p>
-        <ul class="directorate-roles">
-          <li>NLP (Natural Language Processing)</li>
-          <li>ML Research & Experimentation</li>
-          <li>Academic Publications</li>
-        </ul>
-      </div>
-
-      <div class="directorate-card" data-animate>
-        <div class="directorate-icon">🎨</div>
-        <h3>Design Directorate</h3>
-        <p>
-          The visual coders who translate ideas into pixels, posters, and pure
-          aesthetic impact.
-        </p>
-        <ul class="directorate-roles">
-          <li>Graphic Design</li>
-          <li>UI/UX Design</li>
-          <li>Brand Identity</li>
-        </ul>
-      </div>
-
-      <div class="directorate-card" data-animate>
-        <div class="directorate-icon">�</div>
-        <h3>Marketing Directorate</h3>
-        <p>
-          The strategists spreading NSA's mission and pulling crowds like a
-          magnetic algorithm.
-        </p>
-        <ul class="directorate-roles">
-          <li>Marketing Strategy</li>
-          <li>Campaign Planning</li>
-          <li>Brand Growth</li>
-        </ul>
-      </div>
-
-      <div class="directorate-card" data-animate>
-        <div class="directorate-icon">📊</div>
-        <h3>Operations Directorate</h3>
-        <p>
-          The operational backbone ensuring every event runs smoother than code
-          in production.
-        </p>
-        <ul class="directorate-roles">
-          <li>Event Management</li>
-          <li>Admin Events</li>
-          <li>Logistics & Liaison</li>
-        </ul>
-      </div>
-
-      <div class="directorate-card" data-animate>
-        <div class="directorate-icon">🎯</div>
-        <h3>Strategy Directorate</h3>
-        <p>Chart NSA's future, secure funding, and guide long-term vision.</p>
-        <ul class="directorate-roles">
-          <li>Strategic Planning</li>
-          <li>Partnership Development</li>
-          <li>Leadership Coordination</li>
-        </ul>
-      </div>
+        {% endif %}
+      </article>
+      {% endfor %}
     </div>
   </div>
+  {% endif %}
 
-  <!-- Executive Portfolios -->
-  <div class="portfolio-category" data-animate style="margin-top: 4rem">
+  {% if home.portfolios %}
+  <div class="portfolio-category" data-animate>
     <h3 class="portfolio-category-title">
       <span class="portfolio-badge executive">EXECUTIVE PORTFOLIOS</span>
       Specialized Operational Teams
     </h3>
     <div class="portfolios-grid">
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">�</div>
-        <h4>NLP</h4>
-        <p>
-          The linguists of code enabling machines to read, speak, and understand
-          human language.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">📱</div>
-        <h4>SMM</h4>
-        <p>
-          The digital strategists crafting NSA's online identity and narrative
-          across every platform.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">📸</div>
-        <h4>Media</h4>
-        <p>
-          The lens capturing NSA's energy, stories, and memories; one frame at a
-          time.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">🎭</div>
-        <h4>Decor</h4>
-        <p>
-          The creative stylists who transform spaces into immersive NSA
-          atmospheres.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">📣</div>
-        <h4>Marketing</h4>
-        <p>
-          The strategists spreading NSA's mission and pulling crowds like a
-          magnetic algorithm.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">🤝</div>
-        <h4>ER & Sponsorships</h4>
-        <p>
-          The bridge between NSA and the world: forming alliances, partnerships,
-          and securing sponsors.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">💰</div>
-        <h4>Finance</h4>
-        <p>
-          The budget guardians who keep every rupee optimized, every plan
-          financially feasible.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">🚚</div>
-        <h4>Logistics & Liaison</h4>
-        <p>
-          The movers, planners, and fixers ensuring people, props, and plans
-          connect flawlessly.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">🎨</div>
-        <h4>Graphic Design</h4>
-        <p>
-          The visual coders who translate ideas into pixels, posters, and pure
-          aesthetic impact.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">✍️</div>
-        <h4>Publications</h4>
-        <p>
-          The writers and editors documenting NSA's voice, thought, and story
-          with precision and style.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">🎬</div>
-        <h4>Video Editing</h4>
-        <p>
-          The final storytellers who blend moments, motion, and music into pure
-          NSA magic.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">💻</div>
-        <h4>Web & App Development</h4>
-        <p>
-          The builders of NSA's digital universe; turning ideas into
-          interactive, functional, and stunning experiences.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">👥</div>
-        <h4>HR</h4>
-        <p>
-          The human core of NSA, powering recruitment, culture, and connection
-          behind every operation.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">📋</div>
-        <h4>Admin Events</h4>
-        <p>
-          The operational backbone ensuring every event runs smoother than code
-          in production.
-        </p>
-      </div>
-
-      <div class="portfolio-card" data-animate>
-        <div class="portfolio-icon">🎪</div>
-        <h4>Event Management</h4>
-        <p>
-          The architects of experiences; turning NSA ideas into unforgettable,
-          on-ground reality.
-        </p>
-      </div>
+      {% for item in home.portfolios %}
+      <article class="portfolio-card" data-animate>
+        <div class="portfolio-icon">
+          {% if item.icon %}
+          <i class="bi {{ item.icon }}" aria-hidden="true"></i>
+          {% else %}
+          <span aria-hidden="true">&bull;</span>
+          {% endif %}
+        </div>
+        <h4>{{ item.name }}</h4>
+        <p>{{ item.description }}</p>
+      </article>
+      {% endfor %}
     </div>
   </div>
+  {% endif %}
 </section>
+{% endif %}
 
 <section class="intel-deck" id="what-we-do">
   <div class="category-header" data-animate>
@@ -706,11 +324,10 @@ ambitious AI talent at NUST." } %}
       </div>
       <p class="card-info">
         Every project has purpose. Every member has a role.<br />
-        We collaborate, innovate, and lead — together.<br />
-        Because teamwork doesn’t just make the dream work — it makes revolutions
-        real.
+        We collaborate, innovate, and lead together.<br />
+        Because teamwork does more than make the dream work &mdash; it makes revolutions real.
       </p>
-      <p class="card-caption">“Power in unity. Intelligence in motion.”</p>
+      <p class="card-caption">"Power in unity. Intelligence in motion."</p>
     </article>
     <article class="nsa-card" data-animate>
       <div class="card-header">
@@ -719,13 +336,10 @@ ambitious AI talent at NUST." } %}
       </div>
       <p class="card-info">
         We innovate responsibly.<br />
-        Every dataset, every idea, every collaboration respects privacy and
-        trust.<br />
-        Because ethics in AI isn’t optional — it’s fundamental.
+        Every dataset, every idea, every collaboration respects privacy and trust.<br />
+        Because ethics in AI is not optional &mdash; it is fundamental.
       </p>
-      <p class="card-caption">
-        “Trust is our protocol. Ethics is our framework.”
-      </p>
+      <p class="card-caption">"Trust is our protocol. Ethics is our framework."</p>
     </article>
     <article class="nsa-card" data-animate>
       <div class="card-header">
@@ -733,49 +347,42 @@ ambitious AI talent at NUST." } %}
         <h3>Connecting Brilliant Minds</h3>
       </div>
       <p class="card-info">
-        At NSA, you’ll find a culture that thrives on collaboration.<br />
-        We bring together coders, designers, and dreamers — because
-        breakthroughs happen when worlds collide.
+        At NSA, you will find a culture that thrives on collaboration.<br />
+        We bring together coders, designers, and dreamers because breakthroughs happen when worlds collide.
       </p>
-      <p class="card-caption">“Where innovation meets belonging.”</p>
+      <p class="card-caption">"Where innovation meets belonging."</p>
     </article>
   </div>
 </section>
 
 <section class="intel-deck" id="where-were-going">
   <div class="category-header" data-animate>
-    <span class="badge">WHERE WE’RE GOING</span>
+    <span class="badge">WHERE WE ARE GOING</span>
     <h2>Future // Opportunities</h2>
   </div>
   <div class="card-grid">
     <article class="nsa-card" data-animate>
       <div class="card-header">
         <span class="card-index">07</span>
-        <h3>From Idea → Startup</h3>
+        <h3>From Idea to Startup</h3>
       </div>
       <p class="card-info">
         We turn academic projects into viable products and ventures.<br />
-        Through mentorship, resources, and networking, your ideas don’t end at
-        graduation — they start there.
+        With mentorship, resources, and networking, your ideas do not end at graduation &mdash; they start there.
       </p>
-      <p class="card-caption">
-        “Your code could be Pakistan’s next big startup.”
-      </p>
+      <p class="card-caption">"Your code could be Pakistan's next big startup."</p>
     </article>
     <article class="nsa-card" data-animate>
       <div class="card-header">
         <span class="card-index">08</span>
-        <h3>Recruiting Algorithms…</h3>
+        <h3>Recruiting Algorithms</h3>
       </div>
       <p class="card-info">
-        Coders, designers, leaders — your place is here.<br />
+        Coders, designers, leaders &mdash; your place is here.<br />
         We welcome builders who dream big and execute harder.<br />
-        Be part of a community that doesn’t just follow the AI wave — it creates
-        it.
+        Join the community that does not just follow the AI wave &mdash; it creates it.
       </p>
-      <p class="card-caption">
-        “Plug in. Power up. Let’s build the future together.”
-      </p>
+      <p class="card-caption">"Plug in. Power up. Let's build the future together."</p>
     </article>
     <article class="nsa-card" data-animate>
       <div class="card-header">
@@ -784,189 +391,255 @@ ambitious AI talent at NUST." } %}
       </div>
       <p class="card-info">
         From operations to partnerships, every team fuels the NSA ecosystem.<br />
-        We train not just coders — but future leaders who can guide Pakistan’s
-        AI frontier.
+        We train not just coders but leaders who steer Pakistan's AI frontier.
       </p>
-      <p class="card-caption">“Lead the revolution, don’t wait for it.”</p>
+      <p class="card-caption">"Lead the revolution, do not wait for it."</p>
     </article>
   </div>
 </section>
 
-<!-- FAQ Section -->
+{% if home.faq %}
 <section class="faq-section" id="faq">
   <div class="category-header" data-animate>
     <span class="badge">FREQUENTLY ASKED QUESTIONS</span>
     <h2>Your Questions // Our Answers</h2>
+    <p>Still unsure? Ping the council on Instagram or WhatsApp and we will respond fast.</p>
   </div>
-
   <div class="faq-grid">
-    <div class="faq-category" data-animate>
-      <h3><i class="bi bi-clock-history"></i> Timeline & Process</h3>
+    {% for category in home.faq %}
+    <article class="faq-category" data-animate>
+      <h3>
+        {% if category.icon %}<i class="bi {{ category.icon }}" aria-hidden="true"></i>{% endif %} {{ category.title }}
+      </h3>
+      {% for item in category.questions %}
       <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>When does recruitment close?</span>
-          <i class="bi bi-chevron-down"></i>
+        <button
+          class="faq-question"
+          type="button"
+          onclick="toggleFaq(this)"
+          aria-expanded="false"
+        >
+          <span>{{ item.question }}</span>
+          <i class="bi bi-chevron-down" aria-hidden="true"></i>
         </button>
-        <div class="faq-answer">
-          Applications close on
-          <strong>October 15, 2025 at 11:00 PM Pakistan Time</strong>.
-          Interviews will be conducted the following week, and final selections
-          announced by October 25, 2025.
+        <div class="faq-answer" aria-hidden="true">
+          <p>{{ item.answer }}</p>
         </div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>What's the selection process?</span>
-          <i class="bi bi-chevron-down"></i>
-        </button>
-        <div class="faq-answer">
-          <ol>
-            <li><strong>Application:</strong> Submit via Google Form</li>
-            <li>
-              <strong>Screening:</strong> Review of skills, interests, and
-              motivation
-            </li>
-            <li>
-              <strong>Interview:</strong> 15-20 minute technical + culture fit
-              discussion
-            </li>
-            <li>
-              <strong>Decision:</strong> Results within 48 hours of interview
-            </li>
-          </ol>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>How long is the commitment?</span>
-          <i class="bi bi-chevron-down"></i>
-        </button>
-        <div class="faq-answer">
-          We expect 6-8 hours per week for active contributors. Projects run in
-          semesters, with flexibility around exams. Leadership positions require
-          year-long commitment.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-category" data-animate>
-      <h3><i class="bi bi-people-fill"></i> About NSA</h3>
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Who are we?</span>
-          <i class="bi bi-chevron-down"></i>
-        </button>
-        <div class="faq-answer">
-          NSA is NUST's official AI society — a student-led collective of
-          builders, researchers, and innovators. We run projects, workshops,
-          competitions, and research initiatives that bridge academia and
-          industry.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>What do team members do?</span>
-          <i class="bi bi-chevron-down"></i>
-        </button>
-        <div class="faq-answer">
-          <ul>
-            <li>
-              <strong>Engineers:</strong> Build AI products, tools, and
-              infrastructure
-            </li>
-            <li>
-              <strong>Researchers:</strong> Publish papers, run experiments,
-              prototype models
-            </li>
-            <li>
-              <strong>Designers:</strong> Create UX/UI, branding, visual content
-            </li>
-            <li>
-              <strong>Operations:</strong> Event planning, partnerships,
-              community management
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>What's our mission?</span>
-          <i class="bi bi-chevron-down"></i>
-        </button>
-        <div class="faq-answer">
-          To establish Pakistan's premier AI ecosystem at NUST — where students
-          don't just learn AI, they <strong>ship real products</strong>,
-          <strong>publish research</strong>, and
-          <strong>launch startups</strong>.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-category" data-animate>
-      <h3><i class="bi bi-question-circle"></i> Eligibility & Requirements</h3>
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Do I need to be a CS student?</span>
-          <i class="bi bi-chevron-down"></i>
-        </button>
-        <div class="faq-answer">
-          <strong>No!</strong> We welcome students from all NUST schools —
-          engineering, business, design, biosciences, social sciences. AI
-          touches every field, and diverse perspectives make us stronger.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>What skills do I need?</span>
-          <i class="bi bi-chevron-down"></i>
-        </button>
-        <div class="faq-answer">
-          We value <strong>curiosity over credentials</strong>. Helpful skills:
-          Python, ML frameworks, web dev, design tools, project management. But
-          passion + willingness to learn > prior experience.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>Can I join if I'm a first-year student?</span>
-          <i class="bi bi-chevron-down"></i>
-        </button>
-        <div class="faq-answer">
-          Absolutely! We actively recruit freshmen and sophomores. Early
-          involvement means more time to learn, contribute, and eventually lead
-          projects.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>What about researchers and faculty?</span>
-          <i class="bi bi-chevron-down"></i>
-        </button>
-        <div class="faq-answer">
-          We collaborate with faculty on research projects and welcome graduate
-          students/researchers through our
-          <strong>Researchers Recruitment Portal</strong>. This track focuses on
-          publications, grants, and advanced R&D.
-        </div>
-      </div>
-    </div>
+      {% endfor %}
+    </article>
+    {% endfor %}
   </div>
 </section>
+{% endif %}
+
+{% set social_widgets = home.social_widgets if home.social_widgets is defined else {} %}
+{% if home.social or social_widgets %}
+<section class="connect-section" id="connect">
+  <div class="category-header" data-animate>
+    <span class="badge">CONNECT</span>
+    <h2>Stay Linked With NSA</h2>
+    <p>
+      Join the community, reach the council, or follow our updates across platforms.
+    </p>
+  </div>
+  <div class="connect-layout">
+    {% if social_widgets %}
+    <div class="connect-primary">
+      <div class="social-embed-grid">
+        {% if social_widgets.instagram_embed %}
+        <article class="social-embed social-embed--instagram" data-animate>
+          <header>
+            <i class="bi bi-instagram"></i>
+            <h3>Instagram Feed</h3>
+          </header>
+          <div class="embed-frame">
+            <iframe
+              src="{{ social_widgets.instagram_embed }}"
+              title="NSA Instagram"
+              loading="lazy"
+              allowtransparency="true"
+              sandbox="allow-scripts allow-same-origin allow-popups"
+            ></iframe>
+          </div>
+          <button
+            class="chip-button"
+            type="button"
+            data-copy-value="{{ social_widgets.instagram_profile | default('https://www.instagram.com/nsa.nust/') }}"
+          >
+            Copy Instagram Handle
+          </button>
+        </article>
+        {% endif %}
+        {% if social_widgets.whatsapp_qr %}
+        <article class="social-embed social-embed--whatsapp" data-animate>
+          <header>
+            <i class="bi bi-whatsapp"></i>
+            <h3>WhatsApp HQ</h3>
+          </header>
+          <div class="qr-frame">
+            <img
+              src="{{ social_widgets.whatsapp_qr }}"
+              alt="WhatsApp QR join link"
+              loading="lazy"
+            />
+          </div>
+          <div class="chip-row">
+            <button
+              class="chip-button"
+              type="button"
+              data-copy-value="{{ social_widgets.whatsapp_link | default('https://chat.whatsapp.com/BOCZkgf8vYb5fhpXW8o7Vh') }}"
+            >
+              Copy Invite Link
+            </button>
+            <a
+              class="chip-button primary"
+              href="{{ social_widgets.whatsapp_link | default('https://chat.whatsapp.com/BOCZkgf8vYb5fhpXW8o7Vh') }}"
+              target="_blank"
+              rel="noopener"
+            >
+              Open WhatsApp
+            </a>
+          </div>
+        </article>
+        {% endif %}
+        {% if social_widgets.email_address %}
+        <article class="social-embed social-embed--email" data-animate>
+          <header>
+            <i class="bi bi-envelope-fill"></i>
+            <h3>Email Mission Control</h3>
+          </header>
+          <form class="contact-card" data-email="{{ social_widgets.email_address }}">
+            <label class="sr-only" for="contactName">Your name</label>
+            <input
+              type="text"
+              id="contactName"
+              name="name"
+              placeholder="Your name"
+              required
+            />
+            <label class="sr-only" for="contactMessage">Message</label>
+            <textarea
+              id="contactMessage"
+              name="message"
+              rows="3"
+              placeholder="What's on your mind?"
+              required
+            ></textarea>
+            <div class="contact-actions">
+              <button type="submit" class="chip-button primary">
+                Compose Email
+              </button>
+              <button
+                type="button"
+                class="chip-button"
+                data-copy-value="{{ social_widgets.email_address }}"
+              >
+                Copy Address
+              </button>
+            </div>
+          </form>
+          {% if social_widgets.email_note %}
+          <p class="contact-note">{{ social_widgets.email_note }}</p>
+          {% endif %}
+        </article>
+        {% endif %}
+        {% if social_widgets.github_org %}
+        <article class="social-embed social-embed--github" data-animate>
+          <header>
+            <i class="bi bi-github"></i>
+            <h3>GitHub Staging Bay</h3>
+          </header>
+          {% if social_widgets.github_note %}
+          <p class="contact-note">{{ social_widgets.github_note }}</p>
+          {% endif %}
+          <div class="chip-row">
+            <a
+              class="chip-button primary"
+              href="{{ social_widgets.github_org }}"
+              target="_blank"
+              rel="noopener"
+            >
+              Visit Org
+            </a>
+            <button
+              class="chip-button"
+              type="button"
+              data-copy-value="{{ social_widgets.github_org }}"
+            >
+              Copy URL
+            </button>
+          </div>
+        </article>
+        {% endif %}
+        {% if social_widgets.twitter_profile %}
+        <article class="social-embed social-embed--twitter" data-animate>
+          <header>
+            <i class="bi bi-twitter-x"></i>
+            <h3>Twitter Flight Deck</h3>
+          </header>
+          {% if social_widgets.twitter_note %}
+          <p class="contact-note">{{ social_widgets.twitter_note }}</p>
+          {% endif %}
+          <div class="chip-row">
+            <a
+              class="chip-button primary"
+              href="{{ social_widgets.twitter_profile }}"
+              target="_blank"
+              rel="noopener"
+            >
+              Open Twitter
+            </a>
+            <button
+              class="chip-button"
+              type="button"
+              data-copy-value="{{ social_widgets.twitter_profile }}"
+            >
+              Copy Handle
+            </button>
+          </div>
+        </article>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% if home.social %}
+    <aside class="connect-secondary" data-animate>
+      <div class="connect-secondary__card">
+        <h3>Quick Follow Links</h3>
+        <p class="connect-secondary__copy">
+          Prefer a quick follow? Pick your channel and stay in sync with new drops.
+        </p>
+        <div class="social-strip">
+          {% for link in home.social %}
+          <a
+            class="social-chip"
+            href="{{ link.url }}"
+            target="_blank"
+            rel="noopener"
+          >
+            {% if link.icon %}<i class="bi {{ link.icon }}" aria-hidden="true"></i>{% endif %}
+            <div>
+              <span>{{ link.name }}</span>
+              {% if link.handle %}
+              <span class="social-handle">{{ link.handle }}</span>
+              {% endif %}
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </aside>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
 
 <section class="join-section" data-animate>
   <div class="join-console">
     <h2>Plug Into NSA</h2>
     <p class="join-subtitle">
-      Choose the path that fits your mission. Recruitment keeps our talent pool
-      evolving, while the researchers portal connects innovators with NSA's
-      applied AI initiatives.
+      Choose the path that fits your mission. Recruitment keeps our talent pool evolving, while the researchers portal connects innovators with NSA's applied AI initiatives.
     </p>
     <div class="hero-actions">
       <a

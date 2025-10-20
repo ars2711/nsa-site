@@ -7,6 +7,7 @@ Successfully integrated the complete NSA team roster (53 members) from the Googl
 ## What Was Done
 
 ### 1. **Team Data Ingestion Pipeline**
+
 - Created `scripts/generate_team_json.py` to parse `data/team_raw.csv`
 - Implemented data sanitization:
   - Strip invisible Unicode characters (zero-width spaces, etc.)
@@ -18,6 +19,7 @@ Successfully integrated the complete NSA team roster (53 members) from the Googl
 - Generate structured `data/team.json` with 53 validated members
 
 ### 2. **Enhanced Flask Backend (`app.py`)**
+
 - Added sophisticated team data processing:
   - Deduplicate and normalize focus tags
   - Generate lowercase tokens for filtering
@@ -31,6 +33,7 @@ Successfully integrated the complete NSA team roster (53 members) from the Googl
 - Pass `structured_people` to template for proper JSON-LD
 
 ### 3. **Team Template Updates (`templates/team.html`)**
+
 - Use precomputed structured data from backend
 - Lowercase filter chip `data-filter` attributes for case-insensitive matching
 - Add `aria-pressed` states for accessibility
@@ -43,15 +46,18 @@ Successfully integrated the complete NSA team roster (53 members) from the Googl
 - Wrap social links in semantic `project-links` div
 
 ### 4. **Filter Enhancement (`static/js/main.js`)**
+
 - Sync `aria-pressed` attribute with active filter state
 - Maintain accessibility compliance for screen readers
 - Case-insensitive tag matching throughout
 
 ### 5. **Consistency Updates**
+
 - Applied same `aria-pressed` pattern to `templates/projects.html`
 - Ensured uniform filter chip behavior across team and projects pages
 
 ### 6. **Static Build Verification**
+
 - All routes tested: ✓ Index, ✓ Projects, ✓ Team, ✓ Sitemap, ✓ Robots
 - Static export generated successfully
 - Team page HTML validated:
@@ -64,24 +70,28 @@ Successfully integrated the complete NSA team roster (53 members) from the Googl
 ## Technical Improvements
 
 ### Data Quality
+
 - Removed invisible characters that cause display issues
 - Normalized "Curly hair" placeholder (kept as-is per CSV)
 - Merged multi-role members (e.g., "Executive / Deputy Director")
 - Handled missing departments and emails gracefully
 
 ### SEO & Accessibility
+
 - Structured data includes email addresses when available
 - Conditional inclusion of jobTitle, knowsAbout, description
 - Proper ARIA states for interactive filter buttons
 - Semantic HTML for contact information
 
 ### Filtering System
+
 - **29 filter chips** covering all wings, roles, and departments
 - Case-insensitive matching (filter="presidential wing" matches tag="Presidential Wing")
 - Prioritized display order for better UX
 - Empty state message when no results
 
 ### Performance
+
 - Precompute structured data in backend (not in template)
 - Generate focus tokens once per member
 - Efficient tag matching with lowercase normalization

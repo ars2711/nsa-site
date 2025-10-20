@@ -41,7 +41,7 @@ block head_extra %} {{ super() }} {% if projects %} {% set project_items = [] %}
   </div>
 </section>
 
-<section class="projects-section">
+<section class="projects-section" data-filter-scope="projects">
   <div class="projects-toolbar" data-animate>
     <button class="filter-chip is-active" data-filter="all" aria-pressed="true">
       All

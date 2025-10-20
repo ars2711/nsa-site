@@ -116,105 +116,285 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	});
 
-	const filterChips = document.querySelectorAll(".filter-chip");
-	const projectCards = document.querySelectorAll(".project-card");
-	const emptyState = document.querySelector(".projects-empty");
-	if (filterChips.length && projectCards.length) {
-		const normalize = (value = "") =>
-			value
-				.split(",")
-				.map((tag) => tag.trim().toLowerCase())
-				.filter(Boolean);
-
-		const updateEmptyState = () => {
-			const hasVisible = Array.from(projectCards).some(
-				(card) => card.style.display !== "none"
-			);
-			if (emptyState) {
-				emptyState.toggleAttribute("hidden", hasVisible);
-			}
-		};
-
-		filterChips.forEach((chip) => {
-			chip.addEventListener("click", () => {
-				const targetFilter = chip.dataset.filter || "all";
-				filterChips.forEach((c) => {
-					const isActive = c === chip;
-					c.classList.toggle("is-active", isActive);
-					c.setAttribute("aria-pressed", isActive ? "true" : "false");
-				});
-				projectCards.forEach((card) => {
-					const tags = normalize(card.dataset.tags);
-					const matches =
-						targetFilter === "all" || tags.includes(targetFilter.toLowerCase());
-					card.style.display = matches ? "" : "none";
-					card.setAttribute("aria-hidden", matches ? "false" : "true");
-				});
-				updateEmptyState();
-			});
-		});
-
-		updateEmptyState();
-	}
-
-	// Initialize countdown timer
-	initCountdown();
+	initProjectFilters();
+	initTeamDirectory();
+	initBackToTop();
+	initScrollProgress();
+	initCopyButtons();
+	initContactCards();
 });
 
-// === Countdown Timer ===
-function initCountdown() {
-	const daysEl = document.getElementById("days");
-	const hoursEl = document.getElementById("hours");
-	const minutesEl = document.getElementById("minutes");
-	const secondsEl = document.getElementById("seconds");
-	const countdownBanner = document.querySelector(".countdown-banner");
+function normalizeTags(value = "") {
+	return value
+		.split(",")
+		.map((tag) => tag.trim().toLowerCase())
+		.filter(Boolean);
+}
 
-	if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
-
-	// Target: October 15, 2025 at 11:00 PM PKT (UTC+5)
-	// Convert to UTC: 11:00 PM PKT = 6:00 PM UTC (18:00 UTC)
-	const targetDate = new Date("2025-10-15T18:00:00Z");
-
-	function updateCountdown() {
-		const now = new Date();
-		const diff = targetDate - now;
-
-		if (diff <= 0) {
-			// Countdown expired
-			if (countdownBanner) {
-				countdownBanner.style.display = "none";
-			}
+function initProjectFilters() {
+	const sections = document.querySelectorAll('[data-filter-scope="projects"]');
+	sections.forEach((section) => {
+		const chips = section.querySelectorAll(".filter-chip");
+		const cards = section.querySelectorAll(".project-card");
+		const emptyState = section.querySelector(".projects-empty");
+		if (!chips.length || !cards.length) {
 			return;
 		}
 
-		const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-		const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-		const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+		const tagCache = new Map();
+		cards.forEach((card) => {
+			tagCache.set(card, normalizeTags(card.dataset.tags));
+		});
 
-		daysEl.textContent = String(days).padStart(2, "0");
-		hoursEl.textContent = String(hours).padStart(2, "0");
-		minutesEl.textContent = String(minutes).padStart(2, "0");
-		secondsEl.textContent = String(seconds).padStart(2, "0");
+		const updateVisibility = (activeFilter) => {
+			let visibleCount = 0;
+			cards.forEach((card) => {
+				const tags = tagCache.get(card) || [];
+				const matches = activeFilter === "all" || tags.includes(activeFilter);
+				const hidden = !matches;
+				card.style.display = hidden ? "none" : "";
+				card.setAttribute("aria-hidden", hidden ? "true" : "false");
+				if (!hidden) {
+					visibleCount += 1;
+				}
+			});
+			if (emptyState) {
+				emptyState.toggleAttribute("hidden", visibleCount > 0);
+			}
+		};
+
+		const setActiveChip = (chip, filterValue) => {
+			chips.forEach((candidate) => {
+				const isActive = candidate === chip;
+				candidate.classList.toggle("is-active", isActive);
+				candidate.setAttribute("aria-pressed", isActive ? "true" : "false");
+			});
+			updateVisibility(filterValue);
+		};
+
+		chips.forEach((chip) => {
+			chip.addEventListener("click", () => {
+				const targetFilter = (chip.dataset.filter || "all").toLowerCase();
+				setActiveChip(chip, targetFilter);
+			});
+		});
+
+		const preset = section.querySelector(".filter-chip.is-active") || chips[0];
+		const initialFilter = preset
+			? (preset.dataset.filter || "all").toLowerCase()
+			: "all";
+		setActiveChip(preset || chips[0], initialFilter);
+	});
+}
+
+function initTeamDirectory() {
+	const section = document.querySelector('[data-filter-scope="team"]');
+	if (!section) {
+		return;
 	}
 
-	// Update immediately and then every second
-	updateCountdown();
-	setInterval(updateCountdown, 1000);
+	const cards = section.querySelectorAll(".project-card");
+	if (!cards.length) {
+		return;
+	}
+
+	const chips = section.querySelectorAll(".team-filters .filter-chip");
+	if (!chips.length) {
+		return;
+	}
+	const searchInput = document.getElementById("teamSearch");
+	const emptyState = section.querySelector(".projects-empty");
+	const cardMeta = new Map();
+
+	cards.forEach((card) => {
+		const tags = normalizeTags(card.dataset.tags);
+		const strings = [
+			card.querySelector("h2")?.textContent || "",
+			card.querySelector(".project-status")?.textContent || "",
+			card.dataset.wing || "",
+			card.dataset.subteam || "",
+			card.querySelector(".project-summary")?.textContent || "",
+			card.querySelector(".project-meta")?.textContent || "",
+			card.querySelector(".project-links")?.textContent || "",
+		];
+		cardMeta.set(card, {
+			tags,
+			text: strings.join(" ").toLowerCase(),
+		});
+	});
+
+	let activeFilter = "all";
+
+	const applyFilters = () => {
+		const query = (searchInput?.value || "").trim().toLowerCase();
+		let visibleCount = 0;
+		cards.forEach((card) => {
+			const meta = cardMeta.get(card) || { tags: [], text: "" };
+			const matchesFilter =
+				activeFilter === "all" || meta.tags.includes(activeFilter);
+			const matchesQuery =
+				!query ||
+				meta.text.includes(query) ||
+				meta.tags.some((tag) => tag.includes(query));
+			const shouldShow = matchesFilter && matchesQuery;
+			card.style.display = shouldShow ? "" : "none";
+			card.setAttribute("aria-hidden", shouldShow ? "false" : "true");
+			if (shouldShow) {
+				visibleCount += 1;
+			}
+		});
+		if (emptyState) {
+			emptyState.toggleAttribute("hidden", visibleCount > 0);
+		}
+	};
+
+	chips.forEach((chip) => {
+		chip.addEventListener("click", () => {
+			activeFilter = (chip.dataset.filter || "all").toLowerCase();
+			chips.forEach((candidate) => {
+				const isActive = candidate === chip;
+				candidate.classList.toggle("is-active", isActive);
+				candidate.setAttribute("aria-pressed", isActive ? "true" : "false");
+			});
+			applyFilters();
+			if (searchInput) {
+				searchInput.focus();
+			}
+		});
+	});
+
+	if (searchInput) {
+		let debounceTimer;
+		searchInput.addEventListener("input", () => {
+			window.clearTimeout(debounceTimer);
+			debounceTimer = window.setTimeout(applyFilters, 120);
+		});
+	}
+
+	const presetChip =
+		section.querySelector(".team-filters .filter-chip.is-active") || chips[0];
+	activeFilter = presetChip
+		? (presetChip.dataset.filter || "all").toLowerCase()
+		: "all";
+	chips.forEach((chip) => {
+		const isActive = chip === presetChip;
+		chip.setAttribute("aria-pressed", isActive ? "true" : "false");
+		chip.classList.toggle("is-active", isActive);
+	});
+	applyFilters();
+}
+
+function initBackToTop() {
+	const button = document.getElementById("backToTop");
+	if (!button) {
+		return;
+	}
+
+	const toggleVisibility = () => {
+		const shouldShow = window.scrollY > 320;
+		button.classList.toggle("visible", shouldShow);
+	};
+
+	button.addEventListener("click", () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	});
+
+	window.addEventListener("scroll", toggleVisibility, { passive: true });
+	toggleVisibility();
+}
+
+function initScrollProgress() {
+	const progress = document.getElementById("scrollProgress");
+	if (!progress) {
+		return;
+	}
+
+	const updateProgress = () => {
+		const scrollTop = window.scrollY || document.documentElement.scrollTop;
+		const scrollHeight =
+			document.documentElement.scrollHeight - window.innerHeight;
+		const ratio = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+		progress.style.transform = `scaleX(${ratio})`;
+		progress.setAttribute("data-progress", Math.round(ratio * 100));
+	};
+
+	window.addEventListener("scroll", updateProgress, { passive: true });
+	window.addEventListener("resize", updateProgress);
+	updateProgress();
+}
+
+function initCopyButtons() {
+	const buttons = document.querySelectorAll("[data-copy-value]");
+	if (!buttons.length || !navigator.clipboard) {
+		return;
+	}
+
+	buttons.forEach((button) => {
+		button.addEventListener("click", async () => {
+			const value = button.getAttribute("data-copy-value") || "";
+			if (!value) return;
+			try {
+				await navigator.clipboard.writeText(value);
+				button.classList.add("is-copied");
+				setTimeout(() => button.classList.remove("is-copied"), 1400);
+			} catch (error) {
+				console.error("Clipboard copy failed", error);
+			}
+		});
+	});
+}
+
+function initContactCards() {
+	const forms = document.querySelectorAll(".contact-card[data-email]");
+	if (!forms.length) {
+		return;
+	}
+
+	forms.forEach((form) => {
+		form.addEventListener("submit", (event) => {
+			event.preventDefault();
+			const target = event.currentTarget;
+			if (!(target instanceof HTMLFormElement)) {
+				return;
+			}
+			const email = target.dataset.email;
+			if (!email) {
+				return;
+			}
+			const nameInput = target.querySelector("input[name='name']");
+			const messageInput = target.querySelector("textarea[name='message']");
+			const name = nameInput ? nameInput.value.trim() : "";
+			const message = messageInput ? messageInput.value.trim() : "";
+			const subject = encodeURIComponent(
+				`NSA Inquiry from ${name || "Prospective Member"}`
+			);
+			const bodyParts = [];
+			if (name) bodyParts.push(`Name: ${name}`);
+			if (message) bodyParts.push("\n" + message);
+			const body = encodeURIComponent(bodyParts.join("\n"));
+			window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+		});
+	});
 }
 
 // === FAQ Toggle ===
 function toggleFaq(button) {
 	const answer = button.nextElementSibling;
+	if (!answer) {
+		return;
+	}
 	const isOpen = answer.classList.contains("open");
 
 	// Toggle active state on button
 	button.classList.toggle("active");
+	button.setAttribute("aria-expanded", isOpen ? "false" : "true");
 
 	// Toggle answer visibility
 	if (isOpen) {
 		answer.classList.remove("open");
+		answer.setAttribute("aria-hidden", "true");
 	} else {
 		answer.classList.add("open");
+		answer.setAttribute("aria-hidden", "false");
 	}
 }

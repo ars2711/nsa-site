@@ -33,27 +33,49 @@ ambitious student AI community." %} {% set page_keywords = default_keywords + [
   </div>
 </section>
 
-<section class="projects-section">
+<section class="projects-section" id="team-directory" data-filter-scope="team">
   <div class="projects-toolbar" data-animate>
-    <button class="filter-chip is-active" data-filter="all" aria-pressed="true">
-      All
-    </button>
-    {% for t in tracks %}
-    <button
-      class="filter-chip"
-      data-filter="{{ t | lower }}"
-      aria-pressed="false"
-    >
-      {{ t }}
-    </button>
-    {% endfor %}
+    <div class="team-search">
+      <label for="teamSearch" class="sr-only">Search team</label>
+      <input
+        type="search"
+        id="teamSearch"
+        class="team-search__input"
+        placeholder="Search by name, role, wing, or focus"
+      />
+    </div>
+    <div class="team-filters">
+      <button
+        class="filter-chip is-active"
+        data-filter="all"
+        aria-pressed="true"
+      >
+        All
+      </button>
+      {% for f in filters %}
+      <button
+        class="filter-chip"
+        data-filter="{{ f.slug }}"
+        aria-pressed="false"
+      >
+        {{ f.label }}{% if f.count %}<span class="filter-count"
+          >{{ f.count }}</span
+        >{% endif %}
+      </button>
+      {% endfor %}
+    </div>
   </div>
 
   <div class="project-grid">
-    {% for m in members %}
+    {% for m in members %} {% set tag_tokens = (m.focus_tokens | default([],
+    true)) %} {% if m.wing %}{% set tag_tokens = tag_tokens + [m.wing|lower]
+    %}{% endif %} {% if m.subteam %}{% set tag_tokens = tag_tokens +
+    [m.subteam|lower] %}{% endif %}
     <article
       class="project-card"
-      data-tags="{{ (m.focus_tokens | default([], true)) | join(',') }}"
+      data-tags="{{ tag_tokens | join(',') }}"
+      data-wing="{{ m.wing | default('') }}"
+      data-subteam="{{ m.subteam | default('') }}"
       data-animate
     >
       <header class="project-card__header">
@@ -111,4 +133,61 @@ ambitious student AI community." %} {% set page_keywords = default_keywords + [
   </div>
   <p class="projects-empty" hidden>No profiles match this filter.</p>
 </section>
-{% endblock %}
+{% if wings %}
+<section class="team-structure" id="team-structure">
+  <div class="page-hero__inner" data-animate>
+    <span class="badge">STRUCTURE</span>
+    <h2>Wings, Subteams, and Leads</h2>
+    <p>
+      Use this map to understand reporting lines and find the councils you will
+      collaborate with.
+    </p>
+  </div>
+  <div class="team-structure__grid">
+    {% for wing in wings %}
+    <article class="team-wing" id="{{ wing.slug }}" data-animate>
+      <header class="team-wing__header">
+        <div>
+          <h3>{{ wing.name }}</h3>
+          {% if wing.lead_note %}
+          <p class="team-wing__note">{{ wing.lead_note }}</p>
+          {% endif %}
+        </div>
+        {% if wing.lead %}<span class="team-wing__lead"
+          >Lead: {{ wing.lead }}</span
+        >{% endif %}
+      </header>
+      {% if wing.subteams %}
+      <div class="team-subteams">
+        {% for subteam in wing.subteams %}
+        <section class="team-subteam" id="{{ subteam.slug }}">
+          <h4>{{ subteam.name }}</h4>
+          <ul class="team-member-list">
+            {% for member in subteam.members %}
+            <li>
+              <span class="member-name">{{ member.name }}</span>
+              <span class="member-role">{{ member.role }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endfor %}
+      </div>
+      {% endif %} {% if wing.unassigned %}
+      <div class="team-wing__unassigned">
+        <h4>Wing Operations</h4>
+        <ul class="team-member-list">
+          {% for member in wing.unassigned %}
+          <li>
+            <span class="member-name">{{ member.name }}</span>
+            <span class="member-role">{{ member.role }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %} {% endblock %}
