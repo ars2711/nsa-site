@@ -1,64 +1,52 @@
-{% extends "layout.html" %}
-{% block title %}Home - NSA{% endblock %}
-{% block page_metadata %}
-{% set page_description = "Join the NUST Society of Artificial Intelligence to ship AI products, publish research, and deliver flagship tech events across Pakistan." %}
-{% set page_keywords = default_keywords + [
-  "NSA Pakistan",
-  "NUST AI society",
-  "AI recruitment",
-  "student AI projects",
-  "NUST events",
-  "AI leadership"
-] %}
-{% endblock %}
-{% block head_extra %}
-  {{ super() }}
-  {% set faq_ns = namespace(entities=[]) %}
-  {% if home.faq %}
-    {% for category in home.faq %}
-      {% for item in category.questions %}
-        {% set faq_ns.entities = faq_ns.entities + [{
-          "@type": "Question",
-          "name": item.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": item.answer
-          }
-        }] %}
-      {% endfor %}
-    {% endfor %}
-  {% endif %}
-  {% if faq_ns.entities %}
-  <script type="application/ld+json">
-    {{ {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faq_ns.entities
-    } | tojson | safe }}
-  </script>
-  {% endif %}
-{% endblock %}
-{% block content %}
+{% extends "layout.html" %} {% block title %}Home - NSA{% endblock %} {% block
+page_metadata %} {% set page_description = "Join the NUST Society of Artificial
+Intelligence to ship AI products, publish research, and deliver flagship tech
+events across Pakistan." %} {% set page_keywords = default_keywords + [ "NSA
+Pakistan", "NUST AI society", "AI recruitment", "student AI projects", "NUST
+events", "AI leadership" ] %} {% endblock %} {% block head_extra %} {{ super()
+}} {% set faq_ns = namespace(entities=[]) %} {% if home.faq %} {% for category
+in home.faq %} {% for item in category.questions %} {% set faq_ns.entities =
+faq_ns.entities + [{ "@type": "Question", "name": item.question,
+"acceptedAnswer": { "@type": "Answer", "text": item.answer } }] %} {% endfor %}
+{% endfor %} {% endif %} {% if faq_ns.entities %}
+<script type="application/ld+json">
+  {{ {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faq_ns.entities
+  } | tojson | safe }}
+</script>
+{% endif %} {% endblock %} {% block content %}
 
 <section class="terminal-hero" id="home">
   <div class="hero-grid">
     <div class="hero-copy" data-animate>
-      <span class="hero-kicker">// NUST Society of Artificial Intelligence</span>
+      <span class="hero-kicker"
+        >// NUST Society of Artificial Intelligence</span
+      >
       <h1 class="hero-title">Command Center: NSA</h1>
       <p class="hero-subtitle">
-        Pakistan's next generation of builders, researchers, and visionaries transforming AI from theory into reality.
+        Pakistan's next generation of builders, researchers, and visionaries
+        transforming AI from theory into reality.
       </p>
       <p class="hero-link-strip">
         Explore our
-        <a href="{{ url_for('projects') }}" class="hero-link">live AI projects</a>, meet the
-        <a href="{{ url_for('team') }}" class="hero-link">team behind the mission</a>, or follow the
-        <a href="#recruitment-timeline" class="hero-link">recruitment timeline</a>.
+        <a href="{{ url_for('projects') }}" class="hero-link"
+          >live AI projects</a
+        >, meet the
+        <a href="{{ url_for('team') }}" class="hero-link"
+          >team behind the mission</a
+        >, or follow the
+        <a href="#recruitment-timeline" class="hero-link"
+          >recruitment timeline</a
+        >.
       </p>
 
       <div class="countdown-banner" id="countdownBanner">
         <div class="countdown-label">Recruitment Status</div>
         <div class="countdown-message">
-          Rolling applications all year. Submit anytime and expect a council response within 72 hours.
+          Rolling applications all year. Submit anytime and expect a council
+          response within 72 hours.
         </div>
       </div>
 
@@ -94,13 +82,22 @@
     <a
       class="stat-card"
       href="{{ card.href or '#' }}"
-      {% if not card.href %}aria-disabled="true"{% endif %}
+      {%
+      if
+      not
+      card.href
+      %}aria-disabled="true"
+      {%
+      endif
+      %}
       data-animate
     >
       <div class="stat-icon" aria-hidden="true">
         <i class="bi {{ card.icon }}"></i>
       </div>
-      <div class="stat-number" data-count="{{ card.value }}">{{ card.value }}</div>
+      <div class="stat-number" data-count="{{ card.value }}">
+        {{ card.value }}
+      </div>
       <div class="stat-label">{{ card.label }}</div>
       {% if card.description %}
       <p class="stat-description">{{ card.description }}</p>
@@ -109,9 +106,7 @@
     {% endfor %}
   </div>
 </section>
-{% endif %}
-
-{% if home.timeline %}
+{% endif %} {% if home.timeline %}
 <section class="timeline-section" id="recruitment-timeline">
   <div class="category-header" data-animate>
     <span class="badge">RECRUITMENT TIMELINE</span>
@@ -123,14 +118,17 @@
     <div class="timeline-item" data-animate>
       <div class="timeline-marker">
         <div class="timeline-dot">
-          {% if step.icon %}<i class="bi {{ step.icon }}" aria-hidden="true"></i>{% endif %}
+          {% if step.icon %}<i class="bi {{ step.icon }}" aria-hidden="true"></i
+          >{% endif %}
         </div>
         {% if not loop.last %}
         <div class="timeline-line"></div>
         {% endif %}
       </div>
       <div class="timeline-content">
-        {% if step.period %}<div class="timeline-date">{{ step.period }}</div>{% endif %}
+        {% if step.period %}
+        <div class="timeline-date">{{ step.period }}</div>
+        {% endif %}
         <h3>{{ step.title }}</h3>
         <p>{{ step.description }}</p>
         {% if step.cta %}
@@ -163,7 +161,8 @@
         <h3>Welcome to NSA</h3>
       </div>
       <p class="card-info">
-        NUST's official AI Society is the home of Pakistan's next generation of innovators.<br />
+        NUST's official AI Society is the home of Pakistan's next generation of
+        innovators.<br />
         We merge research, creativity, and real-world application.<br />
         Every initiative we launch brings AI closer to daily life.
       </p>
@@ -191,7 +190,8 @@
       </div>
       <p class="card-info">
         Our mission is to turn innovation into influence.<br />
-        From research papers to startups, NSA accelerates AI adoption across Pakistan.
+        From research papers to startups, NSA accelerates AI adoption across
+        Pakistan.
       </p>
       <p class="card-caption">
         "Don't just imagine the future. Ship it with us."
@@ -207,9 +207,8 @@
     <h2>Building &mdash; Real Results</h2>
   </div>
   <div class="impact-grid">
-    {% for metric in home.impact %}
-    {% set dash_total = 251.2 %}
-    {% set dash_offset = dash_total - (dash_total * (metric.value | float / 100)) %}
+    {% for metric in home.impact %} {% set dash_total = 251.2 %} {% set
+    dash_offset = dash_total - (dash_total * (metric.value | float / 100)) %}
     <div class="impact-card" data-animate>
       <div class="impact-visual">
         <svg viewBox="0 0 100 100" class="impact-chart">
@@ -242,15 +241,14 @@
     {% endfor %}
   </div>
 </section>
-{% endif %}
-
-{% if home.directorates or home.portfolios %}
+{% endif %} {% if home.directorates or home.portfolios %}
 <section class="team-structure-section" id="team-structure" data-animate>
   <div class="category-header" data-animate>
     <span class="badge">TEAM STRUCTURE</span>
     <h2>How We Operate // Complete Portfolio Breakdown</h2>
     <p class="section-subtitle">
-      NSA operates through core directorates that steer long-term strategy and executive portfolios that execute every mission on the ground.
+      NSA operates through core directorates that steer long-term strategy and
+      executive portfolios that execute every mission on the ground.
     </p>
   </div>
 
@@ -283,9 +281,7 @@
       {% endfor %}
     </div>
   </div>
-  {% endif %}
-
-  {% if home.portfolios %}
+  {% endif %} {% if home.portfolios %}
   <div class="portfolio-category" data-animate>
     <h3 class="portfolio-category-title">
       <span class="portfolio-badge executive">EXECUTIVE PORTFOLIOS</span>
@@ -325,7 +321,8 @@
       <p class="card-info">
         Every project has purpose. Every member has a role.<br />
         We collaborate, innovate, and lead together.<br />
-        Because teamwork does more than make the dream work &mdash; it makes revolutions real.
+        Because teamwork does more than make the dream work &mdash; it makes
+        revolutions real.
       </p>
       <p class="card-caption">"Power in unity. Intelligence in motion."</p>
     </article>
@@ -336,10 +333,13 @@
       </div>
       <p class="card-info">
         We innovate responsibly.<br />
-        Every dataset, every idea, every collaboration respects privacy and trust.<br />
+        Every dataset, every idea, every collaboration respects privacy and
+        trust.<br />
         Because ethics in AI is not optional &mdash; it is fundamental.
       </p>
-      <p class="card-caption">"Trust is our protocol. Ethics is our framework."</p>
+      <p class="card-caption">
+        "Trust is our protocol. Ethics is our framework."
+      </p>
     </article>
     <article class="nsa-card" data-animate>
       <div class="card-header">
@@ -348,7 +348,8 @@
       </div>
       <p class="card-info">
         At NSA, you will find a culture that thrives on collaboration.<br />
-        We bring together coders, designers, and dreamers because breakthroughs happen when worlds collide.
+        We bring together coders, designers, and dreamers because breakthroughs
+        happen when worlds collide.
       </p>
       <p class="card-caption">"Where innovation meets belonging."</p>
     </article>
@@ -368,9 +369,12 @@
       </div>
       <p class="card-info">
         We turn academic projects into viable products and ventures.<br />
-        With mentorship, resources, and networking, your ideas do not end at graduation &mdash; they start there.
+        With mentorship, resources, and networking, your ideas do not end at
+        graduation &mdash; they start there.
       </p>
-      <p class="card-caption">"Your code could be Pakistan's next big startup."</p>
+      <p class="card-caption">
+        "Your code could be Pakistan's next big startup."
+      </p>
     </article>
     <article class="nsa-card" data-animate>
       <div class="card-header">
@@ -380,9 +384,12 @@
       <p class="card-info">
         Coders, designers, leaders &mdash; your place is here.<br />
         We welcome builders who dream big and execute harder.<br />
-        Join the community that does not just follow the AI wave &mdash; it creates it.
+        Join the community that does not just follow the AI wave &mdash; it
+        creates it.
       </p>
-      <p class="card-caption">"Plug in. Power up. Let's build the future together."</p>
+      <p class="card-caption">
+        "Plug in. Power up. Let's build the future together."
+      </p>
     </article>
     <article class="nsa-card" data-animate>
       <div class="card-header">
@@ -403,13 +410,20 @@
   <div class="category-header" data-animate>
     <span class="badge">FREQUENTLY ASKED QUESTIONS</span>
     <h2>Your Questions // Our Answers</h2>
-    <p>Still unsure? Ping the council on Instagram or WhatsApp and we will respond fast.</p>
+    <p>
+      Still unsure? Ping the council on Instagram or WhatsApp and we will
+      respond fast.
+    </p>
   </div>
   <div class="faq-grid">
     {% for category in home.faq %}
     <article class="faq-category" data-animate>
       <h3>
-        {% if category.icon %}<i class="bi {{ category.icon }}" aria-hidden="true"></i>{% endif %} {{ category.title }}
+        {% if category.icon %}<i
+          class="bi {{ category.icon }}"
+          aria-hidden="true"
+        ></i
+        >{% endif %} {{ category.title }}
       </h3>
       {% for item in category.questions %}
       <div class="faq-item">
@@ -431,16 +445,15 @@
     {% endfor %}
   </div>
 </section>
-{% endif %}
-
-{% set social_widgets = home.social_widgets if home.social_widgets is defined else {} %}
-{% if home.social or social_widgets %}
+{% endif %} {% set social_widgets = home.social_widgets if home.social_widgets
+is defined else {} %} {% if home.social or social_widgets %}
 <section class="connect-section" id="connect">
   <div class="category-header" data-animate>
     <span class="badge">CONNECT</span>
     <h2>Stay Linked With NSA</h2>
     <p>
-      Join the community, reach the council, or follow our updates across platforms.
+      Join the community, reach the council, or follow our updates across
+      platforms.
     </p>
   </div>
   <div class="connect-layout">
@@ -470,8 +483,7 @@
             Copy Instagram Handle
           </button>
         </article>
-        {% endif %}
-        {% if social_widgets.whatsapp_qr %}
+        {% endif %} {% if social_widgets.whatsapp_qr %}
         <article class="social-embed social-embed--whatsapp" data-animate>
           <header>
             <i class="bi bi-whatsapp"></i>
@@ -502,14 +514,16 @@
             </a>
           </div>
         </article>
-        {% endif %}
-        {% if social_widgets.email_address %}
+        {% endif %} {% if social_widgets.email_address %}
         <article class="social-embed social-embed--email" data-animate>
           <header>
             <i class="bi bi-envelope-fill"></i>
             <h3>Email Mission Control</h3>
           </header>
-          <form class="contact-card" data-email="{{ social_widgets.email_address }}">
+          <form
+            class="contact-card"
+            data-email="{{ social_widgets.email_address }}"
+          >
             <label class="sr-only" for="contactName">Your name</label>
             <input
               type="text"
@@ -543,8 +557,7 @@
           <p class="contact-note">{{ social_widgets.email_note }}</p>
           {% endif %}
         </article>
-        {% endif %}
-        {% if social_widgets.github_org %}
+        {% endif %} {% if social_widgets.github_org %}
         <article class="social-embed social-embed--github" data-animate>
           <header>
             <i class="bi bi-github"></i>
@@ -571,8 +584,7 @@
             </button>
           </div>
         </article>
-        {% endif %}
-        {% if social_widgets.twitter_profile %}
+        {% endif %} {% if social_widgets.twitter_profile %}
         <article class="social-embed social-embed--twitter" data-animate>
           <header>
             <i class="bi bi-twitter-x"></i>
@@ -602,13 +614,13 @@
         {% endif %}
       </div>
     </div>
-    {% endif %}
-    {% if home.social %}
+    {% endif %} {% if home.social %}
     <aside class="connect-secondary" data-animate>
       <div class="connect-secondary__card">
         <h3>Quick Follow Links</h3>
         <p class="connect-secondary__copy">
-          Prefer a quick follow? Pick your channel and stay in sync with new drops.
+          Prefer a quick follow? Pick your channel and stay in sync with new
+          drops.
         </p>
         <div class="social-strip">
           {% for link in home.social %}
@@ -618,7 +630,11 @@
             target="_blank"
             rel="noopener"
           >
-            {% if link.icon %}<i class="bi {{ link.icon }}" aria-hidden="true"></i>{% endif %}
+            {% if link.icon %}<i
+              class="bi {{ link.icon }}"
+              aria-hidden="true"
+            ></i
+            >{% endif %}
             <div>
               <span>{{ link.name }}</span>
               {% if link.handle %}
@@ -639,7 +655,9 @@
   <div class="join-console">
     <h2>Plug Into NSA</h2>
     <p class="join-subtitle">
-      Choose the path that fits your mission. Recruitment keeps our talent pool evolving, while the researchers portal connects innovators with NSA's applied AI initiatives.
+      Choose the path that fits your mission. Recruitment keeps our talent pool
+      evolving, while the researchers portal connects innovators with NSA's
+      applied AI initiatives.
     </p>
     <div class="hero-actions">
       <a
