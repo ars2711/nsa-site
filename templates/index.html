@@ -21,9 +21,7 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
 <section class="terminal-hero" id="home">
   <div class="hero-grid">
     <div class="hero-copy" data-animate>
-      <span class="hero-kicker"
-        >// NUST Society of Artificial Intelligence</span
-      >
+      <span class="hero-kicker">NUST Society of Artificial Intelligence</span>
       <h1 class="hero-title">Command Center: NSA</h1>
       <p class="hero-subtitle">
         Pakistan's next generation of builders, researchers, and visionaries
@@ -109,8 +107,8 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
 {% endif %} {% if home.timeline %}
 <section class="timeline-section" id="recruitment-timeline">
   <div class="category-header" data-animate>
-    <span class="badge">RECRUITMENT TIMELINE</span>
-    <h2>Your Journey // From Apply to Onboard</h2>
+  <span class="badge">RECRUITMENT TIMELINE</span>
+  <h2>Your Journey &mdash; From Apply to Onboard</h2>
   </div>
 
   <div class="timeline-container">
@@ -244,8 +242,8 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
 {% endif %} {% if home.directorates or home.portfolios %}
 <section class="team-structure-section" id="team-structure" data-animate>
   <div class="category-header" data-animate>
-    <span class="badge">TEAM STRUCTURE</span>
-    <h2>How We Operate // Complete Portfolio Breakdown</h2>
+  <span class="badge">TEAM STRUCTURE</span>
+  <h2>How We Operate &mdash; Complete Portfolio Breakdown</h2>
     <p class="section-subtitle">
       NSA operates through core directorates that steer long-term strategy and
       executive portfolios that execute every mission on the ground.
@@ -262,11 +260,10 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
       {% for directorate in home.directorates %}
       <article class="directorate-card" data-animate>
         <div class="directorate-icon">
-          {% if directorate.icon %}
-          <i class="bi {{ directorate.icon }}" aria-hidden="true"></i>
-          {% else %}
-          <span aria-hidden="true">&bull;</span>
-          {% endif %}
+          <i
+            class="bi {{ directorate.icon if directorate.icon else 'bi-asterisk' }}"
+            aria-hidden="true"
+          ></i>
         </div>
         <h3>{{ directorate.name }}</h3>
         <p>{{ directorate.description }}</p>
@@ -291,11 +288,10 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
       {% for item in home.portfolios %}
       <article class="portfolio-card" data-animate>
         <div class="portfolio-icon">
-          {% if item.icon %}
-          <i class="bi {{ item.icon }}" aria-hidden="true"></i>
-          {% else %}
-          <span aria-hidden="true">&bull;</span>
-          {% endif %}
+          <i
+            class="bi {{ item.icon if item.icon else 'bi-asterisk' }}"
+            aria-hidden="true"
+          ></i>
         </div>
         <h4>{{ item.name }}</h4>
         <p>{{ item.description }}</p>
@@ -309,8 +305,8 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
 
 <section class="intel-deck" id="what-we-do">
   <div class="category-header" data-animate>
-    <span class="badge">WHAT WE DO</span>
-    <h2>Culture // Values</h2>
+  <span class="badge">WHAT WE DO</span>
+  <h2>Culture &mdash; Values</h2>
   </div>
   <div class="card-grid">
     <article class="nsa-card" data-animate>
@@ -358,8 +354,8 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
 
 <section class="intel-deck" id="where-were-going">
   <div class="category-header" data-animate>
-    <span class="badge">WHERE WE ARE GOING</span>
-    <h2>Future // Opportunities</h2>
+  <span class="badge">WHERE WE ARE GOING</span>
+  <h2>Future &mdash; Opportunities</h2>
   </div>
   <div class="card-grid">
     <article class="nsa-card" data-animate>
@@ -408,8 +404,8 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
 {% if home.faq %}
 <section class="faq-section" id="faq">
   <div class="category-header" data-animate>
-    <span class="badge">FREQUENTLY ASKED QUESTIONS</span>
-    <h2>Your Questions // Our Answers</h2>
+  <span class="badge">FREQUENTLY ASKED QUESTIONS</span>
+  <h2>Your Questions &mdash; Our Answers</h2>
     <p>
       Still unsure? Ping the council on Instagram or WhatsApp and we will
       respond fast.
@@ -445,8 +441,9 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
     {% endfor %}
   </div>
 </section>
-{% endif %} {% set social_widgets = home.social_widgets if home.social_widgets
-is defined else {} %} {% if home.social or social_widgets %}
+{% endif %}
+{% set social_widgets = home.social_widgets if home.social_widgets is defined and home.social_widgets else {} %}
+{% if home.social or social_widgets %}
 <section class="connect-section" id="connect">
   <div class="category-header" data-animate>
     <span class="badge">CONNECT</span>
@@ -459,194 +456,174 @@ is defined else {} %} {% if home.social or social_widgets %}
   <div class="connect-layout">
     {% if social_widgets %}
     <div class="connect-primary">
-      <div class="social-embed-grid">
-        {% if social_widgets.instagram_embed %}
-        <article class="social-embed social-embed--instagram" data-animate>
-          <header>
-            <i class="bi bi-instagram"></i>
-            <h3>Instagram Feed</h3>
-          </header>
-          <div class="embed-frame">
-            <iframe
-              src="{{ social_widgets.instagram_embed }}"
-              title="NSA Instagram"
-              loading="lazy"
-              allowtransparency="true"
-              sandbox="allow-scripts allow-same-origin allow-popups"
-            ></iframe>
-          </div>
-          <button
-            class="chip-button"
-            type="button"
-            data-copy-value="{{ social_widgets.instagram_profile | default('https://www.instagram.com/nsa.nust/') }}"
-          >
-            Copy Instagram Handle
-          </button>
-        </article>
-        {% endif %} {% if social_widgets.whatsapp_qr %}
-        <article class="social-embed social-embed--whatsapp" data-animate>
-          <header>
-            <i class="bi bi-whatsapp"></i>
-            <h3>WhatsApp HQ</h3>
-          </header>
-          <div class="qr-frame">
-            <img
-              src="{{ social_widgets.whatsapp_qr }}"
-              alt="WhatsApp QR join link"
-              loading="lazy"
-            />
-          </div>
-          <div class="chip-row">
-            <button
-              class="chip-button"
-              type="button"
-              data-copy-value="{{ social_widgets.whatsapp_link | default('https://chat.whatsapp.com/BOCZkgf8vYb5fhpXW8o7Vh') }}"
-            >
-              Copy Invite Link
-            </button>
-            <a
-              class="chip-button primary"
-              href="{{ social_widgets.whatsapp_link | default('https://chat.whatsapp.com/BOCZkgf8vYb5fhpXW8o7Vh') }}"
-              target="_blank"
-              rel="noopener"
-            >
-              Open WhatsApp
-            </a>
-          </div>
-        </article>
-        {% endif %} {% if social_widgets.email_address %}
-        <article class="social-embed social-embed--email" data-animate>
-          <header>
+      <div class="contact-grid">
+        {% if social_widgets.email_address %}
+        <article class="connect-card connect-card--email" data-animate>
+          <div class="connect-card__icon" aria-hidden="true">
             <i class="bi bi-envelope-fill"></i>
+          </div>
+          <div class="connect-card__body">
             <h3>Email Mission Control</h3>
-          </header>
-          <form
-            class="contact-card"
-            data-email="{{ social_widgets.email_address }}"
-          >
-            <label class="sr-only" for="contactName">Your name</label>
-            <input
-              type="text"
-              id="contactName"
-              name="name"
-              placeholder="Your name"
-              required
-            />
-            <label class="sr-only" for="contactMessage">Message</label>
-            <textarea
-              id="contactMessage"
-              name="message"
-              rows="3"
-              placeholder="What's on your mind?"
-              required
-            ></textarea>
-            <div class="contact-actions">
-              <button type="submit" class="chip-button primary">
-                Compose Email
-              </button>
-              <button
-                type="button"
-                class="chip-button"
-                data-copy-value="{{ social_widgets.email_address }}"
+            <p>
+              Drop us a note and the council will follow up within one working
+              day.
+            </p>
+            <form
+              class="contact-card"
+              data-email="{{ social_widgets.email_address }}"
+            >
+              <label class="sr-only" for="contactName">Your name</label>
+              <input
+                type="text"
+                id="contactName"
+                name="name"
+                placeholder="Your name"
+                required
+              />
+              <label class="sr-only" for="contactMessage">Message</label>
+              <textarea
+                id="contactMessage"
+                name="message"
+                rows="3"
+                placeholder="What's on your mind?"
+                required
+              ></textarea>
+              <div class="contact-actions">
+                <button type="submit" class="chip-button primary">
+                  Compose Email
+                </button>
+                <button
+                  type="button"
+                  class="chip-button"
+                  data-copy-value="{{ social_widgets.email_address }}"
+                >
+                  Copy Address
+                </button>
+              </div>
+            </form>
+            {% if social_widgets.email_note %}
+            <p class="contact-note">{{ social_widgets.email_note }}</p>
+            {% endif %}
+          </div>
+        </article>
+        {% endif %} {% if social_widgets.whatsapp_link %}
+        <article class="connect-card connect-card--community" data-animate>
+          <div class="connect-card__icon" aria-hidden="true">
+            <i class="bi bi-whatsapp"></i>
+          </div>
+          <div class="connect-card__body">
+            <h3>Community HQ</h3>
+            <p>
+              Join the WhatsApp command channel for ops alerts, recruiting
+              updates, and event drops.
+            </p>
+            <div class="chip-row">
+              <a
+                class="chip-button primary"
+                href="{{ social_widgets.whatsapp_link }}"
+                target="_blank"
+                rel="noopener"
               >
-                Copy Address
+                Join WhatsApp
+              </a>
+              <button
+                class="chip-button"
+                type="button"
+                data-copy-value="{{ social_widgets.whatsapp_link }}"
+              >
+                Copy Invite
               </button>
             </div>
-          </form>
-          {% if social_widgets.email_note %}
-          <p class="contact-note">{{ social_widgets.email_note }}</p>
-          {% endif %}
-        </article>
-        {% endif %} {% if social_widgets.github_org %}
-        <article class="social-embed social-embed--github" data-animate>
-          <header>
-            <i class="bi bi-github"></i>
-            <h3>GitHub Staging Bay</h3>
-          </header>
-          {% if social_widgets.github_note %}
-          <p class="contact-note">{{ social_widgets.github_note }}</p>
-          {% endif %}
-          <div class="chip-row">
-            <a
-              class="chip-button primary"
-              href="{{ social_widgets.github_org }}"
-              target="_blank"
-              rel="noopener"
-            >
-              Visit Org
-            </a>
-            <button
-              class="chip-button"
-              type="button"
-              data-copy-value="{{ social_widgets.github_org }}"
-            >
-              Copy URL
-            </button>
-          </div>
-        </article>
-        {% endif %} {% if social_widgets.twitter_profile %}
-        <article class="social-embed social-embed--twitter" data-animate>
-          <header>
-            <i class="bi bi-twitter-x"></i>
-            <h3>Twitter Flight Deck</h3>
-          </header>
-          {% if social_widgets.twitter_note %}
-          <p class="contact-note">{{ social_widgets.twitter_note }}</p>
-          {% endif %}
-          <div class="chip-row">
-            <a
-              class="chip-button primary"
-              href="{{ social_widgets.twitter_profile }}"
-              target="_blank"
-              rel="noopener"
-            >
-              Open Twitter
-            </a>
-            <button
-              class="chip-button"
-              type="button"
-              data-copy-value="{{ social_widgets.twitter_profile }}"
-            >
-              Copy Handle
-            </button>
           </div>
         </article>
         {% endif %}
-      </div>
-    </div>
-    {% endif %} {% if home.social %}
-    <aside class="connect-secondary" data-animate>
-      <div class="connect-secondary__card">
-        <h3>Quick Follow Links</h3>
-        <p class="connect-secondary__copy">
-          Prefer a quick follow? Pick your channel and stay in sync with new
-          drops.
-        </p>
-        <div class="social-strip">
-          {% for link in home.social %}
-          <a
-            class="social-chip"
-            href="{{ link.url }}"
-            target="_blank"
-            rel="noopener"
-          >
-            {% if link.icon %}<i
-              class="bi {{ link.icon }}"
-              aria-hidden="true"
-            ></i
-            >{% endif %}
-            <div>
-              <span>{{ link.name }}</span>
-              {% if link.handle %}
-              <span class="social-handle">{{ link.handle }}</span>
+        <article class="connect-card connect-card--social" data-animate>
+          <div class="connect-card__icon" aria-hidden="true">
+            <i class="bi bi-broadcast"></i>
+          </div>
+          <div class="connect-card__body">
+            <h3>Social Broadcast</h3>
+            <p>
+              Follow story reels on Instagram, live coverage on X, and our open
+              source engineering drops on GitHub.
+            </p>
+            <div class="chip-row">
+              {% if social_widgets.instagram_profile %}
+              <a
+                class="chip-button"
+                href="{{ social_widgets.instagram_profile }}"
+                target="_blank"
+                rel="noopener"
+              >
+                Instagram
+              </a>
+              {% endif %} {% if social_widgets.twitter_profile %}
+              <a
+                class="chip-button"
+                href="{{ social_widgets.twitter_profile }}"
+                target="_blank"
+                rel="noopener"
+              >
+                X (Twitter)
+              </a>
+              {% endif %} {% if social_widgets.github_org %}
+              <a
+                class="chip-button"
+                href="{{ social_widgets.github_org }}"
+                target="_blank"
+                rel="noopener"
+              >
+                GitHub
+              </a>
               {% endif %}
             </div>
-          </a>
-          {% endfor %}
-        </div>
+          </div>
+        </article>
       </div>
-    </aside>
+    </div>
     {% endif %}
+    <div class="connect-aside">
+      {% if home.social %}
+      <aside class="connect-secondary" data-animate>
+        <div class="connect-secondary__card">
+          <h3>Quick Follow Links</h3>
+          <p class="connect-secondary__copy">
+            Prefer a quick follow? Pick your channel and stay in sync with new
+            drops.
+          </p>
+          <div class="social-strip">
+            {% for link in home.social %}
+            <a
+              class="social-chip"
+              href="{{ link.url }}"
+              target="_blank"
+              rel="noopener"
+            >
+              {% if link.icon %}<i
+                class="bi {{ link.icon }}"
+                aria-hidden="true"
+              ></i
+              >{% endif %}
+              <div>
+                <span>{{ link.name }}</span>
+                {% if link.handle %}
+                <span class="social-handle">{{ link.handle }}</span>
+                {% endif %}
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+      </aside>
+      {% endif %}
+      <div class="connect-visual" data-animate>
+        <img
+          src="{{ url_for('static', filename='img/contact-hub.svg') }}"
+          loading="lazy"
+          alt="Illustration of NSA communication nodes connected together"
+        />
+      </div>
+    </div>
   </div>
 </section>
 {% endif %}

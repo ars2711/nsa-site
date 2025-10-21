@@ -1984,10 +1984,17 @@ body.light-mode .impact-card {
 }
 
 .directorate-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  display: block;
-  filter: drop-shadow(0 0 12px rgba(0, 245, 160, 0.3));
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(0, 245, 160, 0.25), rgba(37, 99, 235, 0.28));
+  border: 1px solid rgba(0, 255, 214, 0.35);
+  display: grid;
+  place-items: center;
+  color: var(--accent-cyan);
+  font-size: 2rem;
+  margin-bottom: 1.25rem;
+  box-shadow: inset 0 0 22px rgba(0, 245, 160, 0.3);
 }
 
 .directorate-card h3 {
@@ -2085,10 +2092,17 @@ body.light-mode .timeline-dot {
 }
 
 .portfolio-icon {
-  font-size: 2.2rem;
-  margin-bottom: 0.8rem;
-  display: block;
-  filter: drop-shadow(0 0 10px rgba(0, 245, 160, 0.25));
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0, 245, 224, 0.18), rgba(37, 99, 235, 0.18));
+  border: 1px solid rgba(0, 245, 224, 0.3);
+  display: grid;
+  place-items: center;
+  color: var(--accent-cyan);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  box-shadow: inset 0 0 18px rgba(0, 245, 224, 0.25);
 }
 
 .portfolio-card h4 {
@@ -2158,78 +2172,108 @@ body.light-mode .portfolio-badge.executive {
 
 @media (min-width: 992px) {
   .connect-layout {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   }
 }
 
-.social-embed-grid {
+.contact-grid {
   display: grid;
-  gap: clamp(1.5rem, 3vw, 2rem);
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.2rem);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   align-content: start;
 }
 
-.social-embed {
+.connect-card {
   background: var(--bg-card);
   border: 1px solid rgba(0, 217, 245, 0.14);
   border-radius: 1.5rem;
-  padding: 1.6rem;
+  padding: clamp(1.4rem, 2.8vw, 2rem);
   box-shadow: var(--shadow-glow);
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-.social-embed header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.connect-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 255, 214, 0.35);
+  box-shadow: 0 20px 45px rgba(0, 232, 255, 0.22);
 }
 
-.social-embed header i {
-  font-size: 1.6rem;
+.connect-card__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(0, 245, 160, 0.25), rgba(37, 99, 235, 0.25));
+  border: 1px solid rgba(0, 255, 214, 0.35);
+  display: grid;
+  place-items: center;
   color: var(--accent-cyan);
+  font-size: 2rem;
+  box-shadow: inset 0 0 22px rgba(0, 245, 160, 0.28);
 }
 
-.social-embed header h3 {
+.connect-card--community .connect-card__icon {
+  background: linear-gradient(140deg, rgba(37, 211, 102, 0.28), rgba(0, 217, 245, 0.24));
+  color: #1fa855;
+}
+
+.connect-card--social .connect-card__icon {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.28), rgba(0, 217, 245, 0.24));
+}
+
+.connect-card__body {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.connect-card__body h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--accent-blue);
 }
 
-.embed-frame {
-  background: rgba(0, 0, 0, 0.25);
-  border-radius: 1rem;
-  padding: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.connect-card__body p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.98rem;
 }
 
-.embed-frame iframe {
-  border: 0;
-  width: 100%;
-  min-height: 360px;
-  border-radius: 0.75rem;
-}
-
-.qr-frame {
+.connect-aside {
   display: grid;
-  place-items: center;
-  border-radius: 1.25rem;
-  padding: 0;
-  background: transparent;
-  border: 1px solid rgba(0, 217, 245, 0.18);
-  box-shadow: var(--shadow-glow);
+  gap: clamp(1.5rem, 3vw, 2.4rem);
+  align-content: start;
 }
 
-.qr-frame img {
-  width: 100%;
-  max-width: 220px;
-  height: auto;
+.connect-visual {
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 217, 245, 0.12);
+  border-radius: 1.5rem;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  box-shadow: var(--shadow-glow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.connect-visual img {
   display: block;
-  background: transparent;
+  width: 100%;
+  height: auto;
+  max-width: 420px;
+}
+
+@media (max-width: 600px) {
+  .connect-card {
+    grid-template-columns: 1fr;
+  }
+
+  .connect-card__icon {
+    margin: 0 auto;
+  }
 }
 
 .chip-button {
