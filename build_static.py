@@ -8,7 +8,13 @@ from typing import Callable, Dict, List, Tuple, Union
 
 from flask import render_template
 
-from app import PUBLIC_BASE_URL, app, projects as projects_view, team as team_view
+from app import (
+    PUBLIC_BASE_URL,
+    app,
+    index as index_view,
+    projects as projects_view,
+    team as team_view,
+)
 
 ROOT = Path(__file__).parent.resolve()
 OUTPUT_DIR = ROOT / "public"
@@ -49,7 +55,7 @@ def main() -> None:
     # Render dynamic templates into static HTML pages.
     with app.app_context():
         pages: Dict[str, Tuple[str, Callable[[], Union[str, bytes]]]] = {
-            "index.html": ("/", lambda: render_template("index.html")),
+            "index.html": ("/", index_view),
             "projects/index.html": ("/projects", projects_view),
             "team/index.html": ("/team", team_view),
         }
