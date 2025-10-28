@@ -13,6 +13,7 @@ from app import (
     app,
     index as index_view,
     projects as projects_view,
+    styleguide as styleguide_view,
     team as team_view,
 )
 
@@ -58,6 +59,7 @@ def main() -> None:
             "index.html": ("/", index_view),
             "projects/index.html": ("/projects", projects_view),
             "team/index.html": ("/team", team_view),
+            "styleguide.html": ("/styleguide", styleguide_view),
         }
         for relative_path, (request_path, handler) in pages.items():
             with app.test_request_context(request_path):
@@ -71,6 +73,7 @@ def main() -> None:
         ("index.html", "/", "1.0"),
         ("projects/index.html", "/projects", "0.9"),
         ("team/index.html", "/team", "0.9"),
+        ("styleguide.html", "/styleguide", "0.5"),
     ]
     for _, path, priority in sitemap_targets:
         loc = f"{BASE_URL}{'' if path == '/' else path}"

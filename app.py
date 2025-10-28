@@ -1066,6 +1066,12 @@ def ai_page() -> str:
     return render_template("ai.html", ai=ai_data)
 
 
+@app.route("/styleguide")
+def styleguide() -> str:
+    """Render the internal design system reference page."""
+    return render_template("styleguide.html")
+
+
 @app.route("/robots.txt")
 def robots_txt() -> Response:
     content = "\n".join(
