@@ -1987,7 +1987,11 @@ body.light-mode .impact-card {
   width: 64px;
   height: 64px;
   border-radius: 18px;
-  background: linear-gradient(145deg, rgba(0, 245, 160, 0.25), rgba(37, 99, 235, 0.28));
+  background: linear-gradient(
+    145deg,
+    rgba(0, 245, 160, 0.25),
+    rgba(37, 99, 235, 0.28)
+  );
   border: 1px solid rgba(0, 255, 214, 0.35);
   display: grid;
   place-items: center;
@@ -2095,7 +2099,11 @@ body.light-mode .timeline-dot {
   width: 52px;
   height: 52px;
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(0, 245, 224, 0.18), rgba(37, 99, 235, 0.18));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 245, 224, 0.18),
+    rgba(37, 99, 235, 0.18)
+  );
   border: 1px solid rgba(0, 245, 224, 0.3);
   display: grid;
   place-items: center;
@@ -2206,7 +2214,11 @@ body.light-mode .portfolio-badge.executive {
   width: 64px;
   height: 64px;
   border-radius: 18px;
-  background: linear-gradient(145deg, rgba(0, 245, 160, 0.25), rgba(37, 99, 235, 0.25));
+  background: linear-gradient(
+    145deg,
+    rgba(0, 245, 160, 0.25),
+    rgba(37, 99, 235, 0.25)
+  );
   border: 1px solid rgba(0, 255, 214, 0.35);
   display: grid;
   place-items: center;
@@ -2216,12 +2228,20 @@ body.light-mode .portfolio-badge.executive {
 }
 
 .connect-card--community .connect-card__icon {
-  background: linear-gradient(140deg, rgba(37, 211, 102, 0.28), rgba(0, 217, 245, 0.24));
+  background: linear-gradient(
+    140deg,
+    rgba(37, 211, 102, 0.28),
+    rgba(0, 217, 245, 0.24)
+  );
   color: #1fa855;
 }
 
 .connect-card--social .connect-card__icon {
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.28), rgba(0, 217, 245, 0.24));
+  background: linear-gradient(
+    135deg,
+    rgba(124, 58, 237, 0.28),
+    rgba(0, 217, 245, 0.24)
+  );
 }
 
 .connect-card__body {

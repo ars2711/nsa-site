@@ -107,8 +107,8 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
 {% endif %} {% if home.timeline %}
 <section class="timeline-section" id="recruitment-timeline">
   <div class="category-header" data-animate>
-  <span class="badge">RECRUITMENT TIMELINE</span>
-  <h2>Your Journey &mdash; From Apply to Onboard</h2>
+    <span class="badge">RECRUITMENT TIMELINE</span>
+    <h2>Your Journey &mdash; From Apply to Onboard</h2>
   </div>
 
   <div class="timeline-container">
@@ -242,8 +242,8 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
 {% endif %} {% if home.directorates or home.portfolios %}
 <section class="team-structure-section" id="team-structure" data-animate>
   <div class="category-header" data-animate>
-  <span class="badge">TEAM STRUCTURE</span>
-  <h2>How We Operate &mdash; Complete Portfolio Breakdown</h2>
+    <span class="badge">TEAM STRUCTURE</span>
+    <h2>How We Operate &mdash; Complete Portfolio Breakdown</h2>
     <p class="section-subtitle">
       NSA operates through core directorates that steer long-term strategy and
       executive portfolios that execute every mission on the ground.
@@ -305,8 +305,8 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
 
 <section class="intel-deck" id="what-we-do">
   <div class="category-header" data-animate>
-  <span class="badge">WHAT WE DO</span>
-  <h2>Culture &mdash; Values</h2>
+    <span class="badge">WHAT WE DO</span>
+    <h2>Culture &mdash; Values</h2>
   </div>
   <div class="card-grid">
     <article class="nsa-card" data-animate>
@@ -354,8 +354,8 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
 
 <section class="intel-deck" id="where-were-going">
   <div class="category-header" data-animate>
-  <span class="badge">WHERE WE ARE GOING</span>
-  <h2>Future &mdash; Opportunities</h2>
+    <span class="badge">WHERE WE ARE GOING</span>
+    <h2>Future &mdash; Opportunities</h2>
   </div>
   <div class="card-grid">
     <article class="nsa-card" data-animate>
@@ -404,8 +404,8 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
 {% if home.faq %}
 <section class="faq-section" id="faq">
   <div class="category-header" data-animate>
-  <span class="badge">FREQUENTLY ASKED QUESTIONS</span>
-  <h2>Your Questions &mdash; Our Answers</h2>
+    <span class="badge">FREQUENTLY ASKED QUESTIONS</span>
+    <h2>Your Questions &mdash; Our Answers</h2>
     <p>
       Still unsure? Ping the council on Instagram or WhatsApp and we will
       respond fast.
@@ -441,9 +441,9 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
     {% endfor %}
   </div>
 </section>
-{% endif %}
-{% set social_widgets = home.social_widgets if home.social_widgets is defined and home.social_widgets else {} %}
-{% if home.social or social_widgets %}
+{% endif %} {% set social_widgets = home.social_widgets if home.social_widgets
+is defined and home.social_widgets else {} %} {% if home.social or
+social_widgets %}
 <section class="connect-section" id="connect">
   <div class="category-header" data-animate>
     <span class="badge">CONNECT</span>
