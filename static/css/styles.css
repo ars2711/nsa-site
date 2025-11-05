@@ -1312,13 +1312,23 @@ body.light-mode .theme-toggle {
 
 /* === Uniform theme overrides === */
 /* Keep these last so they naturally override earlier specifics */
-:where(.nsa-card, .project-card, .portfolio-card, .directorate-card, .stat-card, .connect-card) {
+:where(
+    .nsa-card,
+    .project-card,
+    .portfolio-card,
+    .directorate-card,
+    .stat-card,
+    .connect-card
+  ) {
   border-radius: var(--card-radius);
   padding: var(--card-padding);
   box-shadow: var(--shadow-glow);
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   color: var(--text-primary);
   letter-spacing: -0.01em;
 }
@@ -1341,9 +1351,13 @@ h1, h2, h3, h4 {
 }
 
 /* Buttons: consistent radiuses and transitions */
-.hero-btn, .cta-button, .chip-button, .join-submit {
+.hero-btn,
+.cta-button,
+.chip-button,
+.join-submit {
   border-radius: var(--control-radius);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 /* small utility tweak for readable paragraphs */
@@ -1356,8 +1370,12 @@ p {
 .countdown-banner {
   margin: 2rem 0;
   padding: 1.25rem 1.5rem;
-  background: linear-gradient(120deg, rgba(37, 99, 235, 0.06), rgba(0, 217, 245, 0.03));
-  border: 1px solid rgba(37, 99, 235, 0.10);
+  background: linear-gradient(
+    120deg,
+    rgba(37, 99, 235, 0.06),
+    rgba(0, 217, 245, 0.03)
+  );
+  border: 1px solid rgba(37, 99, 235, 0.1);
   border-radius: var(--card-radius);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);

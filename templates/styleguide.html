@@ -1,20 +1,30 @@
-{% extends "layout.html" %}
-{% block title %}Styleguide - NSA{% endblock %}
-{% block content %}
+{% extends "layout.html" %} {% block title %}Styleguide - NSA{% endblock %} {%
+block content %}
 <section class="category-header">
   <h2>Design Tokens & Components</h2>
-  <p class="section-subtitle">Reference page to preview cards, buttons and icons using the global tokens.</p>
+  <p class="section-subtitle">
+    Reference page to preview cards, buttons and icons using the global tokens.
+  </p>
 </section>
 
 <section class="card-grid">
   <article class="nsa-card">
-    <div class="card-header"><span class="card-index">01</span><h3>Primary Card</h3></div>
-    <p class="card-info">This is the primary information card. It should reflect the global card radius and padding tokens.</p>
+    <div class="card-header">
+      <span class="card-index">01</span>
+      <h3>Primary Card</h3>
+    </div>
+    <p class="card-info">
+      This is the primary information card. It should reflect the global card
+      radius and padding tokens.
+    </p>
     <div class="card-caption">Caption / status</div>
   </article>
 
   <article class="project-card">
-    <div class="project-card__header"><h2>Project Card</h2><div class="project-status">Active</div></div>
+    <div class="project-card__header">
+      <h2>Project Card</h2>
+      <div class="project-status">Active</div>
+    </div>
     <p class="project-summary">Summary content with secondary text color.</p>
   </article>
 
@@ -25,9 +35,9 @@
   </article>
 </section>
 
-<section style="margin-top:2.5rem">
+<section style="margin-top: 2.5rem">
   <h3>Buttons</h3>
-  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem">
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem">
     <a class="hero-btn primary" href="#">Primary</a>
     <a class="hero-btn ghost" href="#">Ghost</a>
     <button class="chip-button">Copy</button>
@@ -35,9 +45,11 @@
   </div>
 </section>
 
-<section style="margin-top:2.5rem">
+<section style="margin-top: 2.5rem">
   <h3>Icons</h3>
-  <div style="display:flex;gap:1.25rem;align-items:center;margin-top:1rem">
+  <div
+    style="display: flex; gap: 1.25rem; align-items: center; margin-top: 1rem"
+  >
     <div class="directorate-icon"><i class="bi bi-cpu"></i></div>
     <div class="portfolio-icon"><i class="bi bi-gear"></i></div>
     <div class="connect-card__icon"><i class="bi bi-envelope-fill"></i></div>
