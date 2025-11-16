@@ -205,11 +205,18 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
     <h2>Building &mdash; Real Results</h2>
   </div>
   <div class="impact-grid">
-    {% for metric in home.impact %} {% set dash_total = 251.2 %} {% set
-    dash_offset = dash_total - (dash_total * (metric.value | float / 100)) %}
+    {% for metric in home.impact %} {% set circumference = 251.2 %} {% set
+    progress = (metric.value | float / 100) * circumference %} {% set
+    dash_offset = circumference - progress %}
     <div class="impact-card" data-animate>
       <div class="impact-visual">
-        <svg viewBox="0 0 100 100" class="impact-chart">
+        <svg
+          viewBox="0 0 100 100"
+          class="impact-chart"
+          role="img"
+          aria-label="{{ metric.title }}: {{ metric.value }} percent"
+        >
+          <title>{{ metric.title }}: {{ metric.value }}%</title>
           <circle
             cx="50"
             cy="50"
@@ -225,13 +232,14 @@ faq_ns.entities + [{ "@type": "Question", "name": item.question,
             fill="none"
             stroke="var(--accent-cyan)"
             stroke-width="8"
-            stroke-dasharray="{{ dash_total }}"
+            stroke-dasharray="{{ circumference }}"
             stroke-dashoffset="{{ dash_offset }}"
             transform="rotate(-90 50 50)"
             class="progress-ring"
+            stroke-linecap="round"
           />
         </svg>
-        <div class="impact-percent">{{ metric.value }}%</div>
+        <div class="impact-percent" aria-hidden="true">{{ metric.value }}%</div>
       </div>
       <h3>{{ metric.title }}</h3>
       <p>{{ metric.description }}</p>

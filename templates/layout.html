@@ -25,7 +25,7 @@
     default_keywords %} {% block page_metadata %}{% endblock %} {% if
     page_keywords is iterable and page_keywords is not string %} {% set
     page_keywords = page_keywords | join(', ') %} {% endif %} {% set og_image =
-    base_url ~ url_for('static', filename='img/og-default.svg') %}
+    base_url ~ url_for('static', filename='img/og-default.png') %}
     <title>{{ page_title }}</title>
     <meta name="description" content="{{ page_description }}" />
     <meta name="keywords" content="{{ page_keywords }}" />
@@ -231,9 +231,6 @@
           Reserved.
         </p>
         <p>Learn. Build. Evolve.</p>
-        <p>
-          <a href="{{ url_for('styleguide') }}">Styleguide</a>
-        </p>
       </div>
     </footer>
 

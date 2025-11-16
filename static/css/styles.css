@@ -99,6 +99,14 @@ body.light-mode .nav-link:hover {
   color: var(--accent-purple) !important;
 }
 
+body.light-mode .navbar-toggler {
+  border-color: rgba(15, 23, 42, 0.2);
+}
+
+body.light-mode .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(11, 22, 38, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 body.light-mode .nsa-card {
   background: var(--bg-card);
   border-color: rgba(82, 97, 255, 0.14);
@@ -125,6 +133,18 @@ body.light-mode .join-form .form-floating > textarea {
 
 body.light-mode .join-form .form-floating > label {
   color: rgba(15, 23, 42, 0.55);
+}
+
+body.light-mode .hero-btn.ghost {
+  border-color: rgba(37, 99, 235, 0.4);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+body.light-mode .hero-btn.ghost:hover {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: rgba(37, 99, 235, 0.65);
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.2);
 }
 
 /* === Particles Layer === */
@@ -596,14 +616,23 @@ a:focus-visible {
   background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
   color: #001315;
   box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.55rem;
+  line-height: 1;
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
   transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
   z-index: 1100;
+  cursor: pointer;
+}
+
+.back-to-top i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .back-to-top.visible {
@@ -929,15 +958,18 @@ body.light-mode .theme-toggle {
 }
 
 .hero-btn.ghost {
-  border: 1px solid rgba(0, 217, 245, 0.32);
+  border: 2px solid rgba(0, 217, 245, 0.42);
   color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.15);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
 .hero-btn.ghost:hover {
-  background: rgba(0, 217, 245, 0.12);
+  background: rgba(0, 217, 245, 0.18);
+  border-color: rgba(0, 217, 245, 0.65);
   transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0, 217, 245, 0.25);
 }
 
 .hero-hologram {
@@ -999,7 +1031,8 @@ body.light-mode .theme-toggle {
 
 .category-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
 }
 
 .badge {
@@ -1011,16 +1044,28 @@ body.light-mode .theme-toggle {
   color: var(--accent-blue);
   letter-spacing: 0.2em;
   font-size: 0.75rem;
+  font-weight: 600;
 }
 
 .category-header h2 {
   margin-top: 1rem;
   font-weight: 700;
   font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  line-height: 1.2;
   color: var(--text-primary);
   max-width: 32ch;
   margin-left: auto;
   margin-right: auto;
+}
+
+.section-subtitle {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 48ch;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
 .card-grid {
@@ -1278,6 +1323,10 @@ body.light-mode .theme-toggle {
     margin-top: 1rem;
   }
 
+  .terminal-hero {
+    padding: 100px 3vw 60px;
+  }
+
   .category-header h2 {
     font-size: 2rem;
   }
@@ -1288,6 +1337,18 @@ body.light-mode .theme-toggle {
 
   .join-console {
     padding: 2rem;
+  }
+
+  /* Reduce excessive section spacing on mobile */
+  .impact-section,
+  .timeline-section,
+  .team-structure-section,
+  .connect-section {
+    padding: 3rem 0;
+  }
+
+  .join-section {
+    padding: 3rem 0;
   }
 }
 
@@ -1719,6 +1780,7 @@ body.light-mode .countdown-banner {
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .impact-chart {
@@ -1727,17 +1789,19 @@ body.light-mode .countdown-banner {
   filter: drop-shadow(0 0 20px rgba(0, 245, 160, 0.3));
 }
 
-.progress-ring {
-  animation: fillProgress 2s ease-out forwards;
+.impact-percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 12px rgba(0, 245, 160, 0.5);
 }
 
-@keyframes fillProgress {
-  from {
-    stroke-dashoffset: 251.2;
-  }
-  to {
-    stroke-dashoffset: 62.8;
-  }
+.progress-ring {
+  transition: stroke-dashoffset 1.5s ease-out;
 }
 
 .impact-card h3 {
