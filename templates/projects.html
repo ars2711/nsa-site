@@ -59,6 +59,8 @@ block head_extra %} {{ super() }} {% if projects %} {% set project_items = [] %}
       class="project-card"
       data-tags="{{ project.tags | join(',') }}"
       data-animate
+      data-parallax
+      data-depth="0.09"
     >
       <header class="project-card__header">
         <h2>{{ project.title }}</h2>

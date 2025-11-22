@@ -1,0 +1,176 @@
+{% extends "layout.html" %}
+{% block title %}Edit Profile{% endblock %}
+{% block page_metadata %}
+{% set page_description = "Edit your NSA member profile" %}
+{% endblock %}
+
+{% block content %}
+<section class="edit-profile" id="edit-profile">
+  <div class="form-container">
+    <div class="form-header" data-animate>
+      <h1>Edit Profile</h1>
+      <p>Update your member information and preferences</p>
+    </div>
+
+    <form class="profile-form" data-animate data-parallax data-depth="0.08" id="profileForm">
+      <div class="form-section">
+        <h2>Basic Information</h2>
+        
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            value="{{ user.name }}" 
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            value="{{ user.email }}" 
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="bio">Bio</label>
+          <textarea 
+            id="bio" 
+            name="bio" 
+            rows="4" 
+            placeholder="Tell us about yourself, your interests, and goals..."
+          >{{ user.bio }}</textarea>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2>NSA Affiliation</h2>
+        
+        <div class="form-group">
+          <label for="wing">Wing</label>
+          <select id="wing" name="wing">
+            <option value="">Select Wing</option>
+            {% for wing in wings %}
+            <option value="{{ wing.name }}" {% if wing.name == user.wing %}selected{% endif %}>
+              {{ wing.name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="subteam">Subteam</label>
+          <select id="subteam" name="subteam">
+            <option value="">Select Subteam</option>
+            <!-- Populated dynamically based on wing selection -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="skills">Skills & Technologies</label>
+          <input 
+            type="text" 
+            id="skills" 
+            name="skills" 
+            value="{{ user.skills | join(', ') }}" 
+            placeholder="Python, React, Machine Learning, etc."
+          />
+          <small>Separate skills with commas</small>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="window.history.back()">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-check-circle"></i>
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const wingSelect = document.getElementById('wing');
+  const subteamSelect = document.getElementById('subteam');
+  const form = document.getElementById('profileForm');
+
+  // Wing to subteam mapping
+  const wingSubteams = {
+    {% for wing in wings %}
+    "{{ wing.name }}": [
+      {% for subteam in wing.subteams %}
+      "{{ subteam.name }}"{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]{% if not loop.last %},{% endif %}
+    {% endfor %}
+  };
+
+  // Update subteams when wing changes
+  wingSelect.addEventListener('change', function() {
+    const selectedWing = this.value;
+    subteamSelect.innerHTML = '<option value="">Select Subteam</option>';
+    
+    if (selectedWing && wingSubteams[selectedWing]) {
+      wingSubteams[selectedWing].forEach(function(subteam) {
+        const option = document.createElement('option');
+        option.value = subteam;
+        option.textContent = subteam;
+        subteamSelect.appendChild(option);
+      });
+    }
+  });
+
+  // Initialize subteams for current wing
+  if (wingSelect.value) {
+    wingSelect.dispatchEvent(new Event('change'));
+    subteamSelect.value = "{{ user.subteam }}";
+  }
+
+  // Handle form submission
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Convert skills to array
+    if (data.skills) {
+      data.skills = data.skills.split(',').map(s => s.trim()).filter(Boolean);
+    }
+
+    try {
+      const response = await fetch('{{ url_for("update_profile") }}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+      
+      if (result.status === 'success') {
+        // Show success message and redirect
+        alert('Profile updated successfully!');
+        window.location.href = '{{ url_for("profile") }}';
+      } else {
+        alert('Error updating profile: ' + result.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error updating profile. Please try again.');
+    }
+  });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,205 @@
+{% extends "layout.html" %} {% block title %}Admin Portal - NSA{% endblock %} {%
+block page_metadata %} {% set page_description = "Manage NSA access, review
+passkey adoption, and track OAuth telemetry from a single secure console." %} {%
+set page_keywords = default_keywords + ["NSA admin", "NSA portal", "OAuth",
+"Passkeys", "Security console"] %} {% endblock %} {% block content %}
+<section class="page-hero admin-hero">
+  <div class="page-hero__inner" data-animate>
+    <span class="badge">ADMIN PORTAL</span>
+    <h1>Secure operations for NSA council.</h1>
+    <p>
+      Launch OAuth handshakes, enroll passkeys, and track live telemetry before
+      unlocking the internal dashboards. This surface mirrors what goes live on
+      the public home page, so you can test flows without risking production.
+    </p>
+    <div class="hero-actions">
+      <a class="hero-btn primary" href="{{ url_for('index') }}#access"
+        >Preview public console</a
+      >
+      <a class="hero-btn ghost" href="#admin-access">Open mission access</a>
+    </div>
+  </div>
+</section>
+
+{% if stats_cards %}
+<section class="stats-showcase" data-animate>
+  <div class="stats-grid">
+    {% for card in stats_cards %}
+    <div class="stat-card" data-animate>
+      <div class="stat-icon" aria-hidden="true">
+        <i class="bi {{ card.icon }}"></i>
+      </div>
+      <div class="stat-number">{{ card.value }}</div>
+      <div class="stat-label">{{ card.label }}</div>
+      {% if card.description %}
+      <p class="stat-description">{{ card.description }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %} {% set console = access_console if access_console is defined and
+access_console else None %} {% if console %}
+<section class="access-console admin-access" id="admin-access">
+  <div class="category-header" data-animate>
+    <span class="badge">MISSION ACCESS</span>
+    <h2>{{ console.headline or "Mission Access Console" }}</h2>
+    {% if console.subheadline %}
+    <p class="section-subtitle">{{ console.subheadline }}</p>
+    {% endif %}
+  </div>
+  <div class="access-grid">
+    <article class="auth-card" data-animate data-parallax data-depth="0.22">
+      <header class="auth-card__header">
+        <p>
+          Use the same OAuth surface the public site exposes. Click a provider
+          to hit the stub endpoint.
+        </p>
+      </header>
+      {% if console.providers %}
+      <div class="provider-grid">
+        {% for provider in console.providers %}
+        <button
+          class="provider-button"
+          type="button"
+          data-auth-provider="{{ provider.slug }}"
+        >
+          <span class="provider-icon" aria-hidden="true">
+            {% if provider.icon %}
+            <i class="bi {{ provider.icon }}"></i>
+            {% else %}
+            <i class="bi bi-shield-lock"></i>
+            {% endif %}
+          </span>
+          <div class="provider-copy">
+            <span class="provider-name">{{ provider.name }}</span>
+            {% if provider.hint %}
+            <span class="provider-hint">{{ provider.hint }}</span>
+            {% endif %}
+          </div>
+          <span class="provider-cta">{{ provider.cta or 'Continue' }}</span>
+        </button>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="auth-status" data-auth-status aria-live="polite">
+        Awaiting provider selection.
+      </div>
+      {% if console.support_note %}
+      <footer class="auth-card__footer">
+        <small>{{ console.support_note }}</small>
+      </footer>
+      {% endif %}
+    </article>
+    <div class="access-stack">
+      {% if console.passkeys %}
+      <article
+        class="passkey-card"
+        data-animate
+        data-parallax
+        data-depth="0.16"
+      >
+        <header class="passkey-card__header">
+          <span class="badge">PASSKEYS</span>
+          <h3>{{ console.passkeys.title }}</h3>
+        </header>
+        <p class="passkey-copy">{{ console.passkeys.description }}</p>
+        {% if console.passkeys.capabilities %}
+        <ul class="passkey-capabilities">
+          {% for capability in console.passkeys.capabilities %}
+          <li>
+            <i class="bi bi-shield-check" aria-hidden="true"></i>
+            <span>{{ capability }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <button
+          class="chip-button primary passkey-trigger"
+          type="button"
+          data-passkey-button
+          data-default-label="{{ console.passkeys.cta }}"
+        >
+          {{ console.passkeys.cta }}
+        </button>
+        {% if console.passkeys.support_copy %}
+        <p class="passkey-support">{{ console.passkeys.support_copy }}</p>
+        {% endif %}
+      </article>
+      {% endif %} {% if console.telemetry %}
+      <article
+        class="telemetry-card"
+        data-animate
+        data-parallax
+        data-depth="0.12"
+      >
+        <header>
+          <h3>Live Telemetry</h3>
+        </header>
+        <div class="telemetry-feed">
+          {% for entry in console.telemetry %}
+          <div class="telemetry-row">
+            <div>
+              <span class="telemetry-label">{{ entry.label }}</span>
+              <span class="telemetry-time">{{ entry.timestamp }}</span>
+            </div>
+            <span class="telemetry-value">{{ entry.value }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </article>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="admin-audit" data-animate>
+  <div class="category-header">
+    <span class="badge">RUNBOOK</span>
+    <h2>Operational guardrails</h2>
+    <p class="section-subtitle">
+      Reference checks for launch windows, people ops, and infrastructure before
+      elevating permissions.
+    </p>
+  </div>
+  <div class="admin-grid">
+    <article class="admin-card">
+      <h3>Access Reviews</h3>
+      <p>
+        Audit OAuth roles weekly. Remove dormant devices and confirm passkey
+        ownership with the council.
+      </p>
+      <ul>
+        <li>Export device ledger from Firebase Auth</li>
+        <li>Rotate client secrets quarterly</li>
+        <li>Log approvals inside Notion HQ</li>
+      </ul>
+    </article>
+    <article class="admin-card">
+      <h3>Incident Playbooks</h3>
+      <p>
+        Each product squad keeps a breach script. If a token leaks, revoke it
+        from the provider dashboard immediately.
+      </p>
+      <ul>
+        <li>Have a backup comms channel</li>
+        <li>Notify partnerships within 1 hour</li>
+        <li>File learnings in the ops archive</li>
+      </ul>
+    </article>
+    <article class="admin-card">
+      <h3>Deploy Checklist</h3>
+      <p>
+        Before flipping features live ensure the static export passes,
+        environment secrets stay encrypted, and logging is quiet.
+      </p>
+      <ul>
+        <li>Run <code>build_static.py</code></li>
+        <li>Validate sitemap + robots</li>
+        <li>Update OG media if hero changes</li>
+      </ul>
+    </article>
+  </div>
+</section>
+{% endblock %}

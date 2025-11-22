@@ -1,9 +1,73 @@
 {
+  "access": {
+    "headline": "Mission Access Console",
+    "subheadline": "Single sign-on for council members, researchers, and operators. Use OAuth or hardware-backed passkeys to reach the admin surface in seconds.",
+    "providers": [
+      {
+        "name": "Google",
+        "slug": "google",
+        "icon": "bi-google",
+        "hint": "Recommended for @nust.edu.pk addresses",
+        "cta": "Continue with Google"
+      },
+      {
+        "name": "Apple",
+        "slug": "apple",
+        "icon": "bi-apple",
+        "hint": "Use Face ID, Touch ID, or passcode backed accounts",
+        "cta": "Sign in with Apple"
+      },
+      {
+        "name": "Microsoft",
+        "slug": "microsoft",
+        "icon": "bi-microsoft",
+        "hint": "Connect NUST Office 365 tenants instantly",
+        "cta": "Continue with Microsoft"
+      },
+      {
+        "name": "GitHub",
+        "slug": "github",
+        "icon": "bi-github",
+        "hint": "Best for engineers linking repos and CI",
+        "cta": "Authorize with GitHub"
+      }
+    ],
+    "passkeys": {
+      "title": "Passkeys & Biometrics",
+      "description": "Register once, then unlock with Face ID, Touch ID, Windows Hello, or a YubiKey. Zero passwords, zero phishing.",
+      "cta": "Enable passkey",
+      "capabilities": [
+        "Face ID & Touch ID",
+        "Windows Hello & Surface pen",
+        "Android fingerprint / Pixel face unlock",
+        "YubiKey & Titan keys"
+      ],
+      "support_copy": "Passkeys sync with iCloud Keychain, Google Password Manager, and 1Password."
+    },
+    "telemetry": [
+      {
+        "label": "Last audit",
+        "value": "0 critical alerts",
+        "timestamp": "6 min ago"
+      },
+      {
+        "label": "Active sessions",
+        "value": "12 secure devices",
+        "timestamp": "Live"
+      },
+      {
+        "label": "MFA coverage",
+        "value": "98% enforced",
+        "timestamp": "Today"
+      }
+    ],
+    "support_note": "Need another provider or SSO hookup? Ping security@nsa.pk."
+  },
   "timeline": [
     {
-      "title": "Rolling Recruitment Windows",
-      "period": "All year",
-      "description": "Submit your profile and we will route it to the right wing in under 72 hours.",
+      "title": "Hit Send. We Reply Fast.",
+      "period": "Year-round",
+      "description": "Fill the form, attach your work, tell us your vibe. Our wing leads review every application and route you to the right squad within 72 hours. No black boxes, no ghosting.",
       "icon": "bi-rocket-takeoff",
       "cta": {
         "label": "Start Application",
@@ -11,23 +75,23 @@
       }
     },
     {
-      "title": "Squad Conversations",
-      "period": "Weekly cohorts",
-      "description": "Meet wing leads for focused chats about your skills, goals, and preferred teams.",
+      "title": "Real Talk with Squad Leads",
+      "period": "Week 1-2",
+      "description": "Forget HR scripts. You'll sit down (virtually or IRL) with actual builders who run the wing you're joining. They want to know what you geek out on, where you see yourself, and if the squad's mission clicks for you.",
       "icon": "bi-people",
       "cta": null
     },
     {
-      "title": "Shadow Sprints",
-      "period": "First month",
-      "description": "Join active missions with mentors so you can learn the operating rhythm on the job.",
+      "title": "Shadow Mode: Learn by Doing",
+      "period": "First 4 weeks",
+      "description": "You're not sitting in onboarding hell watching slides. From day one, you're paired with a mentor and thrown into live projects. Break things, ship fixes, ask dumb questions — that's how you learn our cadence.",
       "icon": "bi-lightning-charge",
       "cta": null
     },
     {
-      "title": "Launch Reviews",
-      "period": "Quarterly",
-      "description": "Showcase progress, ship demos, and plan the next wave of projects with the core council.",
+      "title": "Ship Something. Show Everyone.",
+      "period": "Every quarter",
+      "description": "Launch reviews are where you present what you built, what you learned, and what's next. The whole council watches. The feedback is direct. The recognition is real. Then you level up and do it again.",
       "icon": "bi-bar-chart"
     }
   ],

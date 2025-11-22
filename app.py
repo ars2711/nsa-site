@@ -1,11 +1,12 @@
 from collections import Counter
 from datetime import datetime
+import hashlib
 import json
 import re
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
-from flask import Flask, Response, render_template, url_for
+from flask import Flask, Response, jsonify, render_template, request, url_for
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
@@ -607,6 +608,49 @@ def normalise_links(raw: Any) -> Dict[str, str]:
     return cleaned
 
 
+def derive_initials(name: str) -> str:
+    parts = [segment.strip() for segment in name.split() if segment.strip()]
+    letters = [part[0] for part in parts[:2]]
+    return "".join(letters).upper() or "NSA"
+
+
+def compute_color_hue(seed: str) -> int:
+    digest = hashlib.sha256(seed.encode("utf-8")).hexdigest()
+    return int(digest[:6], 16) % 360
+
+
+def determine_hierarchy_band(role: str) -> Tuple[str, str, int]:
+    role_lower = role.lower()
+    if any(keyword in role_lower for keyword in ("president", "general secretary", "treasurer")):
+        return "command", "Command Council", 0
+    if "director" in role_lower:
+        return "directorate", "Directorate", 1
+    if "deputy" in role_lower:
+        return "deputy", "Deputy Squad", 2
+    if "executive" in role_lower:
+        return "executive", "Executive Pod", 3
+    return "member", "Core Member", 4
+
+
+def format_display_date(value: Optional[str], output_format: str) -> str:
+    if not value:
+        return ""
+    candidates = ["%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y"]
+    parsed: Optional[datetime] = None
+    for pattern in candidates:
+        try:
+            parsed = datetime.strptime(value, pattern)
+            break
+        except ValueError:
+            continue
+    if not parsed:
+        try:
+            parsed = datetime.fromisoformat(value)
+        except ValueError:
+            return value
+    return parsed.strftime(output_format)
+
+
 SLUG_PATTERN = re.compile(r"[^a-z0-9]+")
 
 
@@ -694,8 +738,11 @@ def enrich_member(entry: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     links = normalise_links(entry.get("links"))
     bio = (entry.get("bio") or "").strip()
     email = (entry.get("email") or "").strip()
+    image = (entry.get("image") or "").strip()
     role_priority = ROLE_PRIORITY.get(role, len(ROLE_PRIORITY) + 1)
     wing_order = WING_ORDER.get(wing_name, len(WING_ORDER) + 1)
+    hierarchy_band, hierarchy_label, hierarchy_rank = determine_hierarchy_band(role)
+    color_hue = compute_color_hue(name)
     return {
         "name": name,
         "role": role,
@@ -706,9 +753,15 @@ def enrich_member(entry: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         "subteam": subteam_name,
         "bio": bio,
         "email": email,
+        "image": image,
         "links": links,
         "role_priority": role_priority,
         "wing_priority": wing_order,
+        "hierarchy_band": hierarchy_band,
+        "hierarchy_label": hierarchy_label,
+        "hierarchy_rank": hierarchy_rank,
+        "color_hue": color_hue,
+        "initials": derive_initials(name),
         "slug": slugify(name),
     }
 
@@ -903,6 +956,7 @@ def load_home_data() -> Dict[str, Any]:
     raw.setdefault("portfolios", [])
     raw.setdefault("social", [])
     raw.setdefault("social_widgets", {})
+    raw.setdefault("access", {})
     if not isinstance(raw["social_widgets"], dict):
         raw["social_widgets"] = {}
     return raw
@@ -983,6 +1037,8 @@ HOME_STATS_LAYOUT = [
     },
 ]
 
+SUPPORTED_OAUTH_PROVIDERS = {"google", "apple", "microsoft", "github"}
+
 
 def derive_home_stats(members: List[Dict[str, Any]], projects: List[Dict[str, Any]]) -> Dict[str, int]:
     events_capacity = 0
@@ -1041,6 +1097,121 @@ def index() -> str:
     )
 
 
+@app.route("/admin")
+def admin_portal() -> str:
+    home = load_home_data()
+    projects = load_projects_data()
+    team_data = load_team_data()
+    stats = derive_home_stats(team_data["members"], projects)
+    return render_template(
+        "admin.html",
+        access_console=home.get("access", {}),
+        stats_cards=compose_home_stat_cards(stats),
+        structured_people=team_data["structured_people"],
+    )
+
+
+@app.route("/auth/provider/<provider>", methods=["POST"])
+def auth_provider(provider: str) -> Response:
+    provider_slug = (provider or "").lower()
+    if provider_slug not in SUPPORTED_OAUTH_PROVIDERS:
+        return jsonify({"status": "error", "message": "Provider not supported"}), 400
+    redirect_target = f"https://example.com/oauth/{provider_slug}"
+    return jsonify(
+        {
+            "status": "ok",
+            "provider": provider_slug,
+            "redirect": redirect_target,
+            "message": f"Simulated {provider_slug.title()} OAuth handshake created.",
+        }
+    )
+
+
+@app.route("/auth/passkey", methods=["POST"])
+def register_passkey() -> Response:
+    payload = request.get_json(silent=True) or {}
+    alias = payload.get("alias") or "Secure Device"
+    return jsonify(
+        {
+            "status": "ok",
+            "alias": alias,
+            "message": "Passkey registered (demo stub). Biometrics stay local.",
+        }
+    )
+
+
+@app.route("/profile")
+def profile() -> str:
+    """User profile dashboard."""
+    # Mock user data - in production, fetch from database
+    user_data = {
+        "name": "John Doe",
+        "email": "john.doe@nust.edu.pk",
+        "role": "Member",
+        "wing": "Tech Wing",
+        "subteam": "Unit Software Development",
+        "joined_date": "2024-01-15",
+        "bio": "Full-stack developer passionate about AI applications in web development.",
+        "skills": ["Python", "React", "Machine Learning", "DevOps"],
+        "projects": [
+            {"name": "NSA Website", "role": "Lead Developer", "status": "Completed"},
+            {"name": "AI Assistant Bot", "role": "Backend Developer", "status": "In Progress"}
+        ],
+        "achievements": [
+            {"title": "First Place - Hackathon 2024", "date": "2024-03-15"},
+            {"title": "Published Research Paper", "date": "2024-02-01"}
+        ]
+    }
+    user_data["joined_date_display"] = format_display_date(user_data.get("joined_date"), "%B %Y")
+    for achievement in user_data.get("achievements", []):
+        achievement["date_display"] = format_display_date(achievement.get("date"), "%B %d, %Y")
+    return render_template("profile.html", user=user_data)
+
+
+@app.route("/profile/edit")
+def edit_profile() -> str:
+    """Edit user profile form."""
+    user_data = {
+        "name": "John Doe",
+        "email": "john.doe@nust.edu.pk",
+        "bio": "Full-stack developer passionate about AI applications in web development.",
+        "skills": ["Python", "React", "Machine Learning", "DevOps"],
+        "wing": "Tech Wing",
+        "subteam": "Unit Software Development"
+    }
+    team_data = load_team_data()
+    return render_template("profile_edit.html", user=user_data, wings=team_data["wings"])
+
+
+@app.route("/profile/update", methods=["POST"])
+def update_profile() -> Response:
+    """Handle profile updates."""
+    data = request.get_json(silent=True) or request.form.to_dict()
+    # In production, update database with user data
+    return jsonify({
+        "status": "success",
+        "message": "Profile updated successfully!",
+        "data": data
+    })
+
+
+@app.route("/member/<slug>")
+def member_profile(slug: str) -> str:
+    """Public member profile page."""
+    team_data = load_team_data()
+    member = None
+    for m in team_data["members"]:
+        if m.get("slug") == slug:
+            member = m
+            break
+    
+    if not member:
+        # Return 404 or redirect
+        return render_template("404.html"), 404
+    
+    return render_template("member_public.html", member=member)
+
+
 @app.route("/projects")
 def projects() -> str:
     projects = load_projects_data()
@@ -1051,12 +1222,29 @@ def projects() -> str:
 @app.route("/team")
 def team() -> str:
     team_data = load_team_data()
+    members = team_data["members"]
+    leadership = sorted(
+        [
+            member
+            for member in members
+            if member.get("hierarchy_band") in {"command", "directorate"}
+        ],
+        key=lambda m: (m.get("hierarchy_rank", 5), m.get("role_priority", 99), m["name"].lower()),
+    )[:6]
+    metrics = {
+        "members": len(members),
+        "wings": len(team_data["wings"]),
+        "directors": sum(1 for member in members if member.get("hierarchy_band") in {"command", "directorate"}),
+        "executives": sum(1 for member in members if "executive" in member.get("role", "").lower()),
+    }
     return render_template(
         "team.html",
-        members=team_data["members"],
+        members=members,
         wings=team_data["wings"],
         filters=team_data["filters"],
         structured_people=team_data["structured_people"],
+        metrics=metrics,
+        leadership=leadership,
     )
 
 
@@ -1114,4 +1302,6 @@ def sitemap_xml() -> Response:
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    debug_mode = os.environ.get('FLASK_ENV') != 'production'
+    app.run(debug=debug_mode)

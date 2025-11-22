@@ -1,0 +1,80 @@
+{% extends "layout.html" %} {% block title %}{{ member.name }} - Member
+Profile{% endblock %} {% block page_metadata %} {% set page_description =
+member.name + " | " + member.role + " at NSA" %} {% endblock %} {% block content
+%}
+<section class="member-profile" id="member">
+  <div class="profile-container">
+    <div class="member-card" data-animate data-parallax data-depth="0.1">
+      <div class="member-avatar">
+        <div class="avatar-placeholder">
+          <i class="bi bi-person-circle"></i>
+        </div>
+      </div>
+      <div class="member-info">
+        <h1>{{ member.name }}</h1>
+        <p class="member-role">{{ member.role }}</p>
+        {% if member.dept %}
+        <p class="member-dept">{{ member.dept }}</p>
+        {% endif %} {% if member.wing %}
+        <p class="member-wing">{{ member.wing }}</p>
+        {% endif %} {% if member.subteam %}
+        <p class="member-subteam">{{ member.subteam }}</p>
+        {% endif %} {% if member.bio %}
+        <p class="member-bio">{{ member.bio }}</p>
+        {% endif %}
+      </div>
+      <div class="member-actions">
+        {% if member.email %}
+        <a href="mailto:{{ member.email }}" class="btn btn-primary">
+          <i class="bi bi-envelope"></i>
+          Contact
+        </a>
+        {% endif %} {% for platform, url in member.links.items() %}
+        <a
+          href="{{ url }}"
+          target="_blank"
+          rel="noopener"
+          class="btn btn-ghost"
+        >
+          <i class="bi bi-{{ platform }}"></i>
+          {{ platform.title() }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if member.focus %}
+<section class="member-focus" id="focus">
+  <div class="section-container">
+    <h2 data-animate>Focus Areas</h2>
+    <div class="focus-grid">
+      {% for focus in member.focus %}
+      <span class="focus-tag" data-animate data-parallax data-depth="0.05">
+        {{ focus }}
+      </span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="member-navigation" id="navigation">
+  <div class="section-container">
+    <div class="nav-actions" data-animate>
+      <a href="{{ url_for('team') }}" class="btn btn-ghost">
+        <i class="bi bi-arrow-left"></i>
+        Back to Team Directory
+      </a>
+      <a
+        href="{{ url_for('team') }}#{{ member.wing | slugify }}"
+        class="btn btn-primary"
+      >
+        <i class="bi bi-people"></i>
+        View {{ member.wing }} Team
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

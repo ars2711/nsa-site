@@ -1,0 +1,109 @@
+{% extends "layout.html" %} {% block title %}{{ user.name }} - Profile{%
+endblock %} {% block page_metadata %} {% set page_description = user.name + " |
+NSA Member Profile" %} {% endblock %} {% block content %}
+<section class="profile-header" id="profile">
+  <div class="profile-container">
+    <div class="profile-card" data-animate data-parallax data-depth="0.1">
+      <div class="profile-avatar">
+        <div class="avatar-placeholder">
+          <i class="bi bi-person-circle"></i>
+        </div>
+      </div>
+      <div class="profile-info">
+        <h1>{{ user.name }}</h1>
+        <p class="profile-role">
+          {{ user.role }}{% if user.wing %} • {{ user.wing }}{% endif %}
+        </p>
+        {% if user.subteam %}
+        <p class="profile-subteam">{{ user.subteam }}</p>
+        {% endif %} {% if user.bio %}
+        <p class="profile-bio">{{ user.bio }}</p>
+        {% endif %}
+        <div class="profile-meta">
+          <span class="profile-joined"
+            >Joined {{ user.joined_date_display or user.joined_date }}</span
+          >
+          {% if user.email %}
+          <a href="mailto:{{ user.email }}" class="profile-email">
+            <i class="bi bi-envelope"></i>
+            Contact
+          </a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="profile-actions">
+        <a href="{{ url_for('edit_profile') }}" class="btn btn-primary">
+          <i class="bi bi-pencil"></i>
+          Edit Profile
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if user.skills %}
+<section class="profile-skills" id="skills">
+  <div class="section-container">
+    <h2 data-animate>Skills & Expertise</h2>
+    <div class="skills-grid">
+      {% for skill in user.skills %}
+      <span class="skill-tag" data-animate data-parallax data-depth="0.05">
+        {{ skill }}
+      </span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %} {% if user.projects %}
+<section class="profile-projects" id="projects">
+  <div class="section-container">
+    <h2 data-animate>Projects</h2>
+    <div class="projects-list">
+      {% for project in user.projects %}
+      <article
+        class="project-item"
+        data-animate
+        data-parallax
+        data-depth="0.07"
+      >
+        <div class="project-header">
+          <h3>{{ project.name }}</h3>
+          <span
+            class="project-status status-{{ project.status | lower | replace(' ', '-') }}"
+          >
+            {{ project.status }}
+          </span>
+        </div>
+        <p class="project-role">{{ project.role }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %} {% if user.achievements %}
+<section class="profile-achievements" id="achievements">
+  <div class="section-container">
+    <h2 data-animate>Achievements</h2>
+    <div class="achievements-list">
+      {% for achievement in user.achievements %}
+      <article
+        class="achievement-item"
+        data-animate
+        data-parallax
+        data-depth="0.06"
+      >
+        <div class="achievement-icon">
+          <i class="bi bi-trophy"></i>
+        </div>
+        <div class="achievement-content">
+          <h3>{{ achievement.title }}</h3>
+          <time class="achievement-date" datetime="{{ achievement.date }}"
+            >{{ achievement.date_display or achievement.date }}</time
+          >
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %} {% endblock %}

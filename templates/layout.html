@@ -38,14 +38,76 @@
     <meta name="author" content="NUST Society of Artificial Intelligence" />
     <meta name="language" content="English" />
     <meta name="geo.region" content="PK-IS" />
+    <meta name="geo.placename" content="Islamabad, Pakistan" />
+    <meta name="geo.position" content="33.6844;73.0479" />
+    <meta name="ICBM" content="33.6844, 73.0479" />
     <meta name="distribution" content="global" />
     <meta name="format-detection" content="telephone=no" />
-    <meta name="theme-color" content="#020617" />
-    <link rel="canonical" href="{{ canonical_url }}" />
+    <meta name="theme-color" content="#7c3aed" />
+    <meta name="msapplication-TileColor" content="#7c3aed" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <!-- Structured Data for Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "NUST Society of Artificial Intelligence",
+        "alternateName": "NSA",
+        "url": "{{ base_url }}",
+        "logo": "{{ base_url }}{{ url_for('static', filename='img/logo.png') }}",
+        "description": "{{ default_description }}",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Islamabad",
+          "addressCountry": "PK"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "general",
+          "email": "info@nust-nsa.com"
+        },
+        "foundingDate": "2020",
+        "memberOf": {
+          "@type": "Organization",
+          "name": "National University of Sciences and Technology"
+        },
+        "sameAs": [
+          "https://github.com/nust-nsa",
+          "https://linkedin.com/company/nust-nsa",
+          "https://instagram.com/nust.nsa"
+        ]
+      }
+    </script>
     <link rel="alternate" hreflang="en-PK" href="{{ canonical_url }}" />
     <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}" />
     <meta property="og:locale" content="en_PK" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NSA - NUST Society of AI" />
+    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:description" content="{{ page_description }}" />
+    <meta property="og:url" content="{{ canonical_url }}" />
+    <meta property="og:image" content="{{ og_image }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="NSA - Pakistan's Leading AI Student Society"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@NUST_NSA" />
+    <meta name="twitter:creator" content="@NUST_NSA" />
+    <meta name="twitter:title" content="{{ page_title }}" />
+    <meta name="twitter:description" content="{{ page_description }}" />
+    <meta name="twitter:image" content="{{ og_image }}" />
+    <meta
+      name="twitter:image:alt"
+      content="NSA - Pakistan's Leading AI Student Society"
+    />
     <meta
       property="og:site_name"
       content="NUST Society of Artificial Intelligence (NSA)"

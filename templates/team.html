@@ -14,180 +14,180 @@ ambitious student AI community." %} {% set page_keywords = default_keywords + [
   } | tojson | safe }}
 </script>
 {% endif %} {% endblock %} {% block content %}
-<section class="page-hero">
-  <div class="page-hero__inner" data-animate>
-    <span class="badge">TEAM</span>
+<section class="team-hero">
+  <div class="team-hero__content" data-animate>
+    <span class="badge">THE SQUAD</span>
     <h1>Leads, Builders, Operators</h1>
-    <p>
-      Meet the humans behind the missions. Edit <code>data/team.json</code> to
-      update this roster.
+    <p class="lead">
+      The engineers, researchers, and operators powering Pakistan's most
+      ambitious AI community.
+      <br />Meet the humans behind the missions.
     </p>
-    <p>
-      Looking for your next challenge? Browse our
-      <a href="{{ url_for('projects') }}">AI project pipeline</a> or read the
-      <a href="{{ url_for('index') }}#recruitment-timeline"
-        >recruitment timeline</a
-      >
-      to see where you fit best.
-    </p>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-number">{{ metrics.members }}</span>
+        <span class="stat-label">Active Members</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">{{ metrics.directors }}</span>
+        <span class="stat-label">Directors</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">{{ metrics.wings }}</span>
+        <span class="stat-label">Specialized Wings</span>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="projects-section" id="team-directory" data-filter-scope="team">
+{% if leadership %}
+<section class="leadership-spotlight">
+  <div class="section-header" data-animate>
+    <span class="badge">COMMAND</span>
+    <h2>Council & Directorate</h2>
+    <p>The core leadership driving NSA's strategic vision and operations.</p>
+  </div>
+  <div class="spotlight-grid">
+    {% for leader in leadership %}
+    <article
+      class="spotlight-card"
+      data-animate
+      data-parallax
+      data-depth="0.05"
+    >
+      <div class="spotlight-header"></div>
+      <div class="spotlight-avatar">
+        {% if leader.image %}
+        <img src="{{ leader.image }}" alt="{{ leader.name }}" />
+        {% else %}
+        <div class="initials">{{ leader.initials }}</div>
+        {% endif %}
+      </div>
+      <div class="spotlight-content">
+        <span
+          class="role-badge {% if leader.hierarchy_band == 'command' %}lead{% else %}core{% endif %}"
+        >
+          {{ leader.role }}
+        </span>
+        <h3>{{ leader.name }}</h3>
+        <p class="spotlight-bio">
+          {{ leader.bio or "Leading initiatives and empowering teams at NSA." }}
+        </p>
+        <div class="spotlight-footer">
+          <div class="social-links">
+            {% if leader.links.linkedin %}
+            <a
+              href="{{ leader.links.linkedin }}"
+              target="_blank"
+              class="social-link"
+              ><i class="bi bi-linkedin"></i
+            ></a>
+            {% endif %} {% if leader.links.github %}
+            <a
+              href="{{ leader.links.github }}"
+              target="_blank"
+              class="social-link"
+              ><i class="bi bi-github"></i
+            ></a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="team-metrics">
+  <div class="metrics-grid">
+    <div class="metric-card" data-animate>
+      <div class="metric-icon"><i class="bi bi-people"></i></div>
+      <h3>{{ metrics.members }}+</h3>
+      <p>Active Contributors</p>
+    </div>
+    <div class="metric-card" data-animate data-delay="100">
+      <div class="metric-icon"><i class="bi bi-diagram-3"></i></div>
+      <h3>{{ metrics.wings }}</h3>
+      <p>Specialized Wings</p>
+    </div>
+    <div class="metric-card" data-animate data-delay="200">
+      <div class="metric-icon"><i class="bi bi-trophy"></i></div>
+      <h3>{{ metrics.executives }}</h3>
+      <p>Executive Leads</p>
+    </div>
+    <div class="metric-card" data-animate data-delay="300">
+      <div class="metric-icon"><i class="bi bi-lightning"></i></div>
+      <h3>24/7</h3>
+      <p>Innovation Cycle</p>
+    </div>
+  </div>
+</section>
+
+<section class="team-directory" id="team-directory" data-filter-scope="team">
+  <div class="section-header" data-animate>
+    <span class="badge">ROSTER</span>
+    <h2>Full Team Directory</h2>
+  </div>
+
   <div class="projects-toolbar" data-animate>
     <div class="team-search">
       <label for="teamSearch" class="sr-only">Search team</label>
-      <input
-        type="search"
-        id="teamSearch"
-        class="team-search__input"
-        placeholder="Search by name, role, wing, or focus"
-      />
-    </div>
-    <div class="team-filters">
-      <button
-        class="filter-chip is-active"
-        data-filter="all"
-        aria-pressed="true"
-      >
-        All
-      </button>
-      {% for f in filters %}
-      <button
-        class="filter-chip"
-        data-filter="{{ f.slug }}"
-        aria-pressed="false"
-      >
-        {{ f.label }}{% if f.count %}<span class="filter-count"
-          >{{ f.count }}</span
-        >{% endif %}
-      </button>
-      {% endfor %}
+      <div class="search-wrapper">
+        <i class="bi bi-search"></i>
+        <input
+          type="search"
+          id="teamSearch"
+          class="team-search__input"
+          placeholder="Search by name, role, wing..."
+        />
+      </div>
     </div>
   </div>
 
-  <div class="project-grid">
+  <div class="directory-grid">
     {% for m in members %} {% set tag_tokens = (m.focus_tokens | default([],
     true)) %} {% if m.wing %}{% set tag_tokens = tag_tokens + [m.wing|lower]
     %}{% endif %} {% if m.subteam %}{% set tag_tokens = tag_tokens +
     [m.subteam|lower] %}{% endif %}
     <article
-      class="project-card"
+      class="member-card"
       data-tags="{{ tag_tokens | join(',') }}"
       data-wing="{{ m.wing | default('') }}"
       data-subteam="{{ m.subteam | default('') }}"
       data-animate
     >
-      <header class="project-card__header">
-        <h2>{{ m.name }}</h2>
-        <span class="project-status">{{ m.role }}</span>
-      </header>
-      {% if m.bio %}
-      <p class="project-summary">{{ m.bio }}</p>
-      {% endif %} {% if m.dept or m.email or m.focus %}
-      <dl class="project-meta">
-        {% if m.dept %}
-        <div>
-          <dt>Department</dt>
-          <dd>{{ m.dept }}</dd>
-        </div>
-        {% endif %} {% if m.email %}
-        <div>
-          <dt>Email</dt>
-          <dd><a href="mailto:{{ m.email }}">{{ m.email }}</a></dd>
-        </div>
-        {% endif %} {% if m.focus %}
-        <div>
-          <dt>Focus</dt>
-          <dd>
-            {% for tag in m.focus %}
-            <span class="tag-pill">{{ tag }}</span>
-            {% endfor %}
-          </dd>
-        </div>
-        {% endif %}
-      </dl>
-      {% endif %} {% if m.links.github or m.links.linkedin %}
-      <div class="project-links">
-        {% if m.links.github %}
-        <a
-          class="project-link"
-          href="{{ m.links.github }}"
-          target="_blank"
-          rel="noopener"
-          >GitHub</a
-        >
-        {% endif %} {% if m.links.linkedin %}
-        <a
-          class="project-link"
-          href="{{ m.links.linkedin }}"
-          target="_blank"
-          rel="noopener"
-          >LinkedIn</a
-        >
+      <div class="member-avatar-small">
+        {% if m.image %}
+        <img src="{{ m.image }}" alt="{{ m.name }}" />
+        {% else %}
+        <div class="initials">{{ m.initials }}</div>
         {% endif %}
       </div>
+      <div class="member-info">
+        <h3>{{ m.name }}</h3>
+        <span class="member-role">{{ m.role }}</span>
+      </div>
+
+      <div class="member-tags">
+        {% if m.wing %}
+        <span class="tag-pill">{{ m.wing }}</span>
+        {% endif %}
+      </div>
+
+      {% if m.links.linkedin or m.links.github %}
+      <a
+        href="{{ m.links.linkedin or m.links.github }}"
+        target="_blank"
+        class="member-link"
+      >
+        View Profile
+      </a>
       {% endif %}
     </article>
     {% endfor %}
   </div>
   <p class="projects-empty" hidden>No profiles match this filter.</p>
 </section>
-{% if wings %}
-<section class="team-structure" id="team-structure">
-  <div class="page-hero__inner" data-animate>
-    <span class="badge">STRUCTURE</span>
-    <h2>Wings, Subteams, and Leads</h2>
-    <p>
-      Use this map to understand reporting lines and find the councils you will
-      collaborate with.
-    </p>
-  </div>
-  <div class="team-structure__grid">
-    {% for wing in wings %}
-    <article class="team-wing" id="{{ wing.slug }}" data-animate>
-      <header class="team-wing__header">
-        <div>
-          <h3>{{ wing.name }}</h3>
-          {% if wing.lead_note %}
-          <p class="team-wing__note">{{ wing.lead_note }}</p>
-          {% endif %}
-        </div>
-        {% if wing.lead %}<span class="team-wing__lead"
-          >Lead: {{ wing.lead }}</span
-        >{% endif %}
-      </header>
-      {% if wing.subteams %}
-      <div class="team-subteams">
-        {% for subteam in wing.subteams %}
-        <section class="team-subteam" id="{{ subteam.slug }}">
-          <h4>{{ subteam.name }}</h4>
-          <ul class="team-member-list">
-            {% for member in subteam.members %}
-            <li>
-              <span class="member-name">{{ member.name }}</span>
-              <span class="member-role">{{ member.role }}</span>
-            </li>
-            {% endfor %}
-          </ul>
-        </section>
-        {% endfor %}
-      </div>
-      {% endif %} {% if wing.unassigned %}
-      <div class="team-wing__unassigned">
-        <h4>Wing Operations</h4>
-        <ul class="team-member-list">
-          {% for member in wing.unassigned %}
-          <li>
-            <span class="member-name">{{ member.name }}</span>
-            <span class="member-role">{{ member.role }}</span>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
-    </article>
-    {% endfor %}
-  </div>
-</section>
-{% endif %} {% endblock %}
+{% endblock %}
